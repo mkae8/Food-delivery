@@ -22,7 +22,7 @@ export const palette: PaletteOptions = {
   },
   text: {
     primary: "#000000",
-    secondary: "#000000",
+    secondary: "000000",
     // Waiting iin color Progress
     helper: "#ECEDF0",
   },
