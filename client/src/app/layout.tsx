@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { MuiProvider } from "@/provider/MuiProvider";
+import Footer from "@/components/footer/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <MuiProvider>{children} </MuiProvider>
+        <MuiProvider>
+          {children}
+          <Footer />
+        </MuiProvider>
       </body>
     </html>
   );
