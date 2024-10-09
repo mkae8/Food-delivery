@@ -1,3 +1,10 @@
+"use client";
+import { Typography } from "@mui/material";
+
 export default function Home() {
-  return <div>turshilt 2 shvvvv</div>;
+  return (
+    <div>
+      <Typography color="primary">Zahial batalgaajuulah</Typography>
+    </div>
+  );
 }
