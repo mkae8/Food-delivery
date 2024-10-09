@@ -1,20 +1,15 @@
-"use client";
-import { Input } from "@/components/Input";
-import { TextField, Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import { ChangeEvent } from "react";
+
+
+import { InputPassword } from "@/components/InputPassword";
+import { Typography } from "@mui/material";
 
 export default function Home() {
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {};
 
   return (
     <div>
-      <Input
-        id="outlined-basic"
-        label="нэрээ оруулна уу"
-        variant="filled"
-        inputHandler={inputHandler}
-      />
+    <InputPassword label={"Password"} text={"Нууц үгээ оруулна уу"}/>
+
     </div>
   );
 }
