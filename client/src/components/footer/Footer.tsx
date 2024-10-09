@@ -1,51 +1,10 @@
-// "use client";
-// import style from "";
-// import { Typography } from "@mui/material";
-
-// const Footer = () => {
-//   return (
-//     <div className="footer">
-//       <div>
-//         <img src="/image.png" alt="" />
-//         <h2>Food Delivery</h2>
-//       </div>
-//       <div>
-//         <Typography color="text.secondary">
-//           <a href="">Home</a>
-//         </Typography>
-
-//         <Typography color="text.secondary">
-//           <a href="">Холбоо барих</a>
-//         </Typography>
-
-//         <Typography color="text.secondary">
-//           <a href="">Хоолны цэс</a>
-//         </Typography>
-
-//         <Typography color="text.secondary">
-//           <a href="">Үйлчилгээний нөхцөл</a>
-//         </Typography>
-//         <Typography color="text.secondary">
-//           <a href="">Хүргэлтийн бүс</a>
-//         </Typography>
-//         <Typography color="text.secondary">
-//           <a href="">Нууцлалын бодлого</a>
-//         </Typography>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Footer;
-
+"use client";
 import * as React from "react";
 import Container from "@mui/material/Container";
 import Image from "next/image";
-
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Link from "next/link";
 
 export default function GuestFooter() {
   return (
