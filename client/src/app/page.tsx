@@ -1,15 +1,26 @@
-
-
-import { InputPassword } from "@/components/InputPassword";
+import React, { ChangeEvent } from "react";
+import { Input } from "@/components/Input"; 
 import { Typography } from "@mui/material";
 
 export default function Home() {
-  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {};
+  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value); 
+  };
 
   return (
     <div>
-    <InputPassword label={"Password"} text={"Нууц үгээ оруулна уу"}/>
-
+      <Input
+        id="password"
+        label={"Нууц үг"}
+        variant="filled"
+        
+      />
+      <Input
+        id="name"
+        label="Нэрээ оруулна уу"
+        variant="filled"
+        
+      />
     </div>
   );
 }

@@ -7,10 +7,13 @@ type InputProps = {
   id: string;
   label: string;
   variant: TextFieldVariants;
-  inputHandler: (_event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Input = ({ id, label, variant, inputHandler }: InputProps) => {
+export const Input = ({ id, label, variant }: InputProps) => {
+  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value); 
+  };
+
   return (
     <div>
       <TextField
