@@ -17,12 +17,12 @@ export const palette: PaletteOptions = {
   },
   //Ene bol Log Inputiin colorss
   secondary: {
-    main: "#EEEFF2",
-    light: "#F7F7F8",
+    main: "#000000",
+    light: "#000000",
   },
   text: {
     primary: "#000000",
-    secondary: "#FFFFFF",
+    secondary: "#000000",
     // Waiting iin color Progress
     helper: "#ECEDF0",
   },
