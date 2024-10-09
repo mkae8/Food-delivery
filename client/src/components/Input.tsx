@@ -18,6 +18,13 @@ export const Input = ({ id, label, variant, inputHandler }: InputProps) => {
         label={label}
         variant={variant}
         onChange={inputHandler}
+        slotProps={{ input: { disableUnderline: true } }}
+        color="secondary"
+        sx={{
+          width: "384px",
+          height: "48px",
+          fontSize: 16,
+        }}
       />
     </div>
   );
