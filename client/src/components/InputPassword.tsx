@@ -20,13 +20,13 @@ export const InputPassword = ({ label, text }: InputPasswordPropsType) => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (
+  const handleMouseUpPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
 
-  const handleMouseUpPassword = (
+  const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
