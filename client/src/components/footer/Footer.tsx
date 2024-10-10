@@ -1,140 +1,164 @@
-// "use client";
-// import style from "";
-// import { Typography } from "@mui/material";
+"use client";
 
-// const Footer = () => {
-//   return (
-//     <div className="footer">
-//       <div>
-//         <img src="/image.png" alt="" />
-//         <h2>Food Delivery</h2>
-//       </div>
-//       <div>
-//         <Typography color="text.secondary">
-//           <a href="">Home</a>
-//         </Typography>
-
-//         <Typography color="text.secondary">
-//           <a href="">Холбоо барих</a>
-//         </Typography>
-
-//         <Typography color="text.secondary">
-//           <a href="">Хоолны цэс</a>
-//         </Typography>
-
-//         <Typography color="text.secondary">
-//           <a href="">Үйлчилгээний нөхцөл</a>
-//         </Typography>
-//         <Typography color="text.secondary">
-//           <a href="">Хүргэлтийн бүс</a>
-//         </Typography>
-//         <Typography color="text.secondary">
-//           <a href="">Нууцлалын бодлого</a>
-//         </Typography>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Footer;
-
-import * as React from "react";
-import Container from "@mui/material/Container";
 import Image from "next/image";
-
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Link from "next/link";
+import { Stack } from "@mui/material";
 
-export default function GuestFooter() {
+const GuestFooter: React.FC = () => {
   return (
-    <Paper
-      sx={{ marginTop: "calc(10% + 100px)", bottom: 0 }}
-      component="footer"
-      square
-      variant="outlined"
-    >
-      <Container maxWidth="lg" sx={{ height: "544px" }}>
+    <Stack height="545px" bgcolor="green" position="relative">
+      <Stack position="absolute">
         <Box
           sx={{
-            flexGrow: 1,
-            justifyContent: "center",
+            bgcolor: "#18BA51",
+            position: "relative",
+            width: "100vw",
+            height: "545px",
+          }}
+        >
+          <Image
+            src="/image copy.png"
+            fill
+            alt="Background image"
+            style={{ objectFit: "cover" }}
+          />
+        </Box>
+      </Stack>
+      <Box
+        sx={{
+          justifyContent: "center",
+          display: "flex",
+          position: "absolute",
+          width: "100vw",
+          height: "545px",
+        }}
+      >
+        <Box
+          sx={{
             display: "flex",
-
-            my: 1,
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "45px",
+            width: "full",
+            height: "544px",
           }}
         >
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "space-around",
-              gap: "25px",
-              width: "full",
-              height: "544px",
+              gap: "10px",
+            }}
+          >
+            <Image
+              src={"/image.png"}
+              width={31.27}
+              height={26.77}
+              alt="Food Delivery"
+            />
+            <Typography
+              fontWeight={700}
+              fontSize={20}
+              color="primary.contrastText"
+            >
+              Food Delivery
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "1200px",
+            }}
+          >
+            <a href="/" style={{ textDecoration: "none" }}>
+              <Typography color="primary.contrastText">Home</Typography>
+            </a>
+            <a href="/contact" style={{ textDecoration: "none" }}>
+              <Typography color="primary.contrastText">Холбоо барих</Typography>
+            </a>
+            <a href="/menu" style={{ textDecoration: "none" }}>
+              <Typography color="primary.contrastText">Хоолны цэс</Typography>
+            </a>
+            <a href="/terms" style={{ textDecoration: "none" }}>
+              <Typography color="primary.contrastText">
+                Үйлчилгээний нөхцөл
+              </Typography>
+            </a>
+            <a href="/delivery-area" style={{ textDecoration: "none" }}>
+              <Typography color="primary.contrastText">
+                Хүргэлтийн бүс
+              </Typography>
+            </a>
+            <a href="/privacy-policy" style={{ textDecoration: "none" }}>
+              <Typography color="primary.contrastText">
+                Нууцлалын бодлого
+              </Typography>
+            </a>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <Image
+              src={"/image copy 2.png"}
+              width={31.27}
+              height={26.77}
+              alt="Social Media 1"
+            />
+            <Image
+              src={"/image copy 3.png"}
+              width={31.27}
+              height={26.77}
+              alt="Social Media 2"
+            />
+            <Image
+              src={"/image copy 4.png"}
+              width={31.27}
+              height={26.77}
+              alt="Social Media 3"
+            />
+          </Box>
+
+          <Box
+            sx={{
+              justifyContent: "center",
+              display: "flex",
+              width: "1200px",
+              borderTop: "solid 1px white",
+              pt: 1,
             }}
           >
             <Box
               sx={{
                 display: "flex",
+                height: "46px",
+                flexDirection: "column",
                 alignItems: "center",
-                gap: "10px",
-                paddingTop: "100px",
+                paddingTop: "25px",
+                paddingBottom: "25px",
               }}
             >
-              <Image
-                src={"/image.png"}
-                width={31.27}
-                height={26.77}
-                alt="imagedesc"
-              />
-              <Typography fontWeight={700} fontSize={20} color="text.secondary">
-                Food Delivery
+              <Typography variant="caption" color="primary.contrastText">
+                © 2024 Pinecone Foods LLC
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                gap: "10px",
-              }}
-            >
-              <Typography color="text.secondary">Home</Typography>
-              <Typography color="text.secondary">Холбоо барих</Typography>
-              <Typography color="text.secondary">Хоолны цэс</Typography>
-              <Typography color="text.secondary">
-                Үйлчилгээний нөхцөл
+              <Typography variant="caption" color="primary.contrastText">
+                Зохиогчийн эрх хуулиар хамгаалагдсан
               </Typography>
-              <Typography color="text.secondary">Хүргэлтийн бүс</Typography>
-              <Typography color="text.secondary">Нууцлалын бодлого</Typography>
-            </Box>
-            <Box
-              sx={{
-                flexGrow: 1,
-                justifyContent: "center",
-                display: "flex",
-                mb: 2,
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="caption" color="text.secondary">
-                  © 2024 Pinecone Foods LLC
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  Зохиогчийн эрх хуулиар хамгаалагдсан
-                </Typography>
-              </Box>
             </Box>
           </Box>
         </Box>
-      </Container>
-    </Paper>
+      </Box>
+    </Stack>
   );
-}
+};
+
+export default GuestFooter;
