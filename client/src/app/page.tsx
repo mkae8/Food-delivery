@@ -6,5 +6,5 @@ export default function Home() {
     console.log(event.target.value);
   };
 
-  return <div></div>;
+  return <div>s</div>;
 }
