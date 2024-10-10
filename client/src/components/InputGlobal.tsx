@@ -16,8 +16,8 @@ export const InputGlobal: React.FC<InputGlobalProps> = ({
   label = "Email",
   placeholder = "Имэйл хаягаа оруулах",
   width = "384px",
-  height = "48px",
-  backgroundColor = "",
+  height = "56px",
+  backgroundColor = "F7F7F8",
   textColor = "",
   onChange,
 }) => {
