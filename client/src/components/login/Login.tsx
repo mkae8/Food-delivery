@@ -3,8 +3,8 @@
 import { Box, Container, TextField, Typography } from "@mui/material";
 
 import { InputPassword } from "../InputPassword";
-import { ButtonGlobal } from "../ButtonGlobal";
 import { useState } from "react";
+import { ButtonGlobal } from "../ButtonGlobal";
 
 export const Login = () => {
   const [buttonColor, setButtonColor] = useState();
