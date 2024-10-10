@@ -13,6 +13,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 type InputPasswordPropsType = {
   label: string;
   text: string;
+  
 };
 
 export const InputPassword = ({ label, text }: InputPasswordPropsType) => {

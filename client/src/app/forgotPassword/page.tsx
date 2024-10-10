@@ -20,10 +20,10 @@ const ForgotPassword = () => {
         }}
       >
         <Password />
-        <PasswordReset />
+         <PasswordReset />
         <NewPassword />
         <Loading />
-        <PasswordSuccess />
+        <PasswordSuccess /> 
       </div>
     </>
   );

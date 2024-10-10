@@ -13,9 +13,9 @@ export const PasswordReset = () => {
           flexDirection: "column",
           alignItems: "center",
           textAlign: "center",
-          gap: "48px",
           width: "448px",
-          height: "310px",
+          height: "386px",
+          // border: "1px solid black"
         }}
       >
         <Typography
@@ -34,16 +34,24 @@ export const PasswordReset = () => {
             fontWeight: "500",
             width: "384px",
             textAlign: "left",
+            marginTop:"48px"
           }}
         >
           Таны <span style={{ color: "green" }}>example@pornhub.mn</span> хаяг
           руу сэргээх код <br /> илгээх болно.
         </Typography>
-        <InputPassword
-          text="4 оронтой кодыг оруулна уу"
-          label="Нууц үг сэргээх код"
-        />
-        <ButtonGlobal text="Үргэлжлүүлэх" width="384px" height="56px" />
+       <div style={{marginTop:"32px"}}> <InputPassword
+        
+        text="4 оронтой кодыг оруулна уу"
+        label="Нууц үг сэргээх код"
+        
+      />
+      <ButtonGlobal 
+          text="Үргэлжлүүлэх"
+          width="384px"
+          height="56px"
+          
+        /></div>
       </div>
     </>
   );

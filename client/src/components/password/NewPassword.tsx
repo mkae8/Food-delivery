@@ -13,9 +13,8 @@ export const NewPassword = () => {
           flexDirection: "column",
           alignItems: "center",
           textAlign: "center",
-          gap: "48px",
           width: "448px",
-          height: "310px",
+          height: "386px",
         }}
       >
         <Typography
@@ -26,16 +25,17 @@ export const NewPassword = () => {
             fontWeight: "700",
             width: "384px",
             height: "48px",
+            
           }}
         >
           Шинэ нууц үг зохиох
         </Typography>
 
-        <InputPassword text="Нууц үг " label="Шинэ нууц үг" />
-        <InputPassword
+        <div style={{marginTop:"48px"}}><InputPassword text="Нууц үг " label="Шинэ нууц үг" /></div>
+        <div style={{marginTop:"24px"}}><InputPassword
           text="Нууц үг давтах "
           label="Шинэ нууц үгийг дахин давтана уу"
-        />
+        /></div>
         <ButtonGlobal text="Үргэлжлүүлэх" width="384px" height="56px" />
       </div>
     </>
