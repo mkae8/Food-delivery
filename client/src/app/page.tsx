@@ -7,5 +7,9 @@ export default function Home() {
     console.log(event.target.value);
   };
 
-  return <div>s</div>;
+  return (
+    <div>
+     
+    </div>
+  );
 }
