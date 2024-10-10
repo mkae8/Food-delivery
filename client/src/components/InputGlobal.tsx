@@ -4,8 +4,8 @@ import TextField from "@mui/material/TextField";
 
 interface InputGlobalProps {
   label?: string;
-  placeholder?: string;
   width?: string;
+  placeholder?: string;
   height?: string;
   backgroundColor?: string;
   textColor?: string;
