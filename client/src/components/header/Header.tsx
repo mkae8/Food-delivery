@@ -62,7 +62,7 @@ export const Header = () => {
                 </Button>
               ))}
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
               <Newtreh />
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {heed.map((item) => (
