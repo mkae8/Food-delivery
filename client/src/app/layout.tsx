@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { MuiProvider } from "@/provider/MuiProvider";
 import Footer from "@/components/footer/Footer";
+import { Header } from "@/components/header/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <MuiProvider>
-          
+          <Header />
           {children}
           <Footer />
         </MuiProvider>
