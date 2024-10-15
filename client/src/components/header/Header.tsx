@@ -27,7 +27,7 @@ export const Header = () => {
     },
     {
       title: "ХООЛНЫ ЦЭС",
-      href: "/footmenu",
+      href: "/footer-info/menu",
     },
     {
       title: "ХҮРГЭЛТИЙН БҮС",
