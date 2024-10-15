@@ -22,7 +22,12 @@ const page = () => {
             />
           </Box>
           <Box display="flex">
-            <Typography fontWeight={700} fontSize={20}>
+            <Typography
+              fontWeight={700}
+              fontSize={20}
+              display="flex"
+              gap="10px"
+            >
               <Image
                 style={{ display: "flex", alignItems: "center" }}
                 src={"/image copy 6.png"}
