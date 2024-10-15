@@ -2,9 +2,9 @@
 import { Stack, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 
-export const EditProfile = () => {
+export const EditPhone = () => {
   return (
     <>
       <div>
@@ -18,17 +18,18 @@ export const EditProfile = () => {
             alignItems: "center",
             paddingInline: "12px",
             borderRadius: "8px",
+            marginTop: "20px",
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Person2OutlinedIcon
+            <LocalPhoneOutlinedIcon
               style={{
                 width: "48px",
                 height: "48px",
                 border: "1px solid #EEEFF2",
                 borderRadius: "50%",
               }}
-            ></Person2OutlinedIcon>
+            ></LocalPhoneOutlinedIcon>
             <div
               style={{
                 display: "flex",
@@ -37,10 +38,10 @@ export const EditProfile = () => {
               }}
             >
               <Typography style={{ fontSize: "12px", color: "#888A99" }}>
-                Таны нэр
+                Утасны дугаар
               </Typography>
               <Typography style={{ fontSize: "16px", color: "#0D1118" }}>
-                Mansont{" "}
+                99119911
               </Typography>
             </div>
           </div>
