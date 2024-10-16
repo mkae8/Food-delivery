@@ -13,7 +13,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 type InputPasswordPropsType = {
   label: string;
   text: string;
-  
 };
 
 export const InputPassword = ({ label, text }: InputPasswordPropsType) => {
@@ -21,13 +20,13 @@ export const InputPassword = ({ label, text }: InputPasswordPropsType) => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (
+  const handleMouseUpPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
 
-  const handleMouseUpPassword = (
+  const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
@@ -36,9 +35,9 @@ export const InputPassword = ({ label, text }: InputPasswordPropsType) => {
     <div>
       <FormControl
         sx={{
-          m: 1,
           width: "384px",
           color: "text.secondry",
+          backgroundColor: "#F7F7F8",
         }}
         variant="outlined"
       >
@@ -55,7 +54,7 @@ export const InputPassword = ({ label, text }: InputPasswordPropsType) => {
                 onMouseUp={handleMouseUpPassword}
                 edge="end"
               >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
+                {showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
           }

@@ -15,7 +15,7 @@ export const palette: PaletteOptions = {
     main: "#18BA51",
     contrastText: "#FFFFFF",
   },
-  //Ene bol Log Inputiin colorss
+  //Ene bol Log Inputiin color
   secondary: {
     main: "#000000",
     light: "#000000",
