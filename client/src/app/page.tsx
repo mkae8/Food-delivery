@@ -1,15 +1,12 @@
 "use client";
 import React, { ChangeEvent } from "react";
-import { Typography } from "@mui/material";
+
+import HomeInfoCards from "@/components/homepage/InfoCards";
 
 export default function Home() {
-  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
-  };
-
   return (
     <div>
-     
+      <HomeInfoCards />
     </div>
   );
 }
