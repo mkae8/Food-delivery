@@ -269,6 +269,7 @@ const GuestFooter: React.FC = () => {
           <Image
             src="/image copy.png"
             fill
+            priority
             alt="Background image"
             style={{ objectFit: "cover" }}
           />
@@ -348,18 +349,21 @@ const GuestFooter: React.FC = () => {
               width={31.27}
               height={26.77}
               alt="Social Media 1"
+              priority
             />
             <Image
               src={"/image copy 3.png"}
               width={31.27}
               height={26.77}
               alt="Social Media 2"
+              priority
             />
             <Image
               src={"/image copy 4.png"}
               width={31.27}
               height={26.77}
               alt="Social Media 3"
+              priority
             />
           </Box>
 

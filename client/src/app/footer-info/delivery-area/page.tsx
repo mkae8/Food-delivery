@@ -19,6 +19,7 @@ const page = () => {
               width={1200}
               height={616}
               alt="area"
+              priority
             />
           </Box>
           <Box display="flex">
@@ -33,6 +34,7 @@ const page = () => {
                 src={"/image copy 6.png"}
                 width={31.27}
                 height={26.77}
+                priority
                 alt="Food Delivery"
               />
               Хүргэлтийн бүс дэх хаягууд
@@ -44,6 +46,7 @@ const page = () => {
               width={588}
               height={338}
               alt="area"
+              priority
             />
 
             <Image
@@ -51,6 +54,7 @@ const page = () => {
               width={588}
               height={338}
               alt="area"
+              priority
             />
           </Box>
         </Box>

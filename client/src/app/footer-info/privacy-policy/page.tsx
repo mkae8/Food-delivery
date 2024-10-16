@@ -12,6 +12,7 @@ const page = () => {
             src={"/image copy 6.png"}
             width={31.27}
             height={26.77}
+            priority
             alt="Food Delivery"
           />
           Хүргэлтийн бүс дэх хаягууд

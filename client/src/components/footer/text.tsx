@@ -42,6 +42,7 @@ export default function GuestFooter() {
               }}
             >
               <Image
+                priority
                 src="/image copy.png" // Update to your image path
                 fill // Use 'fill' to fill the parent container
                 alt="description" // Descriptive alt text
