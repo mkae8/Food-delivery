@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import Link from "next/link";
@@ -20,12 +21,12 @@ export const InfoCard = ({ Icon, text_main, text_description }: InfoCard) => {
         borderRadius: "10px",
         borderWidth: "0.5px",
         borderColor: "lightgrey",
-        maxWidth: "250px",
-        height: "100px",
+        maxWidth: "264.75px",
+        height: "155px",
         padding: "16px",
       }}
     >
-      <div style={{ color: "green" }}>
+      <div style={{ color: "green", width: "60px", height: "60px" }}>
         <Icon />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>

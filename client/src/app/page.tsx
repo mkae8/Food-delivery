@@ -1,15 +1,12 @@
 "use client";
 import React, { ChangeEvent } from "react";
-import { Typography } from "@mui/material";
-import { InfoCard } from "@/components/homepage/InfoCard";
-import { FiBookOpen } from "react-icons/fi";
 
-
+import HomeInfoCards from "@/components/homepage/InfoCards";
 
 export default function Home() {
   return (
     <div>
-
+      <HomeInfoCards />
     </div>
   );
 }
