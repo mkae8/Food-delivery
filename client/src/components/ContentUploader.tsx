@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const cloud_name = "do8nfmdlu";
+const cloud_name = "djxo5odaa";
 const present_name = "cloudtest";
 
 const url = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
