@@ -3,9 +3,8 @@
 import { AvatarIcon } from "@/components/userProfile/AvatarIcon";
 import { EditPhone } from "@/components/userProfile/EditPhone";
 import { EditProfile } from "@/components/userProfile/EditProfile";
-import { X } from "@mui/icons-material";
 
-import { Avatar, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const UserProfile = () => {
   return (

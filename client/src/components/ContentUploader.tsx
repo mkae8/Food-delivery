@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 
 const cloud_name = "djxo5odaa";
@@ -32,7 +32,6 @@ const ContentUploader: React.FC<ImageUploadProps> = ({ onUpload, onError }) => {
         });
         console.log(response.data);
         onUpload(response.data.secure_url); // компонент руу URL-г дамжуулна
-        onError(null); // Алдааг арилгана
       } catch (error) {
         console.error("Upload failed:", error);
         onError("Upload failed. Please try again."); // Алдааны мэдэгдэл

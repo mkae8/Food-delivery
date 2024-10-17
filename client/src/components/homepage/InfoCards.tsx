@@ -1,13 +1,10 @@
 "use client";
-import React, { ChangeEvent } from "react";
-import { Typography } from "@mui/material";
+import React from "react";
+
 import { InfoCard } from "@/components/homepage/InfoCard";
 import { FiBookOpen } from "react-icons/fi";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { PiBowlFood } from "react-icons/pi";
-
-import { green } from "@mui/material/colors";
-import { CgEnter } from "react-icons/cg";
 
 export default function HomeInfoCards() {
   return (

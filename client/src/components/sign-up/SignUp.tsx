@@ -37,7 +37,7 @@ export const SignUp = () => {
           control={<Checkbox />}
           label="Үйлчилгээний нөхцөл зөвшөөрөх"
         />
-        <ButtonGlobal text="Бүртгүүлэх" marginTop="32px" />
+        <ButtonGlobal text="Бүртгүүлэх" />
       </div>
     </div>
   );

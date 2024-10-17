@@ -8,7 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import { Stack } from "@mui/material";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 
-const LargeAvatar = styled(Avatar)(({ theme }) => ({
+const LargeAvatar = styled(Avatar)(() => ({
   width: 120,
   height: 120,
 }));

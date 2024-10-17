@@ -227,6 +227,7 @@ const GuestFooter: React.FC = () => {
   const navigate = (path: string) => {
     router.push(path);
   };
+  console.log(navigate);
 
   const routers = [
     {
