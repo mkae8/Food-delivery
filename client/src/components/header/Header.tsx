@@ -37,7 +37,7 @@ export const Header = () => {
 
   return (
     <AppBar position="static" sx={{ bgcolor: "white", boxShadow: "none" }}>
-      <Container maxWidth="xl">
+      <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

@@ -5,6 +5,7 @@ import { Box, Container, TextField, Typography } from "@mui/material";
 import { InputPassword } from "../InputPassword";
 import { useState } from "react";
 import { ButtonGlobal } from "../ButtonGlobal";
+import Link from "next/link";
 
 export const Login = () => {
   const [buttonColor, setButtonColor] = useState();
@@ -84,16 +85,27 @@ export const Login = () => {
           />
 
           <div style={{ fontSize: "14px" }}>Эсвэл</div>
-
-          <ButtonGlobal
-            text="Бүртгүүлэх"
-            width="384px"
-            height="56px"
-            variant="outlined"
-            color="black"
-          />
+          <Link href="/register">
+            <ButtonGlobal
+              text="Бүртгүүлэх"
+              width="384px"
+              height="56px"
+              variant="outlined"
+              color="black"
+            />
+          </Link>
         </Box>
       </Container>
     </>
   );
 };
+
+
+// "@types/express": "^5.0.0",
+// "@types/mongoose": "^5.11.96",
+// "axios": "^1.7.7",
+// "cors": "^2.8.5",
+// "dotenv": "^16.4.5",
+// "express": "^4.21.1",
+// "mongoose": "^8.7.1",
+// "nodemon": "^3.1.7"
