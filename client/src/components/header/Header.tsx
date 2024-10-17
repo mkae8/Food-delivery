@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { PineconeLogo } from "../icon/Pinelog";
 
 import AppBar from "@mui/material/AppBar";
@@ -14,10 +14,10 @@ import { Sags } from "../icon/Sags";
 import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 
-const pages = ["НҮҮР", "ХООЛНЫ ЦЭС", "ХҮРГЭЛТИЙН БҮС"];
+// const pages = ["НҮҮР", "ХООЛНЫ ЦЭС", "ХҮРГЭЛТИЙН БҮС"];
 const head = ["Сагс"];
 const heed = ["Нэвтрэх"];
-const heed1 = ["hereglegch"];
+// const heed1 = ["hereglegch"];
 
 export const Header = () => {
   const routers = [

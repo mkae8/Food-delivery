@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
 
-import Link from "next/link";
-import { green, grey } from "@mui/material/colors";
-
 type InfoCard = {
   Icon: () => JSX.Element;
   text_main: string;
