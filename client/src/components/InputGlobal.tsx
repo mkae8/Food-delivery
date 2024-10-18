@@ -6,6 +6,7 @@ interface InputGlobalProps {
   label?: string;
   width?: string;
   placeholder?: string;
+  name: string;
   height?: string;
   backgroundColor?: string;
   textColor?: string;
@@ -18,11 +19,13 @@ export const InputGlobal: React.FC<InputGlobalProps> = ({
   width = "384px",
   height = "56px",
   backgroundColor = "F7F7F8",
+  name,
   textColor = "",
   onChange,
 }) => {
   return (
     <TextField
+      name={name}
       id="outlined-textarea"
       label={label}
       placeholder={placeholder}

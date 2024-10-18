@@ -17,7 +17,7 @@ const UserSchema = new Schema<UsersModelType>({
   email: { type: String, required: true, unique: true },
   address: { type: String, required: true },
   password: { type: String, required: true },
-  phoneNumber: { type: String, required: true, unique: true },
+  phoneNumber: { type: String, required: false, unique: true },
   isAdmin: { type: Boolean },
   createdAt: { type: Date, default: Date.now, required: true, immutable: true },
   updatedAt: { type: Date, default: Date.now, required: true },
