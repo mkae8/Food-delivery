@@ -38,6 +38,7 @@ export const SignUp = () => {
         address: userDetail.address,
         password: userDetail.password,
       });
+      console.log(result);
 
       push("/login");
     } catch (error) {
