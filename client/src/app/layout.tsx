@@ -30,7 +30,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <MuiProvider>
-          <Header /> <div style={{marginTop:50}}> {children}</div>
+          <Header />{" "}
+          <div
+            style={{
+              marginTop: 50,
+              width: "1200px",
+              margin: "auto",
+              minHeight: "100vh",
+            }}
+          >
+            {" "}
+            {children}
+          </div>
           <Footer />
         </MuiProvider>
       </body>
