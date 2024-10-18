@@ -10,6 +10,7 @@ interface ButtonGlobalProps {
   background?: string;
   border?: string;
   color?: string;
+  clickhandler?: () => void;
 }
 
 export const ButtonGlobal: React.FC<ButtonGlobalProps> = ({
@@ -20,9 +21,14 @@ export const ButtonGlobal: React.FC<ButtonGlobalProps> = ({
   background = "",
   border = "",
   color = "",
+  clickhandler = () => {},
 }) => {
   return (
-    <Button variant={variant} sx={{ width, height, background, border, color }}>
+    <Button
+      variant={variant}
+      sx={{ width, height, background, border, color }}
+      onClick={clickhandler}
+    >
       {text}
     </Button>
   );
