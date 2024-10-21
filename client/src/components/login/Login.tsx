@@ -49,7 +49,7 @@ export const Login = () => {
             placeholder="Имэйл хаягаа оруулна уу"
             sx={{ width: "384px", height: "48px" }}
           />
-          <InputPassword text="Нууц үг " label="Нууц үг " />
+          <InputPassword text="Нууц үг " label="Нууц үг " name="password" />
           <div
             style={{
               fontSize: "14px",
@@ -97,7 +97,6 @@ export const Login = () => {
     </>
   );
 };
-
 
 // "@types/express": "^5.0.0",
 // "@types/mongoose": "^5.11.96",
