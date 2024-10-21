@@ -1,194 +1,3 @@
-// "use client";
-
-// import React, { useState, ChangeEvent } from "react";
-
-// import {
-//   Box,
-//   Button,
-//   FormControlLabel,
-//   Modal,
-//   Switch,
-//   TextField,
-//   MenuItem,
-// } from "@mui/material";
-
-// interface FoodItem {
-//   foodName: string;
-//   category: string;
-//   ingredients: string;
-//   price: string;
-//   onSale: boolean;
-// }
-
-// export const AdminAdd: React.FC = () => {
-//   const [open, setOpen] = useState<boolean>(false);
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
-
-//   console.log(handleClose);
-
-//   const [foodName, setFoodName] = useState<string>("");
-//   const [category, setCategory] = useState<string>("");
-//   const [ingredients, setIngredients] = useState<string>("");
-//   const [price, setPrice] = useState<string>("");
-//   const [onSale, setOnSale] = useState<boolean>(false);
-
-//   // const style = {
-//   //   position: "absolute",
-//   //   top: "50%",
-//   //   left: "50%",
-//   //   transform: "translate(-50%, -50%)",
-//   //   width: 400,
-//   //   bgcolor: "background.paper",
-//   //   border: "2px solid #000",
-//   //   boxShadow: 24,
-//   //   p: 4,
-//   // };
-
-//   const handleSubmit = () => {
-//     const newFoodItem: FoodItem = {
-//       foodName,
-//       category,
-//       ingredients,
-//       price,
-//       onSale,
-//     };
-
-//     console.log(newFoodItem);
-
-//     handleClear();
-//   };
-
-//   const handleClear = () => {
-//     setFoodName("");
-//     setCategory("");
-//     setIngredients("");
-//     setPrice("");
-//     setOnSale(false);
-//     setOpen(false);
-//   };
-
-//   const handleInputChange =
-//     (setter: React.Dispatch<React.SetStateAction<string>>) =>
-//     (e: ChangeEvent<HTMLInputElement>) => {
-//       setter(e.target.value);
-//     };
-
-//   return (
-//     <>
-//       <div
-//         style={{
-//           display: "flex",
-//           alignItems: "center",
-//           justifyContent: "center",
-//           textAlign: "center",
-//           padding: "50px",
-//         }}
-//       >
-//         <div>
-//           <Button onClick={handleOpen}>Open modal</Button>
-//         </div>
-//         <Modal
-//           open={open}
-//           onClose={() => handleClear()}
-//           aria-labelledby="create-food-modal"
-//           aria-describedby="modal-to-add-food"
-//         >
-//           <Box
-//             sx={{
-//               position: "absolute",
-//               top: "50%",
-//               left: "50%",
-//               transform: "translate(-50%, -50%)",
-//               width: 400,
-//               bgcolor: "background.paper",
-//               boxShadow: 24,
-//               p: 4,
-//               borderRadius: 2,
-//             }}
-//           >
-//             <h2 id="create-food-modal" style={{ textAlign: "center" }}>
-//               Create food
-//             </h2>
-
-//             <TextField
-//               fullWidth
-//               label="Хоолны нэр"
-//               variant="outlined"
-//               margin="normal"
-//               value={foodName}
-//               onChange={handleInputChange(setFoodName)}
-//             />
-
-//             <TextField
-//               fullWidth
-//               label="Хоолны ангилал"
-//               variant="outlined"
-//               margin="normal"
-//               select
-//               value={category}
-//               onChange={(e) => setCategory(e.target.value)}
-//             >
-//               <MenuItem value="Main">Main</MenuItem>
-//               <MenuItem value="Side">Side</MenuItem>
-//               <MenuItem value="Dessert">Dessert</MenuItem>
-//             </TextField>
-
-//             <TextField
-//               fullWidth
-//               label="Хоолны орц"
-//               variant="outlined"
-//               margin="normal"
-//               value={ingredients}
-//               onChange={handleInputChange(setIngredients)}
-//             />
-
-//             <TextField
-//               fullWidth
-//               label="Хоолны үнэ"
-//               variant="outlined"
-//               margin="normal"
-//               value={price}
-//               onChange={handleInputChange(setPrice)}
-//             />
-
-//             <FormControlLabel
-//               control={
-//                 <Switch
-//                   checked={onSale}
-//                   onChange={(e) => setOnSale(e.target.checked)}
-//                 />
-//               }
-//               label="Хямдралтай эсэх"
-//               style={{ marginTop: "15px" }}
-//             />
-
-//             <div style={{ marginTop: "15px", marginBottom: "15px" }}>
-//               <Button variant="outlined" component="label" fullWidth>
-//                 Add image for the food
-//                 <input type="file" hidden />
-//               </Button>
-//             </div>
-
-//             <div style={{ display: "flex", justifyContent: "space-between" }}>
-//               <Button variant="text" color="error" onClick={handleClear}>
-//                 Clear
-//               </Button>
-//               <Button
-//                 variant="contained"
-//                 color="primary"
-//                 onClick={handleSubmit}
-//               >
-//                 Continue
-//               </Button>
-//             </div>
-//           </Box>
-//         </Modal>
-//       </div>
-//     </>
-//   );
-// };
-
 "use client";
 
 import React, { useState, ChangeEvent } from "react";
@@ -227,10 +36,11 @@ export const AdminAdd: React.FC = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: "587px",
+    Height: "854px",
     bgcolor: "white",
     boxShadow: 24,
-    p: 4,
+    p: 5,
     borderRadius: 2,
   };
 
@@ -257,9 +67,19 @@ export const AdminAdd: React.FC = () => {
   };
 
   const handleInputChange =
-    (setter: React.Dispatch<React.SetStateAction<string>>) =>
+    (
+      setter: React.Dispatch<React.SetStateAction<string>>,
+      isNumber?: boolean
+    ) =>
     (e: ChangeEvent<HTMLInputElement>) => {
-      setter(e.target.value);
+      const value = e.target.value;
+
+      if (isNumber) {
+        const numericValue = value.replace(/[^0-9]/g, "");
+        setter(numericValue);
+      } else {
+        setter(value);
+      }
     };
 
   return (
@@ -293,9 +113,25 @@ export const AdminAdd: React.FC = () => {
             aria-describedby="modal-to-add-food"
           >
             <Box sx={style}>
-              <h2 id="create-food-modal" style={{ textAlign: "center" }}>
-                Create food
-              </h2>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  style={{ height: "12px", width: "12px", cursor: "pointer" }}
+                  src="/image copy 10.png"
+                  alt=""
+                  color="error"
+                  onClick={handleClear}
+                />
+                <h2 id="create-food-modal" style={{ textAlign: "center" }}>
+                  Create food
+                </h2>
+                <div></div>
+              </div>
 
               <TextField
                 fullWidth
@@ -315,9 +151,9 @@ export const AdminAdd: React.FC = () => {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <MenuItem value="Main">Main</MenuItem>
-                <MenuItem value="Side">Side</MenuItem>
-                <MenuItem value="Dessert">Dessert</MenuItem>
+                <MenuItem value="Main">Tsuivan</MenuItem>
+                <MenuItem value="Side">Budaatai Huurga</MenuItem>
+                <MenuItem value="Dessert">Huitsai</MenuItem>
               </TextField>
 
               <TextField
@@ -331,11 +167,11 @@ export const AdminAdd: React.FC = () => {
 
               <TextField
                 fullWidth
-                label="Хоолны үнэ"
+                label="Хоолны үнэ ($)"
                 variant="outlined"
                 margin="normal"
-                value={price}
-                onChange={handleInputChange(setPrice)}
+                value={price ? `${price}` : "₮"}
+                onChange={handleInputChange(setPrice, true)}
               />
 
               <FormControlLabel
@@ -382,16 +218,29 @@ export const AdminAdd: React.FC = () => {
                   marginTop: "15px",
                 }}
               >
-                <Button variant="text" color="error" onClick={handleClear}>
-                  Clear
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSubmit}
+                <div></div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "15px",
+                  }}
                 >
-                  Continue
-                </Button>
+                  <Button
+                    variant="text"
+                    color="secondary"
+                    onClick={handleClear}
+                  >
+                    Clear
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
+                    Continue
+                  </Button>
+                </div>
               </div>
             </Box>
           </Modal>
