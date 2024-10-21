@@ -1,5 +1,8 @@
 "use client";
 
+import axios from "axios";
+import Image from "next/image";
+
 import React, { useState, ChangeEvent } from "react";
 import {
   Box,
@@ -30,6 +33,12 @@ export const AdminAdd: React.FC = () => {
   const [ingredients, setIngredients] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [onSale, setOnSale] = useState<boolean>(false);
+
+  const cloud_name = "djxo5odaa";
+  const preset_name = "temuujin";
+  const url = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+
+  const [image, setImage] = useState("");
 
   const style = {
     position: "absolute",
@@ -81,6 +90,28 @@ export const AdminAdd: React.FC = () => {
         setter(value);
       }
     };
+
+  const HandleImageUpload = async (event: any) => {
+    //body boldeh
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", preset_name);
+    console.log(file);
+
+    // api huselt
+    try {
+      const response: any = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response.data);
+      setImage(response.data.secure_url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -198,7 +229,7 @@ export const AdminAdd: React.FC = () => {
                   backgroundColor: "#f9f9f9",
                 }}
               >
-                <Typography variant="h6" style={{ marginBottom: "10px" }}>
+                {/* <Typography variant="h6" style={{ marginBottom: "10px" }}>
                   Add image for the food
                 </Typography>
                 <Button
@@ -208,7 +239,11 @@ export const AdminAdd: React.FC = () => {
                 >
                   Add image
                   <input type="file" hidden />
-                </Button>
+                </Button> */}
+
+                <Image width={500} height={500} alt="image" src={image} />
+                <label htmlFor="picture">Picture</label>
+                <input onChange={HandleImageUpload} id="picture" type="file" />
               </Box>
 
               <div
