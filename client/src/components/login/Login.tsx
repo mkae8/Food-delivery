@@ -5,8 +5,42 @@ import { Box, Container, TextField, Typography } from "@mui/material";
 import { InputPassword } from "../InputPassword";
 import { ButtonGlobal } from "../ButtonGlobal";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/provider/UserProvider";
 
 export const Login = () => {
+  const { push } = useRouter();
+  const { isLoggedIn, loginHandler } = useUser();
+  const [error, setError] = useState("");
+  const [userDetail, setUserDetail] = useState({ email: "", password: "" });
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    console.log(event.target);
+
+    setUserDetail((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleClick = async () => {
+    if (!userDetail.email || !userDetail.password) {
+      setError("Invalid inputs");
+      return;
+    }
+    try {
+      await loginHandler(userDetail.email, userDetail.password);
+
+      push("/");
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  if (isLoggedIn) {
+    push("/");
+  }
+  console.log(userDetail);
+
   return (
     <>
       <Container
@@ -46,10 +80,17 @@ export const Login = () => {
             id="outlined-basic"
             label="Имэйл "
             variant="outlined"
+            name="email"
             placeholder="Имэйл хаягаа оруулна уу"
             sx={{ width: "384px", height: "48px" }}
+            onChange={handleChange}
           />
-          <InputPassword text="Нууц үг " label="Нууц үг " />
+          <InputPassword
+            text="Нууц үг "
+            label="Нууц үг"
+            onChange={handleChange}
+            name="password"
+          />
           <div
             style={{
               fontSize: "14px",
@@ -60,6 +101,8 @@ export const Login = () => {
             Нууц үг сэргээх
           </div>
         </Box>
+
+        <>{error}</>
 
         <Box
           sx={{
@@ -80,6 +123,7 @@ export const Login = () => {
             background="#EEEFF2"
             border="none"
             color="black"
+            clickhandler={handleClick}
           />
 
           <div style={{ fontSize: "14px" }}>Эсвэл</div>
@@ -97,7 +141,6 @@ export const Login = () => {
     </>
   );
 };
-
 
 // "@types/express": "^5.0.0",
 // "@types/mongoose": "^5.11.96",

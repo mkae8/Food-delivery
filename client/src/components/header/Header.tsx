@@ -13,6 +13,7 @@ import { SearchInput } from "../SearchInput";
 import { Sags } from "../icon/Sags";
 import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
+import { useUser } from "@/provider/UserProvider";
 
 // const pages = ["НҮҮР", "ХООЛНЫ ЦЭС", "ХҮРГЭЛТИЙН БҮС"];
 const head = ["Сагс"];
@@ -20,6 +21,7 @@ const heed = ["Нэвтрэх"];
 // const heed1 = ["hereglegch"];
 
 export const Header = () => {
+  const { isLoggedIn, logOut, loginHandler } = useUser();
   const routers = [
     {
       title: "НҮҮР",
@@ -74,15 +76,21 @@ export const Header = () => {
               <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
                 <Newtreh />
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                  {heed.map((item) => (
+                  {isLoggedIn ? (
                     <Button
-                      key={item}
-                      // onClick={handleCloseNavMenu}
+                      onClick={logOut}
                       sx={{ my: 2, color: "Black", display: "block" }}
                     >
-                      {item}
+                      Гарах
                     </Button>
-                  ))}
+                  ) : (
+                    <Button
+                      onClick={loginHandler}
+                      sx={{ my: 2, color: "Black", display: "block" }}
+                    >
+                      Нэвтрэх
+                    </Button>
+                  )}
                 </Box>
               </Box>
             </Link>
