@@ -27,21 +27,29 @@ export const SignUp = () => {
   };
 
   const handeSubmit = async () => {
-    if (userDetail.password !== userDetail.rePassword) {
-      setError("Passwords do not match");
+    const { username, email, address, password, rePassword } = userDetail;
+
+    if (!username || !email || !address || !password || !rePassword) {
+      setError("Дутуу бөглөсөн байна !");
       return;
     }
+
+    if (password !== rePassword) {
+      setError("Нууц үг таарахгүй байна");
+      return;
+    }
+
     try {
       const result = await axios.post("http://localhost:8000/user/signup", {
-        username: userDetail.username,
-        email: userDetail.email,
-        address: userDetail.address,
-        password: userDetail.password,
+        username,
+        email,
+        address,
+        password,
       });
 
       push("/login");
     } catch (error) {
-      setError("error");
+      setError("Backendtei server unasan bn ");
     }
   };
 
@@ -99,8 +107,18 @@ export const SignUp = () => {
           control={<Checkbox />}
           label="Үйлчилгээний нөхцөл зөвшөөрөх"
         />
+        <Typography
+          sx={{
+            color: "Red",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "10px",
+          }}
+        >
+          {error}
+        </Typography>
         <ButtonGlobal text="Бүртгүүлэх" clickhandler={handeSubmit} />
-        <Typography sx={{ color: "Red" }}>{error}</Typography>
       </div>
     </div>
   );

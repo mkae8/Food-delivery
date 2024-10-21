@@ -91,6 +91,7 @@ export const Login = () => {
             onChange={handleChange}
             name="password"
           />
+          <InputPassword text="Нууц үг " label="Нууц үг " name="password" />
           <div
             style={{
               fontSize: "14px",
