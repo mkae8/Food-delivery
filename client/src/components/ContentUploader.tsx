@@ -4,7 +4,7 @@ import React from "react";
 import axios from "axios";
 
 const cloud_name = "djxo5odaa";
-const present_name = "cloudtest";
+const present_name = "temuujin";
 
 const url = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
 
@@ -25,7 +25,7 @@ const ContentUploader: React.FC<ImageUploadProps> = ({ onUpload, onError }) => {
 
       // API хүсэлт
       try {
-        const response = await axios.post(url, formData, {
+        const response: any = await axios.post(url, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
