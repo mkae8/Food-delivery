@@ -34,7 +34,7 @@ export default function HomeInfoCards() {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        marginTop: "20px",
+        marginTop: "122px",
       }}
     >
       {information.map((el, index) => {

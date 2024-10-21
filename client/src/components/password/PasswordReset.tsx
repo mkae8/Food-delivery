@@ -34,24 +34,20 @@ export const PasswordReset = () => {
             fontWeight: "500",
             width: "384px",
             textAlign: "left",
-            marginTop:"48px"
+            marginTop: "48px",
           }}
         >
-          Таны <span style={{ color: "green" }}>example@pornhub.mn</span> хаяг
+          Таны <span style={{ color: "green" }}>example@pinecone.mn</span> хаяг
           руу сэргээх код <br /> илгээх болно.
         </Typography>
-       <div style={{marginTop:"32px"}}> <InputPassword
-        
-        text="4 оронтой кодыг оруулна уу"
-        label="Нууц үг сэргээх код"
-        
-      />
-      <ButtonGlobal 
-          text="Үргэлжлүүлэх"
-          width="384px"
-          height="56px"
-          
-        /></div>
+        <div style={{ marginTop: "32px" }}>
+          <InputPassword
+            text="4 оронтой кодыг оруулна уу"
+            label="Нууц үг сэргээх код"
+            name="passoword"
+          />
+          <ButtonGlobal text="Үргэлжлүүлэх" width="384px" height="56px" />
+        </div>
       </div>
     </>
   );
