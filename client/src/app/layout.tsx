@@ -4,6 +4,7 @@ import "./globals.css";
 import { MuiProvider } from "@/provider/MuiProvider";
 import Footer from "@/components/footer/Footer";
 import { Header } from "@/components/header/Header";
+import { UserProvider } from "@/provider/UserProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,21 +30,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <MuiProvider>
-          <Header />{" "}
-          <div
-            style={{
-              marginTop: 50,
-              width: "1200px",
-              margin: "auto",
-              minHeight: "100vh",
-            }}
-          >
-            {" "}
-            {children}
-          </div>
-          <Footer />
-        </MuiProvider>
+        <UserProvider>
+          <MuiProvider>
+            <Header />{" "}
+            <div
+              style={{
+                marginTop: 50,
+                width: "1200px",
+                margin: "auto",
+                minHeight: "100vh",
+              }}
+            >
+              {" "}
+              {children}
+            </div>
+            <Footer />
+          </MuiProvider>
+        </UserProvider>
       </body>
     </html>
   );

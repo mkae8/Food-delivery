@@ -1,0 +1,35 @@
+import { UserModel } from "../../src/database/models/userModel";
+import bcrypt from "bcrypt";
+import env from "dotenv";
+import { connectDataBase } from "../../src/database/config";
+import jwt from "jsonwebtoken";
+env.config();
+connectDataBase();
+
+export const loginController = async (req: any, res: any) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).send({ message: "Invalid credentials" });
+    }
+
+    // Generate token if needed
+    const token = jwt.sign({ id: user._id }, process.env.SECRET as string, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).send({ message: "Login successful", token, user }); // Include success message
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Internal server error" });
+  }
+};
