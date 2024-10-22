@@ -1,36 +1,42 @@
 "use client";
+
 import React, { useState } from "react";
+import ForwardToInboxOutlinedIcon from "@mui/icons-material/ForwardToInboxOutlined";
 import { Stack, Typography, Modal, Button, TextField } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import axios from "axios";
 
-export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }) => {
+export const EmailIcon = ({ initialEmail = "", label = "", onEditClick }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newName, setNewName] = useState(userName || "");
+  const [email, setEmail] = useState(initialEmail);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleEditClick = () => {
+  const handleOpen = () => {
     setIsModalOpen(true);
+    setError("");
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+    setEmail(initialEmail);
+    setError("");
   };
 
   const handleInputChange = (e) => {
-    setNewName(e.target.value);
+    setEmail(e.target.value);
   };
 
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.put("/api/update-profile", {
-        name: newName,
-      });
+      const response = await axios.put("/api/update-email", { email });
 
       if (response.status === 200) {
         setIsModalOpen(false);
-        onEditClick(newName);
+        onEditClick(email);
       } else {
-        setError("Failed to update profile");
+        setError("Failed to update email");
       }
     } catch (err) {
       setError("Error: Unable to update");
@@ -41,7 +47,6 @@ export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }
 
   return (
     <div>
-      {/* Profile Display */}
       <div
         style={{
           width: "394px",
@@ -54,6 +59,7 @@ export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }
           borderRadius: "8px",
           marginTop: "20px",
         }}
+        onClick={handleOpen}
       >
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div
@@ -68,7 +74,7 @@ export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }
               justifyContent: "center",
             }}
           >
-            <Person2OutlinedIcon
+            <ForwardToInboxOutlinedIcon
               sx={{
                 width: "24px",
                 height: "24px",
@@ -86,7 +92,7 @@ export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }
               {label}
             </Typography>
             <Typography style={{ fontSize: "16px", color: "#0D1118" }}>
-              {userName}
+              {email}
             </Typography>
           </div>
         </div>
@@ -105,7 +111,7 @@ export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }
               transform: "scale(1.1)",
             },
           }}
-          onClick={handleEditClick}
+          onClick={handleOpen}
         >
           <ModeEditOutlineOutlinedIcon
             sx={{
@@ -116,8 +122,7 @@ export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }
         </Stack>
       </div>
 
-      {/* Edit Modal */}
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal open={isModalOpen} onClose={handleClose}>
         <div
           style={{
             display: "flex",
@@ -132,13 +137,14 @@ export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }
             marginTop: "100px",
           }}
         >
-          <Typography variant="h6">Нэрээ өөрчлөх</Typography>
+          <Typography variant="h6">Имэйл хаягаа засах</Typography>
           <TextField
-            value={newName}
-            onChange={handleInputChange}
-            label="Шинэ нэр"
             fullWidth
-            style={{ marginTop: "20px" }}
+            label="Шинэ имэйл хаяг"
+            variant="outlined"
+            value={email}
+            onChange={handleInputChange}
+            sx={{ marginTop: "16px" }}
           />
           {error && (
             <Typography color="error" style={{ marginTop: "10px" }}>
