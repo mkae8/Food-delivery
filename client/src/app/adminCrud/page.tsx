@@ -1,13 +1,11 @@
 "use client";
 
-import { AdminAdd } from "@/components/adminCrud/AdminAdd";
-import { AddCategory } from "@/components/adminCrud/AddCategory";
+import AdminPageComp from "@/components/adminCrud/AdminPageComp";
 
 const AdminCrud = () => {
   return (
     <>
-      <AddCategory />
-      <AdminAdd />
+      <AdminPageComp />
     </>
   );
 };

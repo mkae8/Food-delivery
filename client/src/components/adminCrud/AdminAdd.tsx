@@ -72,7 +72,6 @@ export const AdminAdd: React.FC = () => {
     setIngredients("");
     setPrice("");
     setOnSale(false);
-    setOpen(false);
   };
 
   const handleInputChange =
@@ -115,15 +114,7 @@ export const AdminAdd: React.FC = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "50px",
-        }}
-      >
+      <div style={{}}>
         <div>
           <Button
             style={{
@@ -156,7 +147,7 @@ export const AdminAdd: React.FC = () => {
                   src="/image copy 10.png"
                   alt=""
                   color="error"
-                  onClick={handleClear}
+                  onClick={handleClose}
                 />
                 <h2 id="create-food-modal" style={{ textAlign: "center" }}>
                   Create food
@@ -171,6 +162,7 @@ export const AdminAdd: React.FC = () => {
                 margin="normal"
                 value={foodName}
                 onChange={handleInputChange(setFoodName)}
+                sx={{ backgroundColor: "#F4F4F4" }}
               />
 
               <TextField
@@ -181,10 +173,12 @@ export const AdminAdd: React.FC = () => {
                 select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                sx={{ backgroundColor: "#F4F4F4" }}
               >
-                <MenuItem value="Main">Tsuivan</MenuItem>
-                <MenuItem value="Side">Budaatai Huurga</MenuItem>
-                <MenuItem value="Dessert">Huitsai</MenuItem>
+                <MenuItem value="Main">Breakfast</MenuItem>
+                <MenuItem value="Side">Soup</MenuItem>
+                <MenuItem value="DMain course">Main course</MenuItem>
+                <MenuItem value="Dessert">Desserts</MenuItem>
               </TextField>
 
               <TextField
@@ -194,15 +188,17 @@ export const AdminAdd: React.FC = () => {
                 margin="normal"
                 value={ingredients}
                 onChange={handleInputChange(setIngredients)}
+                sx={{ backgroundColor: "#F4F4F4" }}
               />
 
               <TextField
                 fullWidth
-                label="Хоолны үнэ ($)"
+                label="Хоолны үнэ ₮"
                 variant="outlined"
                 margin="normal"
                 value={price ? `${price}` : "₮"}
                 onChange={handleInputChange(setPrice, true)}
+                sx={{ backgroundColor: "#F4F4F4" }}
               />
 
               <FormControlLabel
@@ -215,10 +211,20 @@ export const AdminAdd: React.FC = () => {
                 label="Хямдралтай эсэх"
                 style={{ marginTop: "15px" }}
               />
+              <TextField
+                fullWidth
+                label="Хямдралтай эсэх"
+                variant="outlined"
+                margin="normal"
+                value={onSale}
+                onChange={handleInputChange(setPrice, true)}
+                sx={{ backgroundColor: "#F4F4F4" }}
+              />
 
               <Typography variant="body1" style={{ marginTop: "15px" }}>
                 Хоолны зураг
               </Typography>
+
               <Box
                 sx={{
                   border: "1px dashed grey",
@@ -227,23 +233,53 @@ export const AdminAdd: React.FC = () => {
                   borderRadius: "10px",
                   textAlign: "center",
                   backgroundColor: "#f9f9f9",
+                  width: "284px",
+                  height: "122px",
+                  position: "relative",
                 }}
               >
-                {/* <Typography variant="h6" style={{ marginBottom: "10px" }}>
-                  Add image for the food
+                <Typography
+                  variant="h6"
+                  style={{
+                    marginBottom: "10px",
+                    color: "#525252",
+                    fontSize: "16px",
+                  }}
+                >
+                  Хоолны зургийг нэмнэ үү
                 </Typography>
                 <Button
                   variant="contained"
                   component="label"
-                  sx={{ backgroundColor: "#333", color: "white" }}
+                  sx={{
+                    backgroundColor: "#333",
+                    color: "white",
+                    marginBottom: "10px",
+                  }}
                 >
-                  Add image
-                  <input type="file" hidden />
-                </Button> */}
-
-                <Image width={500} height={500} alt="image" src={image} />
-                <label htmlFor="picture">Picture</label>
-                <input onChange={HandleImageUpload} id="picture" type="file" />
+                  Зураг нэмэх
+                  <input
+                    type="file"
+                    hidden
+                    onChange={HandleImageUpload}
+                    id="picture"
+                  />
+                </Button>
+                {image && (
+                  <Image
+                    width={284}
+                    height={122}
+                    alt="image"
+                    src={image}
+                    style={{
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                    }}
+                  />
+                )}
               </Box>
 
               <div
