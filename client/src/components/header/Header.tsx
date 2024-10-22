@@ -14,14 +14,11 @@ import { Sags } from "../icon/Sags";
 import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
-
-// const pages = ["НҮҮР", "ХООЛНЫ ЦЭС", "ХҮРГЭЛТИЙН БҮС"];
-const head = ["Сагс"];
-const heed = ["Нэвтрэх"];
-// const heed1 = ["hereglegch"];
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const { isLoggedIn, logOut, loginHandler } = useUser();
+  const { push } = useRouter();
   const routers = [
     {
       title: "НҮҮР",
@@ -37,6 +34,14 @@ export const Header = () => {
     },
   ];
 
+  const handleUserClick = () => {
+    if (isLoggedIn) {
+      push("/userprofile");
+    } else {
+      loginHandler();
+    }
+  };
+
   return (
     <AppBar position="static" sx={{ bgcolor: "white", boxShadow: "none" }}>
       <Container sx={{ width: "1248px" }}>
@@ -49,10 +54,7 @@ export const Header = () => {
                 key={item.title}
                 style={{ textDecoration: "none" }}
               >
-                <Button
-                  // onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "Black", display: "block" }}
-                >
+                <Button sx={{ my: 2, color: "Black", display: "block" }}>
                   {item.title}
                 </Button>
               </Link>
@@ -62,38 +64,23 @@ export const Header = () => {
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {head.map((item) => (
-                <Button
-                  key={item}
-                  //   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "Black", display: "block" }}
-                >
-                  {item}
-                </Button>
-              ))}
+              <Button sx={{ my: 2, color: "Black", display: "block" }}>
+                Сагс
+              </Button>
             </Box>
-            <Link href={"/login"} style={{ textDecoration: "none" }}>
+            <Box style={{ textDecoration: "none" }}>
               <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
                 <Newtreh />
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                  {isLoggedIn ? (
-                    <Button
-                      onClick={logOut}
-                      sx={{ my: 2, color: "Black", display: "block" }}
-                    >
-                      Гарах
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={loginHandler}
-                      sx={{ my: 2, color: "Black", display: "block" }}
-                    >
-                      Нэвтрэх
-                    </Button>
-                  )}
+                  <Button
+                    onClick={handleUserClick}
+                    sx={{ my: 2, color: "Black", display: "block" }}
+                  >
+                    {isLoggedIn ? "Хэрэглэгч" : "Нэвтрэх"}
+                  </Button>
                 </Box>
               </Box>
-            </Link>
+            </Box>
           </Box>
         </Toolbar>
       </Container>

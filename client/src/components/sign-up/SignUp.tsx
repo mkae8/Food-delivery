@@ -8,7 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export const SignUp = () => {
   const { push } = useRouter();
@@ -54,72 +54,82 @@ export const SignUp = () => {
   };
 
   return (
-    <div
+    <Container
       style={{
         display: "flex",
-        flexDirection: "column",
-        gap: "48px",
-        width: "448px",
-        height: "722px",
-        padding: "32px",
-        margin: "auto",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "131px",
       }}
     >
       <div
-        style={{ fontSize: "28px", fontWeight: "bold", textAlign: "center" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "48px",
+          width: "448px",
+          height: "722px",
+          padding: "32px",
+        }}
       >
-        Бүртгүүлэх
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        <InputGlobal
-          name="username"
-          label="Нэр"
-          placeholder="Нэрээ оруулна уу"
-          onChange={handleChange}
-        />
-        <InputGlobal
-          name="email"
-          label="И-мэйл"
-          placeholder="И-мэйл хаягаа оруулна уу"
-          onChange={handleChange}
-        />
-        <InputGlobal
-          name="address"
-          label="Хаяг"
-          placeholder="Та хаягаа оруулна уу"
-          onChange={handleChange}
-        />
-        <InputPassword
-          name="password"
-          label="Нууц үг"
-          text="Нууц үгээ оруулна уу"
-          onChange={handleChange}
-        />
-        <InputPassword
-          name="rePassword"
-          label="Нууц үг давтах"
-          text="Нууц үгээ оруулна уу"
-          onChange={handleChange}
-        />
-      </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <FormControlLabel
-          control={<Checkbox />}
-          label="Үйлчилгээний нөхцөл зөвшөөрөх"
-        />
-        <Typography
-          sx={{
-            color: "Red",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: "10px",
-          }}
+        <div
+          style={{ fontSize: "28px", fontWeight: "bold", textAlign: "center" }}
         >
-          {error}
-        </Typography>
-        <ButtonGlobal text="Бүртгүүлэх" clickhandler={handeSubmit} />
+          Бүртгүүлэх
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <InputGlobal
+            name="username"
+            label="Нэр"
+            placeholder="Нэрээ оруулна уу"
+            onChange={handleChange}
+          />
+          <InputGlobal
+            name="email"
+            label="И-мэйл"
+            placeholder="И-мэйл хаягаа оруулна уу"
+            onChange={handleChange}
+          />
+          <InputGlobal
+            name="address"
+            label="Хаяг"
+            placeholder="Та хаягаа оруулна уу"
+            onChange={handleChange}
+          />
+          <InputPassword
+            name="password"
+            label="Нууц үг"
+            text="Нууц үгээ оруулна уу"
+            onChange={handleChange}
+          />
+          <InputPassword
+            name="rePassword"
+            label="Нууц үг давтах"
+            text="Нууц үгээ оруулна уу"
+            onChange={handleChange}
+          />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <FormControlLabel
+            control={<Checkbox />}
+            label="Үйлчилгээний нөхцөл зөвшөөрөх"
+          />
+          <Typography
+            sx={{
+              color: "Red",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: "10px",
+            }}
+          >
+            {error}
+          </Typography>
+          <ButtonGlobal text="Бүртгүүлэх" clickhandler={handeSubmit} />
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
