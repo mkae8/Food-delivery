@@ -1,22 +1,23 @@
-import { FoodModel } from "../../src/database/models/foodModel"
+import { FoodModel } from "../../src/database/models/foodModel";
 import env from "dotenv";
 env.config();
 
 export const foodController = async (req: any, res: any) => {
-  const { foodName,images,price,description} = req.body
+  const { foodName, images, price, description } = req.body;
+
+  if (!foodName || !images || !price || !description) {
+    return res.status(400).send({ message: "All fields are required" });
+  }
 
   try {
-
-const newFood = await FoodModel.create({
-  foodName,
-  images,
-  price,
-  description,
-  isAdmin: true,
-});
-
-    res.status(201).send({ message: "Food added successfully" });
+    const newFood = await FoodModel.create({
+      foodName,
+      images,
+      price,
+      description,
+    });
+    res.status(201).send({ message: "Food created successfully", newFood });
   } catch (error) {
-    res.send({ message: "Menundee hiij chadsanguieeee" });
+    res.status(500).send({ message: "Failed to create food" });
   }
 };

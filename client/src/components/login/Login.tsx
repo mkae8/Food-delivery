@@ -1,28 +1,28 @@
 "use client";
 
-import { Box, colors, Container, TextField, Typography } from "@mui/material";
-
+import { Box, Container, TextField, Typography } from "@mui/material";
 import { InputPassword } from "../InputPassword";
 import { ButtonGlobal } from "../ButtonGlobal";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/provider/UserProvider";
+import Loading from "../password/Loading";
 
 export const Login = () => {
   const { push } = useRouter();
   const { isLoggedIn, loginHandler } = useUser();
   const [error, setError] = useState("");
   const [userDetail, setUserDetail] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    console.log(event.target.value);
-
     setUserDetail((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleClick = async () => {
+    setLoading(true);
     if (!userDetail.email || !userDetail.password) {
       setError("Бөглөөрэй хө");
       return;
@@ -32,9 +32,12 @@ export const Login = () => {
       push("/");
     } catch (error: any) {
       setError("Нууц үг эсвэл хэрэглэгчийн нэр буруу байна");
-      console.log();
+      setLoading(false);
     }
   };
+  if (loading) {
+    return <Loading />;
+  }
 
   if (isLoggedIn) {
     push("/");
