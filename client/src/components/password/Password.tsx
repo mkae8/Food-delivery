@@ -15,7 +15,7 @@ export const Password: React.FC = () => {
         justifyContent: "center",
         textAlign: "center",
         // border: "1px solid black",
-        
+
         width: "448px",
         height: "386px",
       }}
@@ -30,9 +30,13 @@ export const Password: React.FC = () => {
       >
         Нууц үг сэргээх
       </Typography>
-      <div style={{marginTop:'32px'}}><InputGlobal /></div>
+      <div style={{ marginTop: "32px" }}>
+        <InputGlobal name="password" />
+      </div>
 
-      <div style={{marginTop:"32px"}}><ButtonGlobal text="Үргэлжлүүлэх" width="384px" height="56px"  /></div>
+      <div style={{ marginTop: "32px" }}>
+        <ButtonGlobal text="Үргэлжлүүлэх" width="384px" height="56px" />
+      </div>
     </div>
   );
 };

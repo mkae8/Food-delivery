@@ -17,7 +17,6 @@ export const signUpController = async (req: any, res: any) => {
       isAdmin: false,
     });
     console.log(newUser);
-
     res.status(201).send({ message: "User created successfully" });
   } catch (error) {
     res.send({ message: "Email already registered" });

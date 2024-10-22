@@ -6,7 +6,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { PropsWithChildren } from "react";
 
 const UserContext: any = createContext(null);
-
 export const UserProvider = ({ children }: PropsWithChildren) => {
   const [token, setToken] = useState("");
   const [userDetail, setUserDetail] = useState({});
