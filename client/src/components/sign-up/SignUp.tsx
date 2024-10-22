@@ -9,10 +9,12 @@ import Checkbox from "@mui/material/Checkbox";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Container, Typography } from "@mui/material";
+import Loading from "../password/Loading";
 
 export const SignUp = () => {
   const { push } = useRouter();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [userDetail, setUserDetail] = useState({
     username: "",
     email: "",
@@ -27,6 +29,7 @@ export const SignUp = () => {
   };
 
   const handeSubmit = async () => {
+    setLoading(true);
     const { username, email, address, password, rePassword } = userDetail;
 
     if (!username || !email || !address || !password || !rePassword) {
@@ -38,7 +41,6 @@ export const SignUp = () => {
       setError("Нууц үг таарахгүй байна");
       return;
     }
-
     try {
       const result = await axios.post("http://localhost:8000/user/signup", {
         username,
@@ -50,8 +52,12 @@ export const SignUp = () => {
       push("/login");
     } catch (error) {
       setError("Backendtei server unasan bn ");
+      setLoading(false);
     }
   };
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Container

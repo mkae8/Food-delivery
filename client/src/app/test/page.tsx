@@ -1,9 +1,9 @@
-import Loading from "@/components/password/Loading";
+import { Test } from "@/components/test";
 
 const test = () => {
   return (
     <>
-      <Loading />
+      <Test />
     </>
   );
 };
