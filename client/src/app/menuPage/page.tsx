@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
-import { 
-  Container, 
-  Grid, 
-  AppBar,
-  Tabs,
-  Tab,
-  Box
-} from '@mui/material';
-import { styled } from '@mui/system';
-import { Header } from '@/components/header/Header';
-import Footer from '@/components/footer/Footer';
-import MenuItemCard from '@/components/order/MenuItemCard';
-import OrderDetailModal from '@/components/order/orderDetailModal';
+import React, { useState } from "react";
+import { Container, Grid, AppBar, Tabs, Tab, Box } from "@mui/material";
+import { styled } from "@mui/system";
+import { Header } from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
+import MenuItemCard from "@/components/order/MenuItemCard";
+import OrderDetailModal from "@/components/order/OrderDetailModal";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
-  '&.Mui-selected': {
+  "&.Mui-selected": {
     backgroundColor: theme.palette.success.main,
     color: theme.palette.common.white,
   },
@@ -31,8 +24,20 @@ const MenuPage: React.FC = () => {
 
   // Mock data - replace with actual data from your API
   const menuItems = [
-    { id: 1, name: 'Breakfast salad', price: 12.99, image: '/path-to-image.jpg', description: 'A healthy start to your day' },
-    { id: 2, name: 'Smoothie', price: 8.99, image: '/path-to-image.jpg', description: 'Refreshing fruit blend' },
+    {
+      id: 1,
+      name: "Breakfast salad",
+      price: 12.99,
+      image: "/path-to-image.jpg",
+      description: "A healthy start to your day",
+    },
+    {
+      id: 2,
+      name: "Smoothie",
+      price: 8.99,
+      image: "/path-to-image.jpg",
+      description: "Refreshing fruit blend",
+    },
     // Add more items...
   ];
 
@@ -58,8 +63,8 @@ const MenuPage: React.FC = () => {
           <Grid container spacing={3}>
             {menuItems.map((item) => (
               <Grid item xs={12} sm={6} md={3} key={item.id}>
-                <MenuItemCard 
-                  item={item} 
+                <MenuItemCard
+                  item={item}
                   onClick={() => {
                     setSelectedItem(item);
                     setModalOpen(true);
@@ -71,7 +76,7 @@ const MenuPage: React.FC = () => {
         </Box>
       </Container>
       {selectedItem && (
-        <OrderDetailModal 
+        <OrderDetailModal
           open={modalOpen}
           onClose={() => setModalOpen(false)}
           item={selectedItem}
