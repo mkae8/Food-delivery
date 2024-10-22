@@ -29,8 +29,8 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
     } catch (error: any) {
       setToken("");
       setIsLoggedIn(false);
-
-      throw new Error(error.response.data.message);
+      console.log(error);
+      return error.response.data.message;
     }
   };
 
