@@ -9,7 +9,9 @@ export default function Home() {
   return (
     <div>
       <HomePageHeader />
+
       <HomeInfoCards />
+
       <HomePageFoods />
     </div>
   );
