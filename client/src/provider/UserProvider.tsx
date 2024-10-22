@@ -20,9 +20,9 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
         password,
       });
 
-      window.localStorage.setItem("token", result.token);
+      window.localStorage.setItem("token", result.data.token);
 
-      setToken(result.token);
+      setToken(result.data.token);
       setIsLoggedIn(true);
       setUserDetail(result.user);
       push("/");
