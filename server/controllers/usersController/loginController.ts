@@ -19,15 +19,14 @@ export const loginController = async (req: any, res: any) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(401).send({ message: "Invalid credentials" });
+      return res.status(401).send({ message: "Password or username is wrong" });
     }
 
-    // Generate token if needed
     const token = jwt.sign({ id: user._id }, process.env.SECRET as string, {
       expiresIn: "1h",
     });
 
-    res.status(200).send({ message: "Login successful", token, user }); // Include success message
+    res.status(200).send({ message: "Login successful", token, user });
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Internal server error" });

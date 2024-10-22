@@ -31,7 +31,8 @@ export const Login = () => {
       await loginHandler(userDetail.email, userDetail.password);
       push("/");
     } catch (error: any) {
-      setError(error.data.message);
+      setError("Нууц үг эсвэл хэрэглэгчийн нэр буруу байна");
+      console.log();
     }
   };
 
