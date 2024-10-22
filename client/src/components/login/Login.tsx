@@ -39,7 +39,6 @@ export const Login = () => {
   if (isLoggedIn) {
     push("/");
   }
-  console.log(userDetail);
 
   const isFormFilled = userDetail.email !== "" && userDetail.password !== "";
 
@@ -53,8 +52,8 @@ export const Login = () => {
           textAlign: "center",
           width: "448px",
           height: "549px",
-
           justifyContent: "space-around",
+          marginTop: "168px",
         }}
       >
         <Typography
