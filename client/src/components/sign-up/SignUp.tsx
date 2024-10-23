@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Container, Typography } from "@mui/material";
 import Loading from "../password/Loading";
+import { toast } from "react-toastify";
 
 export const SignUp = () => {
   const { push } = useRouter();
@@ -29,16 +30,19 @@ export const SignUp = () => {
   };
 
   const handeSubmit = async () => {
+    setError("");
     setLoading(true);
     const { username, email, address, password, rePassword } = userDetail;
 
     if (!username || !email || !address || !password || !rePassword) {
       setError("Дутуу бөглөсөн байна !");
+      setLoading(false);
       return;
     }
 
     if (password !== rePassword) {
       setError("Нууц үг таарахгүй байна");
+      setLoading(false);
       return;
     }
     try {
@@ -48,16 +52,20 @@ export const SignUp = () => {
         address,
         password,
       });
-
+      toast.success(" Бүртгэл амжилттай үүслээ! ");
       push("/login");
     } catch (error) {
       setError("Backendtei server unasan bn ");
+      toast.error("Бүртгэл амжилгүй боллоо. Дахин оролдоно уу!");
       setLoading(false);
     }
   };
   if (loading) {
     return <Loading />;
   }
+  const isFormFilled = Object.values(userDetail).every(
+    (value) => value.trim() !== ""
+  );
 
   return (
     <Container
@@ -133,7 +141,12 @@ export const SignUp = () => {
           >
             {error}
           </Typography>
-          <ButtonGlobal text="Бүртгүүлэх" clickhandler={handeSubmit} />
+          <ButtonGlobal
+            text="Бүртгүүлэх"
+            clickhandler={handeSubmit}
+            background={isFormFilled ? "#18ba51" : "#EEEFF2"}
+            color={isFormFilled ? "#FFFFFF" : "#000000"}
+          />
         </div>
       </div>
     </Container>

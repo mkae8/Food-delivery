@@ -1,5 +1,4 @@
 "use client";
-
 import { Box, Container, TextField, Typography } from "@mui/material";
 import { InputPassword } from "../InputPassword";
 import { ButtonGlobal } from "../ButtonGlobal";
@@ -22,25 +21,33 @@ export const Login = () => {
   };
 
   const handleClick = async () => {
+    setError("");
     setLoading(true);
+
     if (!userDetail.email || !userDetail.password) {
       setError("Бөглөөрэй хө");
+      setLoading(false);
       return;
     }
+
     try {
       await loginHandler(userDetail.email, userDetail.password);
-      push("/");
+
+      if (isLoggedIn) {
+        push("/");
+      } else {
+        // setError("Нууц үг эсвэл имэйл таарахгүй байна");
+
+        setLoading(false);
+      }
     } catch (error: any) {
-      setError("Нууц үг эсвэл хэрэглэгчийн нэр буруу байна");
+      setError("Backendee asaasiimuu daa ?");
       setLoading(false);
     }
   };
+
   if (loading) {
     return <Loading />;
-  }
-
-  if (isLoggedIn) {
-    push("/");
   }
 
   const isFormFilled = userDetail.email !== "" && userDetail.password !== "";
@@ -127,9 +134,9 @@ export const Login = () => {
             height="56px"
             variant="outlined"
             border="none"
-            color="black"
             clickhandler={handleClick}
             background={isFormFilled ? "#18ba51" : "#EEEFF2"}
+            color={isFormFilled ? "#FFFFFF" : "#000000"}
           />
 
           <div style={{ fontSize: "14px" }}>Эсвэл</div>

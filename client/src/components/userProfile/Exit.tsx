@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import { useRouter } from "next/navigation";
 
@@ -59,9 +59,9 @@ export const Exit = () => {
               paddingInline: "5px",
             }}
           >
-            <Typography style={{ fontSize: "16px", color: "#0D1118" }}>
+            <Button style={{ fontSize: "16px", color: "#0D1118" }}>
               Гарах
-            </Typography>
+            </Button>
           </div>
         </div>
       </div>

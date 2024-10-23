@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import { PropsWithChildren } from "react";
+import { toast } from "react-toastify";
 
 const UserContext: any = createContext(null);
 export const UserProvider = ({ children }: PropsWithChildren) => {
@@ -26,9 +27,11 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
       setIsLoggedIn(true);
       setUserDetail(result.user);
       push("/");
+      toast.success("Амжилттай нэвтэрлээ!");
     } catch (error: any) {
       setToken("");
       setIsLoggedIn(false);
+      toast.error("Амжилгүй боллоо. Дахин оролдоно уу!");
       console.log(error);
       return error.response.data.message;
     }
