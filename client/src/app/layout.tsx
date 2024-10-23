@@ -32,7 +32,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ToastContainer />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ToastContainer />
         <UserProvider>

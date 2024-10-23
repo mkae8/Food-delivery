@@ -8,7 +8,8 @@ interface FoodCategory {
   foodName: string;
   images: string;
   price: string;
-  description: string;
+  foodIngredients: string;
+  foodCategory: string;
 }
 
 export const Test = () => {
@@ -17,7 +18,7 @@ export const Test = () => {
   const foodHandler = async () => {
     try {
       const response = await axios.get<FoodCategory[]>(
-        `http://localhost:8000/food`
+        `http://localhost:8000/food-get`
       );
       console.log(response);
 
@@ -41,7 +42,8 @@ export const Test = () => {
                 alt={category.foodName}
                 style={{ width: "200px", height: "auto" }}
               />
-              <p>{category.description}</p>
+              <p>{category.foodIngredients}</p>
+              {/* <p>{category.foodCategory}</p> */}
               <p>{category.price}</p>
             </li>
           ))

@@ -3,18 +3,19 @@ import env from "dotenv";
 env.config();
 
 export const foodController = async (req: any, res: any) => {
-  const { foodName, images, price, description } = req.body;
+  const { foodName, foodCategory, foodIngredients, images, price } = req.body;
 
-  if (!foodName || !images || !price || !description) {
+  if (!foodName || !images || !price || !foodIngredients) {
     return res.status(400).send({ message: "All fields are required" });
   }
 
   try {
     const newFood = await FoodModel.create({
       foodName,
+      foodCategory,
+      foodIngredients,
       images,
       price,
-      description,
     });
     res.status(201).send({ message: "Food created successfully", newFood });
   } catch (error) {
