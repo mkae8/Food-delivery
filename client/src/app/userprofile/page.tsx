@@ -27,24 +27,23 @@ const UserProfile = () => {
       </Typography>
 
       <EditProfile
-        userName=""
+        userName="Hahaha"
         label="Таны нэр"
         onEditClick={() => console.log("Edit Profile Clicked")}
       />
 
       <EditPhone
-        phoneNumber=""
+        initialPhoneNumber="123123123"
         label="Утасны дугаар"
         onEditClick={() => console.log("Edit Phone Clicked!")}
       />
       <EmailIcon
-        email="test@gmail.com"
+        initialEmail="test@gmail.com"
         label="Email"
         onEditClick={() => console.log("Edit Email Clicked")}
       />
 
       <OrderHistory />
-
       <Exit />
     </div>
   );

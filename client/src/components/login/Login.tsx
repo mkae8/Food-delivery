@@ -1,43 +1,53 @@
 "use client";
-
-import { Box, colors, Container, TextField, Typography } from "@mui/material";
-
+import { Box, Container, TextField, Typography } from "@mui/material";
 import { InputPassword } from "../InputPassword";
 import { ButtonGlobal } from "../ButtonGlobal";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/provider/UserProvider";
+import Loading from "../password/Loading";
 
 export const Login = () => {
   const { push } = useRouter();
   const { isLoggedIn, loginHandler } = useUser();
   const [error, setError] = useState("");
   const [userDetail, setUserDetail] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    console.log(event.target.value);
-
     setUserDetail((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleClick = async () => {
+    setError("");
+    setLoading(true);
+
     if (!userDetail.email || !userDetail.password) {
       setError("Бөглөөрэй хө");
+      setLoading(false);
       return;
     }
+
     try {
       await loginHandler(userDetail.email, userDetail.password);
-      push("/");
+
+      if (isLoggedIn) {
+        push("/");
+      } else {
+        // setError("Нууц үг эсвэл имэйл таарахгүй байна");
+
+        setLoading(false);
+      }
     } catch (error: any) {
-      setError("Нууц үг эсвэл хэрэглэгчийн нэр буруу байна");
-      console.log();
+      setError("Backendee asaasiimuu daa ?");
+      setLoading(false);
     }
   };
 
-  if (isLoggedIn) {
-    push("/");
+  if (loading) {
+    return <Loading />;
   }
 
   const isFormFilled = userDetail.email !== "" && userDetail.password !== "";
@@ -124,9 +134,9 @@ export const Login = () => {
             height="56px"
             variant="outlined"
             border="none"
-            color="black"
             clickhandler={handleClick}
             background={isFormFilled ? "#18ba51" : "#EEEFF2"}
+            color={isFormFilled ? "#FFFFFF" : "#000000"}
           />
 
           <div style={{ fontSize: "14px" }}>Эсвэл</div>
