@@ -34,6 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <ToastContainer />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <ToastContainer />
         <UserProvider>
           <MuiProvider>
             <Header />{" "}
