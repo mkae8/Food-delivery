@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { connectDataBase } from "./src/database/config";
 import userRouter from "./routers/users/userRouter";
+import foodRouter from "./routers/foods/foodsRouter";
 
 const port = process.env.PORT;
 const app = express();
@@ -11,6 +12,7 @@ app.use(cors());
 connectDataBase();
 
 app.use("/", userRouter);
+app.use("/", foodRouter);
 
 app.listen(port, () => {
   console.log(`nee deer asna --> http://localhost:${port}`);
@@ -122,3 +124,4 @@ app.listen(port, () => {
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
 // });
+

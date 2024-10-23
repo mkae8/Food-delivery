@@ -40,6 +40,10 @@ export const AdminAdd: React.FC = () => {
 
   const [image, setImage] = useState("");
 
+  // const handleChange = (event:any) => {
+  //   const {name, value}
+  // }
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -289,7 +293,6 @@ export const AdminAdd: React.FC = () => {
                   marginTop: "15px",
                 }}
               >
-                <div></div>
                 <div
                   style={{
                     display: "flex",
