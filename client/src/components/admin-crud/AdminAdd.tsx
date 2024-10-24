@@ -14,6 +14,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import { toast } from "react-toastify";
 
 interface FoodItem {
   foodName: string;
@@ -40,10 +41,6 @@ export const AdminAdd: React.FC = () => {
 
   const [image, setImage] = useState("");
 
-  // const handleChange = (event:any) => {
-  //   const {name, value}
-  // }
-
   const style = {
     position: "absolute",
     top: "50%",
@@ -57,7 +54,7 @@ export const AdminAdd: React.FC = () => {
     borderRadius: 2,
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newFoodItem: FoodItem = {
       foodName,
       category,
@@ -66,8 +63,27 @@ export const AdminAdd: React.FC = () => {
       onSale,
     };
 
-    console.log(newFoodItem);
-    handleClear();
+    if (!foodName || !category || !ingredients || !price || !image) {
+      toast.error("All fields are required!");
+      return;
+    }
+
+    try {
+      const result = await axios.post("http://localhost:8000/food-create", {
+        foodName: newFoodItem.foodName,
+        foodCategory: newFoodItem.category,
+        foodIngredients: newFoodItem.ingredients,
+        price: newFoodItem.price,
+        onSale: newFoodItem.onSale,
+        images: image,
+      });
+
+      toast.success("Food item created successfully!");
+      handleClear();
+    } catch (error) {
+      toast.error("Failed to create food item. Please try again.");
+      console.error(error);
+    }
   };
 
   const handleClear = () => {
@@ -76,6 +92,7 @@ export const AdminAdd: React.FC = () => {
     setIngredients("");
     setPrice("");
     setOnSale(false);
+    setImage("");
   };
 
   const handleInputChange =

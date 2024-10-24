@@ -152,3 +152,48 @@ export const SignUp = () => {
     </Container>
   );
 };
+
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState("");
+
+const [foodDetail, setFoodDetail] = useState({
+  foodName: "",
+  foodCategory: "",
+  foodIngredients: "",
+  price: "",
+  images: "",
+});
+
+// const handleChange = (event: any) => {
+//   const { name, value } = event.target;
+//   setFoodDetail((prev) => ({ ...prev, [name]: value }));
+// };
+
+// const handleSubmit = async () => {
+//   setLoading(true);
+
+//   const { foodName, foodCategory, foodIngredients, price, images } =
+//     foodDetail;
+
+//   if (!foodName || !foodCategory || !foodIngredients || !price || !images) {
+//     setError("Дутуу бөглөсөн байна !");
+//     setLoading(false);
+//     return;
+//   }
+
+//   try {
+//     const result = await axios.post("http://localhost:8000/food-create", {
+//       foodName,
+//       foodCategory,
+//       foodIngredients,
+//       price,
+//       images,
+//     });
+//     toast.success(" Хоол амжилттай үүслээ! ");
+//   } catch (error) {
+//     toast.error("Хоол үүсгэх амжилгүй боллоо. Дахин оролдоно уу!");
+//   }
+// };
+// if (loading) {
+//   return <Loading />;
+// }
