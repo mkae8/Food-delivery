@@ -13,6 +13,7 @@ import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface RouterItem {
   title: string;
@@ -31,12 +32,19 @@ export const Header: React.FC = () => {
     { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
   ];
 
-  const handleUserClick = () => {
+  const handleUserClick = async () => {
     if (isLoggedIn) {
       push("/userprofile");
       setClickedButton("Хэрэглэгч");
     } else {
-      loginHandler();
+      const email = prompt("Please enter your email:");
+      const password = prompt("Please enter your password:");
+
+      if (email && password) {
+        await loginHandler(email, password);
+      } else {
+        toast.error("Email and password are required.");
+      }
     }
   };
 

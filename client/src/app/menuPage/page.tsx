@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Container, Grid, AppBar, Tabs, Tab, Box } from "@mui/material";
 import { styled } from "@mui/system";
@@ -5,6 +6,14 @@ import { Header } from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import MenuItemCard from "@/components/order/MenuItemCard";
 import OrderDetailModal from "@/components/order/OrderDetailModal";
+
+interface MenuItem {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+}
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   "&.Mui-selected": {
@@ -15,7 +24,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 
 const MenuPage: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
