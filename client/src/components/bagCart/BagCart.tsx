@@ -30,7 +30,8 @@ export default function BagCart() {
         display: "flex",
         gap: "16px",
         backgroundColor: "white",
-      }}>
+      }}
+    >
       <img
         style={{
           width: "245px",
@@ -44,7 +45,8 @@ export default function BagCart() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-          }}>
+          }}
+        >
           <div>
             <p>Food name</p>
             <p>{AllFoodPrice}</p> {/* Display total price */}
@@ -60,18 +62,21 @@ export default function BagCart() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-          }}>
+          }}
+        >
           <Button
             onClick={nemeh}
             sx={{ width: "45px", height: "40px" }}
-            variant="contained">
+            variant="contained"
+          >
             <AddIcon />
           </Button>
           <Typography>{count}</Typography>
           <Button
             onClick={hasah}
             sx={{ width: "45px", height: "40px" }}
-            variant="contained">
+            variant="contained"
+          >
             <RemoveIcon />
           </Button>
         </div>

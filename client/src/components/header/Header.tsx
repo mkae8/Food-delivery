@@ -24,12 +24,28 @@ export const Header: React.FC = () => {
   const { isLoggedIn, loginHandler } = useUser();
   const { push } = useRouter();
 
+<<<<<<< Updated upstream
   const [clickedButton, setClickedButton] = useState<string | null>(null);
 
   const routers: RouterItem[] = [
     { title: "НҮҮР", href: "/" },
     { title: "ХООЛНЫ ЦЭС", href: "/footer-info/menu" },
     { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
+=======
+  const routers = [
+    {
+      title: "НҮҮР",
+      href: "/",
+    },
+    {
+      title: "ХООЛНЫ ЦЭС",
+      href: "/footer-info/menu",
+    },
+    {
+      title: "ХҮРГЭЛТИЙН БҮС",
+      href: "/footer-info/delivery-area",
+    },
+>>>>>>> Stashed changes
   ];
 
   const handleUserClick = async () => {
@@ -48,6 +64,7 @@ export const Header: React.FC = () => {
     }
   };
 
+<<<<<<< Updated upstream
   const handleButtonClick = (title: string) => {
     setClickedButton(title);
   };
@@ -68,6 +85,18 @@ export const Header: React.FC = () => {
         textSizeAdjust: "inherit",
       }}
     >
+=======
+  const [isBagOpen, setIsBagOpen] = useState<boolean>(false);
+
+  const toggleBag = () => {
+    setIsBagOpen((prev) => !prev);
+    console.log(isBagOpen);
+  };
+
+  return (
+    <AppBar position="static" sx={{ bgcolor: "white", boxShadow: "none" }}>
+      {isBagOpen && <Bag />}
+>>>>>>> Stashed changes
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -94,6 +123,7 @@ export const Header: React.FC = () => {
           <SearchInput />
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
+<<<<<<< Updated upstream
             <Button sx={buttonStyles} aria-label="Cart">
               Сагс
             </Button>
@@ -108,6 +138,14 @@ export const Header: React.FC = () => {
                 }}
               >
                 {isLoggedIn ? "Хэрэглэгч" : "Нэвтрэх"}
+=======
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              <Button
+                onClick={toggleBag}
+                sx={{ my: 2, color: "Black", display: "block" }}
+              >
+                Сагс
+>>>>>>> Stashed changes
               </Button>
             </Box>
           </Box>

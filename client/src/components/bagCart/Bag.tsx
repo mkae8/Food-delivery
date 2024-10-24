@@ -3,18 +3,97 @@
 import { Box, Button, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import BagCart from "./BagCart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const DataBaseInformation = [
+  {
+    foodId: "hool1",
+    foodPic: "hool1.png",
+    foodName: "dsda",
+    price: 14500,
+    foodIngredients: "orts1",
+  },
+  {
+    foodId: "hool2",
+    foodPic: "hool2.png",
+    foodName: "dsda2",
+    price: 15000,
+    foodIngredients: "orts2",
+  },
+  {
+    foodId: "hool3",
+    foodPic: "hool3.png",
+    foodName: "dsda3",
+    price: 16000,
+    foodIngredients: "orts3",
+  },
+];
+
+// type DataBaseInformationProps = {
+//   foodPic: string;
+//   foodName: string;
+//   price: number;
+//   foodIngredients: string;
+// };
 
 export const Bag = () => {
-  const [isSidebarVisible, setSidebarVisible] = useState(true);
-
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [count, setCount] = useState<any>({});
+  const [oneFoodPrice, setoneFoodPrice] = useState();
+  const [lastPrice, setLastPrice] = useState<number>(0);
   const toggleBag = () => {
-    setSidebarVisible(!isSidebarVisible);
+    setIsVisible(!isVisible);
   };
+
+  const incrementCount = (foodId: string) => {
+    setCount((prev: any) => ({
+      ...prev,
+      [foodId]: prev[foodId] == undefined ? 1 : prev[foodId] + 1,
+    }));
+  };
+
+  const decrementCount = (foodId: string) => {
+    setCount((prev: any) => ({
+      ...prev,
+      [foodId]:
+        prev[foodId] == undefined
+          ? 0
+          : prev[foodId] === 0
+          ? 0
+          : prev[foodId] - 1,
+    }));
+  };
+
+  const closeCartItem = () => {
+    setIsVisible(false);
+    setCount(0);
+  };
+
+  const totalPrice = DataBaseInformation.map((el) => {
+    const hoolniToo = count[el.foodId];
+    const totalPrice = el.price * hoolniToo;
+    return totalPrice;
+  });
+
+  const handleCountChange = (newCount: number) => {
+    setLastPrice(lastPrice);
+  };
+
+  useEffect(() => {
+    const totalPrice = DataBaseInformation.reduce((total, item) => {
+      const itemCount = count[item.foodId] || 0;
+      return total + item.price * itemCount;
+    }, 0);
+    setLastPrice(totalPrice);
+  }, [count]);
+  console.log(handleCountChange);
+
+  if (!isVisible) return null;
+
   return (
     <div
       style={{
-        display: isSidebarVisible ? "flex" : "none",
+        display: isVisible ? "flex" : "none",
         position: "absolute",
         zIndex: "100",
         width: "100%",
@@ -24,14 +103,14 @@ export const Bag = () => {
     >
       <div
         style={{
-          width: "65%",
+          width: "75%",
           backgroundColor: "#00000080",
           opacity: "50%",
         }}
       ></div>
       <div
         style={{
-          width: "35%",
+          width: "25%",
           backgroundColor: "white",
           right: "0",
           display: "flex",
@@ -70,8 +149,23 @@ export const Bag = () => {
               borderTop: "1px solid #D6D8DB",
             }}
           >
-            <BagCart />
-            <BagCart />
+            {DataBaseInformation.map((el, Item) => {
+              return (
+                <BagCart
+                  key={Item}
+                  foodPic={el.foodPic}
+                  foodName={el.foodName}
+                  foodIngredients={el.foodIngredients}
+                  price={el.price}
+                  onCountChange={handleCountChange}
+                  incrementCount={() => incrementCount(el.foodId)}
+                  decrementCount={() => decrementCount(el.foodId)}
+                  count={1}
+                  closeCartItem={closeCartItem}
+                  totalFoodPrice={10}
+                />
+              );
+            })}
           </Box>
         </div>
         <Box
@@ -100,7 +194,7 @@ export const Bag = () => {
           >
             <Typography>Таны нийт төлөх дүн</Typography>
             <Typography sx={{ fontWeight: "700", fontSize: "18px" }}>
-              {"Total"}
+              {lastPrice}
             </Typography>
           </Box>
           <Button sx={{ width: "50%", height: "48px" }} variant="contained">
