@@ -4,6 +4,11 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 
+interface UploadResponse {
+  secure_url: string;
+  public_id: string;
+}
+
 export default function ContentUploader() {
   const cloud_name = "djxo5odaa";
   const preset_name = "temuujin";
@@ -11,25 +16,29 @@ export default function ContentUploader() {
 
   const [image, setImage] = useState("");
 
-  const HandleImageUpload = async (event: any) => {
-    //body boldeh
-    const file = event.target.files[0];
+  const HandleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", preset_name);
-    console.log(file);
 
-    // api huselt
-    try {
-      const response: any = await axios.post(url, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response.data);
-      setImage(response.data.secure_url);
-    } catch (error) {
-      console.log(error);
+    if (file) {
+      formData.append("file", file);
+      formData.append("upload_preset", preset_name);
+      console.log(file);
+
+      // API request
+      try {
+        const response = await axios.post<UploadResponse>(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log(response.data);
+        setImage(response.data.secure_url);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -37,7 +46,7 @@ export default function ContentUploader() {
     <div className="flex w-full h-screen justify-center items-center">
       <div className="flex flex-col gap-5">
         <>
-          <Image width={500} height={500} alt="image" src={image} />
+          {image && <Image width={500} height={500} alt="image" src={image} />}
           <label htmlFor="picture">Picture</label>
           <input onChange={HandleImageUpload} id="picture" type="file" />
         </>

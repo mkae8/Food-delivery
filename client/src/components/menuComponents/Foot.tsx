@@ -3,7 +3,7 @@
 import React from "react";
 import { ButtonGlobal } from "../ButtonGlobal";
 import { Stack, Typography } from "@mui/material";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Allfoot } from "./AllFoot";
 
 interface ButtonData {
@@ -21,7 +21,10 @@ const buttonData: ButtonData[] = [
 const Foot: React.FC = () => {
   const { push } = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
+
+;
+  
 
   const handleChange = (item: string) => {
     push(`${pathname}?category=${item}`);

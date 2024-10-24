@@ -39,7 +39,7 @@ export const EmailIcon = ({ initialEmail = "", label = "", onEditClick }) => {
         setError("Failed to update email");
       }
     } catch (err) {
-      setError("Error: Unable to update");
+      setError(`Error: Unable to update${err}`);
     } finally {
       setLoading(false);
     }
