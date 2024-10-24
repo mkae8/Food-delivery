@@ -45,7 +45,6 @@ export default function RootLayout({
                 minHeight: "100vh",
               }}
             >
-              {" "}
               {children}
             </div>
             <Footer />
