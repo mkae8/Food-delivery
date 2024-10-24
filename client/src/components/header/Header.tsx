@@ -1,12 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { PineconeLogo } from "../icon/Pinelog";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { SearchInput } from "../SearchInput";
@@ -16,34 +14,52 @@ import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
 
-export const Header = () => {
-  const { isLoggedIn, logOut, loginHandler } = useUser();
+interface RouterItem {
+  title: string;
+  href: string;
+}
+
+export const Header: React.FC = () => {
+  const { isLoggedIn, loginHandler } = useUser();
   const { push } = useRouter();
-  const routers = [
-    {
-      title: "НҮҮР",
-      href: "/",
-    },
-    {
-      title: "ХООЛНЫ ЦЭС",
-      href: "/footer-info/menu",
-    },
-    {
-      title: "ХҮРГЭЛТИЙН БҮС",
-      href: "/footer-info/delivery-area",
-    },
+
+  const [clickedButton, setClickedButton] = useState<string | null>(null);
+
+  const routers: RouterItem[] = [
+    { title: "НҮҮР", href: "/" },
+    { title: "ХООЛНЫ ЦЭС", href: "/footer-info/menu" },
+    { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
   ];
 
   const handleUserClick = () => {
     if (isLoggedIn) {
       push("/userprofile");
+      setClickedButton("Хэрэглэгч");
     } else {
       loginHandler();
     }
   };
 
+  const handleButtonClick = (title: string) => {
+    setClickedButton(title);
+  };
+
+  const buttonStyles = {
+    my: 2,
+    color: "black",
+    display: "block",
+    fontWeight: 700,
+  };
+
   return (
-    <AppBar position="static" sx={{ bgcolor: "white", boxShadow: "none" }}>
+    <AppBar
+      position="static"
+      sx={{
+        bgcolor: "white",
+        boxShadow: "none",
+        textSizeAdjust: "inherit",
+      }}
+    >
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -54,7 +70,14 @@ export const Header = () => {
                 key={item.title}
                 style={{ textDecoration: "none" }}
               >
-                <Button sx={{ my: 2, color: "Black", display: "block" }}>
+                <Button
+                  sx={buttonStyles}
+                  style={{
+                    color: clickedButton === item.title ? "#18ba51" : "black",
+                  }}
+                  onClick={() => handleButtonClick(item.title)}
+                  aria-label={item.title}
+                >
                   {item.title}
                 </Button>
               </Link>
@@ -63,23 +86,21 @@ export const Header = () => {
           <SearchInput />
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Button sx={{ my: 2, color: "Black", display: "block" }}>
-                Сагс
+            <Button sx={buttonStyles} aria-label="Cart">
+              Сагс
+            </Button>
+            <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
+              <Newtreh />
+              <Button
+                onClick={handleUserClick}
+                sx={buttonStyles}
+                aria-label={isLoggedIn ? "User Profile" : "Login"}
+                style={{
+                  color: clickedButton !== "Хэрэглэгч" ? "black" : "#18ba51",
+                }}
+              >
+                {isLoggedIn ? "Хэрэглэгч" : "Нэвтрэх"}
               </Button>
-            </Box>
-            <Box style={{ textDecoration: "none" }}>
-              <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
-                <Newtreh />
-                <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                  <Button
-                    onClick={handleUserClick}
-                    sx={{ my: 2, color: "Black", display: "block" }}
-                  >
-                    {isLoggedIn ? "Хэрэглэгч" : "Нэвтрэх"}
-                  </Button>
-                </Box>
-              </Box>
             </Box>
           </Box>
         </Toolbar>

@@ -7,7 +7,6 @@ import { Header } from "@/components/header/Header";
 import { UserProvider } from "@/provider/UserProvider";
 import { ToastContainer } from "react-toastify";
 
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -37,7 +36,6 @@ export default function RootLayout({
         <ToastContainer />
         <UserProvider>
           <MuiProvider>
-            <Bag />
             <Header />{" "}
             <div
               style={{
@@ -45,8 +43,8 @@ export default function RootLayout({
                 width: "1200px",
                 margin: "auto",
                 minHeight: "100vh",
-              }}>
-              {" "}
+              }}
+            >
               {children}
             </div>
             <Footer />
