@@ -1,4 +1,3 @@
-// import { Options } from "./node_modules/minipass/index.d";
 import express from "express";
 import cors from "cors";
 import { connectDataBase } from "./src/database/config";
@@ -124,4 +123,3 @@ app.listen(port, () => {
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
 // });
-
