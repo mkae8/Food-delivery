@@ -38,7 +38,7 @@ export default function RootLayout({
           <ToastContainer />
           <UserProvider>
             <MuiProvider>
-              <Header />{" "}
+              <Header />
               <div
                 style={{
                   marginTop: 50,
