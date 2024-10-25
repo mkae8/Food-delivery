@@ -2,7 +2,7 @@ import { Sags } from "@/components/sags/Step1";
 import { Container } from "@mui/material";
 import React from "react";
 
-export const page = () => {
+const Page = () => {
   return (
     <>
       <Container>
@@ -12,4 +12,4 @@ export const page = () => {
   );
 };
 
-export default page;
+export default Page;

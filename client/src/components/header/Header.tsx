@@ -33,9 +33,6 @@ export const Header: React.FC = () => {
     { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
   ];
 
-
-  
-
   const handleUserClick = async () => {
     if (isLoggedIn) {
       push("/userprofile");
@@ -57,7 +54,7 @@ export const Header: React.FC = () => {
       push("/sags");
       setClickedButton("Sags");
     } else {
-      loginHandler();
+      push("/login");
     }
   };
 
@@ -124,7 +121,6 @@ export const Header: React.FC = () => {
                 color: clickedButton !== "sags" ? "black" : "#18ba51",
               }}
             >
-
               Сагс
             </Button>
             <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
