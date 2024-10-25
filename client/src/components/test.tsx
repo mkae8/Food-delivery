@@ -23,7 +23,7 @@ export const Test = () => {
       console.log(response);
       setFoodCategories(response.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.log("Error fetching data:", error);
     }
   };
   return (

@@ -33,6 +33,9 @@ export const Header: React.FC = () => {
     { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
   ];
 
+
+  
+
   const handleUserClick = async () => {
     if (isLoggedIn) {
       push("/userprofile");

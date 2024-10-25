@@ -35,7 +35,7 @@ export const Login = () => {
       if (isLoggedIn) {
         push("/");
       } else {
-        // setError("Нууц үг эсвэл имэйл таарахгүй байна");
+        setError("Нууц үг эсвэл имэйл таарахгүй байна");
 
         setLoading(false);
       }
