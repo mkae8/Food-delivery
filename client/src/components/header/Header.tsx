@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { Bag } from "../bagCart/Bag";
 
 interface RouterItem {
   title: string;
@@ -59,6 +60,13 @@ export const Header: React.FC = () => {
     fontWeight: 700,
   };
 
+  const [isBagOpen, setIsBagOpen] = useState<boolean>(false);
+
+  const toggleBag = () => {
+    setIsBagOpen((prev) => !prev);
+    console.log(isBagOpen);
+  };
+
   return (
     <AppBar
       position="static"
@@ -68,6 +76,7 @@ export const Header: React.FC = () => {
         textSizeAdjust: "inherit",
       }}
     >
+      {isBagOpen && <Bag />}
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -94,7 +103,7 @@ export const Header: React.FC = () => {
           <SearchInput />
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
-            <Button sx={buttonStyles} aria-label="Cart">
+            <Button onClick={toggleBag} sx={buttonStyles} aria-label="Cart">
               Сагс
             </Button>
             <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
