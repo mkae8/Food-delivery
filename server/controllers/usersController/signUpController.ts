@@ -14,7 +14,7 @@ export const signUpController = async (req: any, res: any) => {
       email,
       address,
       password: hashedPassword,
-      isAdmin: false,
+      isAdmin: true,
     });
     res.status(201).send({ message: "User created successfully" });
   } catch (error) {
