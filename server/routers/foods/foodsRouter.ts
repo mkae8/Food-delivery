@@ -5,6 +5,6 @@ import { fetchFoods } from "../../controllers/foodController/fetchFoods";
 const foodRouter = Router();
 
 foodRouter.route("/food-create").post(foodController);
-foodRouter.route("/food-get").get(fetchFoods);
+foodRouter.route("/foods-get").get(fetchFoods);
 
 export default foodRouter;

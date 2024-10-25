@@ -1,15 +1,44 @@
 "use client";
-
 import { AvatarIcon } from "@/components/userProfile/AvatarIcon";
 import { EditPhone } from "@/components/userProfile/EditPhone";
 import { EditProfile } from "@/components/userProfile/EditProfile";
 import { EmailIcon } from "@/components/userProfile/EmailIcon";
 import { Exit } from "@/components/userProfile/Exit";
 import { OrderHistory } from "@/components/userProfile/OrderHistory";
-
 import { Typography } from "@mui/material";
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+interface UserInformation {
+  username: string;
+  phoneNumber: string;
+  email: string;
+}
 
 const UserProfile = () => {
+  const [userInfo, setUserInfo] = useState<UserInformation | null>(null);
+  const [email, setEmail] = useState<string>("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const response = await axios.get<UserInformation>(
+          `http://localhost:8000/user/profile`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        console.log(response.data);
+        setUserInfo(response.data);
+        setEmail(response.data.email);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
   return (
     <div
       style={{
@@ -22,23 +51,28 @@ const UserProfile = () => {
       }}
     >
       <AvatarIcon />
-      <Typography>
-        <h1>Mansont</h1>
+      <Typography variant="h4">
+        {userInfo ? userInfo.username : "Loading..."}
       </Typography>
 
       <EditProfile
-        userName="Hahaha"
-        label="Таны нэр"
+        userName={userInfo ? userInfo.username : "Loading..."}
         onEditClick={() => console.log("Edit Profile Clicked")}
       />
 
       <EditPhone
-        initialPhoneNumber="123123123"
+        initialPhoneNumber={userInfo ? userInfo.phoneNumber : "99474747"}
         label="Утасны дугаар"
-        onEditClick={() => console.log("Edit Phone Clicked!")}
+        onEditClick={async () => {
+          console.log("Edit Phone Clicked!");
+          return Promise.resolve();
+        }}
       />
+
       <EmailIcon
-        initialEmail="test@gmail.com"
+        disabled={userInfo?.email ? false : true}
+        email={email}
+        setEmail={setEmail}
         label="Email"
         onEditClick={() => console.log("Edit Email Clicked")}
       />

@@ -19,12 +19,12 @@ const style = {
 };
 
 interface Category {
-  id: string;
+  _id: string;
   categoryName: string;
 }
 
 interface NewCategoryResponse {
-  id: string;
+  _id: string;
   categoryName: string;
 }
 
@@ -37,10 +37,10 @@ const AdminPageComp = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [newCategoryName, setNewCategoryName] = useState<string>("");
+  const [idStore, setIdStore] = useState("");
 
   const addCategory = async (newCategory: string) => {
     try {
-      // Серверт шинэ ангилал нэмэх хүсэлт
       const response = await axios.post<AddCategoryResponse>(
         "http://localhost:8000/category",
         {
@@ -48,7 +48,6 @@ const AdminPageComp = () => {
         }
       );
 
-      // const newCategoryObj = response.data.newCategory;
       const newCategoryObj: NewCategoryResponse = response.data.newCategory;
       setCategories((prevCategories) => [...prevCategories, newCategoryObj]);
       toast.success(`${newCategory} added successfully!`);
@@ -72,20 +71,33 @@ const AdminPageComp = () => {
 
   const handleEdit = async () => {
     try {
-      const updatedCategory = {
-        ...categories.find((cat) => cat.categoryName === selectedCategory),
-        name: newCategoryName,
-      };
-      await axios.put(
-        `http://localhost:8000/category/${updatedCategory.id}`,
-        updatedCategory
+      const categoryToEdit = idStore;
 
-        // setCategories((prevCategories) =>
-        //   prevCategories.map((category) =>
-        //     category.name === selectedCategory ? updatedCategory : category
-        //   )
+      if (!categoryToEdit) {
+        toast.error("Category not found.");
+        return;
+      }
+
+      const updatedCategory = {
+        categoryName: newCategoryName,
+      };
+
+      const response = await axios.put(
+        `http://localhost:8000/editCategory/${categoryToEdit}`,
+        updatedCategory
       );
+
+      // Ангиллыг шинэчлэх
+      setCategories((prevCategories) =>
+        prevCategories.map((cat) =>
+          cat._id === categoryToEdit
+            ? { ...cat, categoryName: newCategoryName }
+            : cat
+        )
+      );
+
       toast.success(`Edited ${selectedCategory} to ${newCategoryName}`);
+      setIdStore("");
       handleCloseModal();
     } catch (error) {
       console.error("Error editing category:", error);
@@ -93,19 +105,36 @@ const AdminPageComp = () => {
     }
   };
 
+  // const handleDelete = async () => {
+  //   try {
+  //     await axios.delete(`http://localhost:8000/category/${selectedCategory}`);
+  //     setCategories((prevCategories) =>
+  //       prevCategories.filter(
+  //         (category) => category.categoryName !== selectedCategory
+  //       )
+  //     );
+  //     toast.success(`Deleted ${selectedCategory}`);
+  //     handleCloseModal();
+  //   } catch (error) {
+  //     console.error("Error deleting category:", error);
+  //     toast.error("Failed to delete category.");
+  //   }
+  // };
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/category/${selectedCategory}`); // Устгах хүсэлт
+      // Устгах ангиллын id-г ашиглан устгана
+      await axios.delete(`http://localhost:8000/category/${idStore}`);
+
+      // Устгасан ангиллыг жагсаалтаас хасна
       setCategories((prevCategories) =>
-        prevCategories.filter(
-          (category) => category.categoryName !== selectedCategory
-        )
+        prevCategories.filter((category) => category._id !== idStore)
       );
+
       toast.success(`Deleted ${selectedCategory}`);
       handleCloseModal();
     } catch (error) {
       console.error("Error deleting category:", error);
-      toast.error("Failed to delete category.");
+      toast.error("Fail. hha arai duussangue");
     }
   };
 
@@ -114,7 +143,7 @@ const AdminPageComp = () => {
       const response = await axios.get<Category[]>(
         "http://localhost:8000/fetchCategory"
       );
-      setCategories(response.data); // Серверээс авсан категориуд
+      setCategories(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
       toast.error("Failed to fetch categories.");
@@ -142,7 +171,7 @@ const AdminPageComp = () => {
         <Box display="flex" flexDirection="column" marginTop="20px" gap="20px">
           {categories.map((category) => (
             <Button
-              key={category.id}
+              key={category._id}
               style={{
                 color: "black",
                 border: "1px solid #D6D8DB",
@@ -152,7 +181,10 @@ const AdminPageComp = () => {
                 paddingLeft: "15px",
                 paddingRight: "15px",
               }}
-              onClick={() => handleOpenModal(category.categoryName)}
+              onClick={() => {
+                handleOpenModal(category.categoryName);
+                setIdStore(category._id);
+              }}
             >
               {category.categoryName}
               <img

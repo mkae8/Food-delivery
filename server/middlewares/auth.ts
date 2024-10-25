@@ -18,7 +18,7 @@ export const authMiddleware = async (req: any, res: any, next: any) => {
     if (err) {
       return res.status(401).send({ message: err.message });
     } else {
-      res.locals.userId = succ.userId;
+      res.locals.userId = succ.id;
       next();
     }
   });

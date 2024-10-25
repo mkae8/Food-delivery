@@ -1,19 +1,6 @@
-export const Allfoot = () => {
-  const imageSources = [
-    { image: "/hool1.png", title: "Өглөөний хоол", price: "14,800₮" },
-    { image: "/zairmag.png", title: "Зайрмаг", price: "4,800₮" },
-    { image: "/hool2.png", title: "Өглөөний хоол", price: "24,800₮" },
-    { image: "/hool3.png", title: "Breakfast", price: "124,800₮" },
-    { image: "/hool4.png", title: "Торт", price: "54,800₮" },
-    { image: "/hool5.png", title: "Oreo shake", price: "54,800₮" },
-    { image: "/hool6.png", title: "Chocolate ", price: "54,800₮" },
-    { image: "/hool7.png", title: "Yoghurt", price: "54,800₮" },
-    { image: "/hool1.png", title: "Өглөөний хоол", price: "14,800₮" },
-    { image: "/zairmag.png", title: "Зайрмаг", price: "4,800₮" },
-    { image: "/hool2.png", title: "Өглөөний хоол", price: "24,800₮" },
-    { image: "/hool3.png", title: "Breakfast", price: "124,800₮" },
-  ];
+"use client";
 
+export const Allfoot = ({ foods }: { foods: any }) => {
   return (
     <div
       style={{
@@ -22,7 +9,7 @@ export const Allfoot = () => {
         gap: "10px",
       }}
     >
-      {imageSources.map((src, index) => (
+      {foods.map((src: any, index: number) => (
         <div key={index} style={{ display: "column", justifyContent: "start" }}>
           <img
             src={src.image}
@@ -54,7 +41,7 @@ export const Allfoot = () => {
               }}
             >
               {src.price}
-            </p>{" "}
+            </p>
           </div>
         </div>
       ))}

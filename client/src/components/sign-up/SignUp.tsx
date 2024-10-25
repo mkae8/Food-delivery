@@ -24,7 +24,7 @@ export const SignUp = () => {
     rePassword: "",
   });
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserDetail((prev) => ({ ...prev, [name]: value }));
   };
@@ -52,10 +52,12 @@ export const SignUp = () => {
         address,
         password,
       });
+      console.log(result);
+      
       toast.success(" Бүртгэл амжилттай үүслээ! ");
       push("/login");
     } catch (error) {
-      setError("Backendtei server unasan bn ");
+      setError(`Backendtei server unasan bn ${error}`);
       toast.error("Бүртгэл амжилгүй боллоо. Дахин оролдоно уу!");
       setLoading(false);
     }
@@ -152,3 +154,5 @@ export const SignUp = () => {
     </Container>
   );
 };
+
+

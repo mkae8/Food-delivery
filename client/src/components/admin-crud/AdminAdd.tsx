@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import Image from "next/image";
-
 import React, { useState, ChangeEvent } from "react";
 import {
   Box,
@@ -14,6 +13,12 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import { toast } from "react-toastify";
+
+interface UploadResponse {
+  secure_url: string;
+  public_id: string;
+}
 
 interface FoodItem {
   foodName: string;
@@ -33,16 +38,11 @@ export const AdminAdd: React.FC = () => {
   const [ingredients, setIngredients] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [onSale, setOnSale] = useState<boolean>(false);
+  const [image, setImage] = useState<string>("");
 
   const cloud_name = "djxo5odaa";
   const preset_name = "temuujin";
   const url = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
-
-  const [image, setImage] = useState("");
-
-  // const handleChange = (event:any) => {
-  //   const {name, value}
-  // }
 
   const style = {
     position: "absolute",
@@ -50,14 +50,14 @@ export const AdminAdd: React.FC = () => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "587px",
-    Height: "854px",
+    height: "854px",
     bgcolor: "white",
     boxShadow: 24,
     p: 5,
     borderRadius: 2,
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newFoodItem: FoodItem = {
       foodName,
       category,
@@ -66,8 +66,27 @@ export const AdminAdd: React.FC = () => {
       onSale,
     };
 
-    console.log(newFoodItem);
-    handleClear();
+    if (!foodName || !category || !ingredients || !price || !image) {
+      toast.error("All fields are required!");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:8000/food-create", {
+        foodName: newFoodItem.foodName,
+        foodCategory: newFoodItem.category,
+        foodIngredients: newFoodItem.ingredients,
+        price: newFoodItem.price,
+        onSale: newFoodItem.onSale,
+        images: image,
+      });
+
+      toast.success("Food item created successfully!");
+      handleClear();
+    } catch (error) {
+      toast.error("Failed to create food item. Please try again.");
+      console.error(error);
+    }
   };
 
   const handleClear = () => {
@@ -76,6 +95,7 @@ export const AdminAdd: React.FC = () => {
     setIngredients("");
     setPrice("");
     setOnSale(false);
+    setImage("");
   };
 
   const handleInputChange =
@@ -94,32 +114,36 @@ export const AdminAdd: React.FC = () => {
       }
     };
 
-  const HandleImageUpload = async (event: any) => {
-    //body boldeh
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", preset_name);
-    console.log(file);
+  const HandleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
 
-    // api huselt
-    try {
-      const response: any = await axios.post(url, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response.data);
-      setImage(response.data.secure_url);
-    } catch (error) {
-      console.log(error);
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", preset_name);
+      console.log(file);
+
+      try {
+        const response = await axios.post<UploadResponse>(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log(response.data);
+        setImage(response.data.secure_url);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error("Failed to upload image. Please try again.");
+      }
     }
   };
   console.log(category, "category");
 
   return (
     <>
-      <div style={{}}>
+      <div>
         <div>
           <Button
             style={{
@@ -150,8 +174,7 @@ export const AdminAdd: React.FC = () => {
                 <img
                   style={{ height: "12px", width: "12px", cursor: "pointer" }}
                   src="/image copy 10.png"
-                  alt=""
-                  color="error"
+                  alt="Close"
                   onClick={handleClose}
                 />
                 <h2 id="create-food-modal" style={{ textAlign: "center" }}>
@@ -180,10 +203,10 @@ export const AdminAdd: React.FC = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 sx={{ backgroundColor: "#F4F4F4" }}
               >
-                <MenuItem value="Main">Breakfast</MenuItem>
-                <MenuItem value="Side">Soup</MenuItem>
-                <MenuItem value="DMain course">Main course</MenuItem>
-                <MenuItem value="Dessert">Desserts</MenuItem>
+                <MenuItem value="Breakfast">Breakfast</MenuItem>
+                <MenuItem value="Soup">Soup</MenuItem>
+                <MenuItem value="Main course">Main course</MenuItem>
+                <MenuItem value="Desserts">Desserts</MenuItem>
               </TextField>
 
               <TextField
@@ -215,15 +238,6 @@ export const AdminAdd: React.FC = () => {
                 }
                 label="Хямдралтай эсэх"
                 style={{ marginTop: "15px" }}
-              />
-              <TextField
-                fullWidth
-                label="Хямдралтай эсэх"
-                variant="outlined"
-                margin="normal"
-                value={onSale}
-                onChange={handleInputChange(setPrice, true)}
-                sx={{ backgroundColor: "#F4F4F4" }}
               />
 
               <Typography variant="body1" style={{ marginTop: "15px" }}>
@@ -274,7 +288,7 @@ export const AdminAdd: React.FC = () => {
                   <Image
                     width={284}
                     height={122}
-                    alt="image"
+                    alt="Uploaded image"
                     src={image}
                     style={{
                       position: "absolute",

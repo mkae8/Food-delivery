@@ -15,7 +15,7 @@ export const Login = () => {
   const [userDetail, setUserDetail] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserDetail((prev) => ({ ...prev, [name]: value }));
   };
@@ -23,7 +23,6 @@ export const Login = () => {
   const handleClick = async () => {
     setError("");
     setLoading(true);
-
     if (!userDetail.email || !userDetail.password) {
       setError("Бөглөөрэй хө");
       setLoading(false);
@@ -36,12 +35,12 @@ export const Login = () => {
       if (isLoggedIn) {
         push("/");
       } else {
-        // setError("Нууц үг эсвэл имэйл таарахгүй байна");
+        setError("Нууц үг эсвэл имэйл таарахгүй байна");
 
         setLoading(false);
       }
-    } catch (error: any) {
-      setError("Backendee asaasiimuu daa ?");
+    } catch (error) {
+      setError(`Backendee asaasiimuu daa ?${error}`);
       setLoading(false);
     }
   };

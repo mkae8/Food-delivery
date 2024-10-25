@@ -25,17 +25,21 @@ export const NewPassword = () => {
             fontWeight: "700",
             width: "384px",
             height: "48px",
-            
           }}
         >
           Шинэ нууц үг зохиох
         </Typography>
 
-        <div style={{marginTop:"48px"}}><InputPassword text="Нууц үг " label="Шинэ нууц үг" /></div>
-        <div style={{marginTop:"24px"}}><InputPassword
-          text="Нууц үг давтах "
-          label="Шинэ нууц үгийг дахин давтана уу"
-        /></div>
+        <div style={{ marginTop: "48px" }}>
+          <InputPassword text="Нууц үг " label="Шинэ нууц үг" name="password" />
+        </div>
+        <div style={{ marginTop: "24px" }}>
+          <InputPassword
+            name="password"
+            text="Нууц үг давтах "
+            label="Шинэ нууц үгийг дахин давтана уу"
+          />
+        </div>
         <ButtonGlobal text="Үргэлжлүүлэх" width="384px" height="56px" />
       </div>
     </>

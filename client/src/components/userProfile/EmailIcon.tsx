@@ -1,29 +1,47 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import ForwardToInboxOutlinedIcon from "@mui/icons-material/ForwardToInboxOutlined";
 import { Stack, Typography, Modal, Button, TextField } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import axios from "axios";
 
-export const EmailIcon = ({ initialEmail = "", label = "", onEditClick }) => {
+interface EmailIconProps {
+  initialEmail?: string;
+  label?: string;
+  onEditClick: (email: string) => void;
+  disabled: boolean;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+}
+
+export const EmailIcon: React.FC<EmailIconProps> = ({
+  disabled,
+  label = "",
+  onEditClick,
+  email,
+  setEmail,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [email, setEmail] = useState(initialEmail);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleOpen = () => {
+    if (disabled) {
+      return;
+    }
     setIsModalOpen(true);
     setError("");
   };
 
   const handleClose = () => {
     setIsModalOpen(false);
-    setEmail(initialEmail);
+    setEmail(email);
     setError("");
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
@@ -39,7 +57,7 @@ export const EmailIcon = ({ initialEmail = "", label = "", onEditClick }) => {
         setError("Failed to update email");
       }
     } catch (err) {
-      setError("Error: Unable to update");
+      setError(`Error: Unable to update${err}`);
     } finally {
       setLoading(false);
     }
@@ -92,7 +110,7 @@ export const EmailIcon = ({ initialEmail = "", label = "", onEditClick }) => {
               {label}
             </Typography>
             <Typography style={{ fontSize: "16px", color: "#0D1118" }}>
-              {email}
+              {disabled ? "Loading..." : email}
             </Typography>
           </div>
         </div>

@@ -1,9 +1,9 @@
-// import { Options } from "./node_modules/minipass/index.d";
 import express from "express";
 import cors from "cors";
 import { connectDataBase } from "./src/database/config";
 import userRouter from "./routers/users/userRouter";
 import foodRouter from "./routers/foods/foodsRouter";
+import categoryRouter from "./routers/category/categoriesRouter";
 
 const port = process.env.PORT;
 const app = express();
@@ -13,6 +13,7 @@ connectDataBase();
 
 app.use("/", userRouter);
 app.use("/", foodRouter);
+app.use("/", categoryRouter);
 
 app.listen(port, () => {
   console.log(`nee deer asna --> http://localhost:${port}`);
@@ -124,4 +125,3 @@ app.listen(port, () => {
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
 // });
-

@@ -1,18 +1,19 @@
 "use client";
 
-import { Button, Stack, Typography } from "@mui/material";
+import { Button} from "@mui/material";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import { useRouter } from "next/navigation";
 
 export const Exit = () => {
   const router = useRouter();
 
-  const handleExitClick = () => {
-    router.push("/"); // Нүүр хуудас руу шилжих!!!
+  const handleExitClick = async () => {
+    window.localStorage.removeItem("token");
+    router.push("/login");
   };
 
   return (
-    <div onClick={handleExitClick} style={{ cursor: "pointer" }}>
+    <div>
       <div
         style={{
           width: "394px",
@@ -59,7 +60,10 @@ export const Exit = () => {
               paddingInline: "5px",
             }}
           >
-            <Button style={{ fontSize: "16px", color: "#0D1118" }}>
+            <Button
+              onClick={handleExitClick}
+              style={{ fontSize: "16px", color: "#0D1118", cursor: "pointer" }}
+            >
               Гарах
             </Button>
           </div>

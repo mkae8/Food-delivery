@@ -18,16 +18,14 @@ export const Test = () => {
   const foodHandler = async () => {
     try {
       const response = await axios.get<FoodCategory[]>(
-        `http://localhost:8000/food-get`
+        `http://localhost:8000/foods-get`
       );
       console.log(response);
-
       setFoodCategories(response.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.log("Error fetching data:", error);
     }
   };
-
   return (
     <div>
       <button onClick={foodHandler}>Hoolnuudaa avah</button>

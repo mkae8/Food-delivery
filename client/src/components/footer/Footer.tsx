@@ -5,14 +5,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const GuestFooter: React.FC = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const navigate = (path: string) => {
-    router.push(path);
-  };
+  // const navigate = (path: string) => {
+  //   router.push(path);
+  // };
 
   const routers = [
     {
@@ -25,7 +25,7 @@ const GuestFooter: React.FC = () => {
     },
     {
       title: "Menu",
-      href: "/footer-info/menu",
+      href: "/menu",
     },
     {
       title: "Terms",

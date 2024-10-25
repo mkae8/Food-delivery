@@ -13,6 +13,8 @@ import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { Bag } from "../bagCart/Bag";
 
 interface RouterItem {
   title: string;
@@ -31,12 +33,22 @@ export const Header: React.FC = () => {
     { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
   ];
 
-  const handleUserClick = () => {
+
+  
+
+  const handleUserClick = async () => {
     if (isLoggedIn) {
       push("/userprofile");
       setClickedButton("Хэрэглэгч");
     } else {
-      loginHandler();
+      const email = prompt("Please enter your email:");
+      const password = prompt("Please enter your password:");
+
+      if (email && password) {
+        await loginHandler(email, password);
+      } else {
+        toast.error("Email and password are required.");
+      }
     }
   };
 
@@ -60,6 +72,13 @@ export const Header: React.FC = () => {
     fontWeight: 700,
   };
 
+  const [isBagOpen, setIsBagOpen] = useState<boolean>(false);
+
+  const toggleBag = () => {
+    setIsBagOpen((prev) => !prev);
+    console.log(isBagOpen);
+  };
+
   return (
     <AppBar
       position="static"
@@ -69,6 +88,7 @@ export const Header: React.FC = () => {
         textSizeAdjust: "inherit",
       }}
     >
+      {isBagOpen && <Bag />}
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -95,6 +115,7 @@ export const Header: React.FC = () => {
           <SearchInput />
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
+
             <Button
               onClick={handleSagsClick}
               sx={buttonStyles}
@@ -103,6 +124,7 @@ export const Header: React.FC = () => {
                 color: clickedButton !== "sags" ? "black" : "#18ba51",
               }}
             >
+
               Сагс
             </Button>
             <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
