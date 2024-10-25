@@ -115,6 +115,7 @@ export const AdminAdd: React.FC = () => {
       console.log(error);
     }
   };
+  console.log(category, "category");
 
   return (
     <>
