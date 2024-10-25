@@ -12,7 +12,6 @@ interface UserDetail {
   email: string;
 }
 
-
 type UserContextType = {
   loginHandler: (
     email: string,
@@ -40,7 +39,8 @@ const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
   const [token, setToken] = useState("");
-  const [userDetail, setUserDetail] = useState<UserDetail | null>(null);({});
+  const [userDetail, setUserDetail] = useState<UserDetail | null>(null);
+  ({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { push } = useRouter();
@@ -97,7 +97,13 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <UserContext.Provider
-      value={{ loginHandler, isLoggedIn, token, userDetail, logOut }}
+      value={{
+        loginHandler,
+        isLoggedIn,
+        token,
+        userDetail: userDetail ? userDetail : {}, 
+        logOut,
+      }}
     >
       {children}
     </UserContext.Provider>

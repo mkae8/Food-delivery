@@ -14,7 +14,6 @@ const GuestFooter: React.FC = () => {
   //   router.push(path);
   // };
 
-
   const routers = [
     {
       title: "Home",
@@ -26,7 +25,7 @@ const GuestFooter: React.FC = () => {
     },
     {
       title: "Menu",
-      href: "/footer-info/menu",
+      href: "/menu",
     },
     {
       title: "Terms",

@@ -6,7 +6,13 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import axios from "axios";
 
-export const EditPhone = ({
+interface EditPhoneProps {
+  initialPhoneNumber?: string;
+  label?: string;
+  onEditClick: (phoneNumber: string) => Promise<void>;
+}
+
+export const EditPhone: React.FC<EditPhoneProps> = ({
   initialPhoneNumber = "",
   label = "",
   onEditClick,
@@ -27,7 +33,7 @@ export const EditPhone = ({
     setError("");
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
   };
 
@@ -43,7 +49,7 @@ export const EditPhone = ({
         setError("Failed to update phone number");
       }
     } catch (err) {
-      setError("Error: Unable to update");
+      setError(`Error: Unable to update${err}`);
     } finally {
       setLoading(false);
     }

@@ -28,15 +28,18 @@ const UserProfile = () => {
 
       <EditProfile
         userName="Hahaha"
-        label="Таны нэр"
         onEditClick={() => console.log("Edit Profile Clicked")}
       />
 
       <EditPhone
         initialPhoneNumber="123123123"
         label="Утасны дугаар"
-        onEditClick={() => console.log("Edit Phone Clicked!")}
+        onEditClick={async () => {
+          console.log("Edit Phone Clicked!");
+          return Promise.resolve();
+        }}
       />
+
       <EmailIcon
         initialEmail="test@gmail.com"
         label="Email"
