@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
 
   const routers: RouterItem[] = [
     { title: "НҮҮР", href: "/" },
-    { title: "ХООЛНЫ ЦЭС", href: "/footer-info/menu" },
+    { title: "ХООЛНЫ ЦЭС", href: "/menu" },
     { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
   ];
 
