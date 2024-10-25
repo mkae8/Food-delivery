@@ -7,21 +7,34 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 
-export default function BagCart() {
+type DataBaseInformationProps = {
+  foodPic: string;
+  foodName: string;
+  price: number;
+  foodIngredients: string;
+  onCountChange: (newCount: number) => void;
+  incrementCount: () => void;
+  decrementCount: () => void;
+  count: number;
+  closeCartItem: () => void;
+  totalPrice: number[];
+};
+
+export default function BagCart({
+  foodName,
+  foodPic,
+  price,
+  foodIngredients,
+  onCountChange,
+  incrementCount,
+  decrementCount,
+  totalPrice,
+}: DataBaseInformationProps) {
   const [count, setCount] = useState(0);
   const OneFoodPrice = 14500;
 
-  const nemeh = () => {
-    setCount(count + 1);
-  };
-
-  const hasah = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
-
   const AllFoodPrice = count * OneFoodPrice;
+  console.log(totalPrice);
 
   return (
     <Card
@@ -37,10 +50,10 @@ export default function BagCart() {
           width: "245px",
           height: "150px",
         }}
-        src="hool2.png"
+        src={foodPic}
         alt=""
       />
-      <div>
+      <div style={{ width: "245px" }}>
         <div
           style={{
             display: "flex",
@@ -48,15 +61,17 @@ export default function BagCart() {
           }}
         >
           <div>
-            <p>Food name</p>
-            <p>{AllFoodPrice}</p> {/* Display total price */}
+            <p>{foodName}</p>
+            <p>{totalPrice}</p>
           </div>
-          <Button sx={{ color: "black", width: "48px", height: "48px" }}>
+          <Button /* onclick={} */
+            sx={{ color: "black", width: "48px", height: "48px" }}
+          >
             <ClearIcon />
           </Button>
         </div>
         <div style={{ fontSize: "16px", color: "#767676", fontWeight: "400" }}>
-          Хулуу, төмс, лууван, сонгино, цөцгийн тос, самрын үр
+          {foodIngredients}
         </div>
         <div
           style={{
@@ -65,7 +80,7 @@ export default function BagCart() {
           }}
         >
           <Button
-            onClick={nemeh}
+            onClick={incrementCount}
             sx={{ width: "45px", height: "40px" }}
             variant="contained"
           >
@@ -73,7 +88,7 @@ export default function BagCart() {
           </Button>
           <Typography>{count}</Typography>
           <Button
-            onClick={hasah}
+            onClick={decrementCount}
             sx={{ width: "45px", height: "40px" }}
             variant="contained"
           >

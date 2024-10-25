@@ -39,7 +39,7 @@ const DataBaseInformation = [
 export const Bag = () => {
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [count, setCount] = useState<any>({});
-  const [oneFoodPrice, setoneFoodPrice] = useState();
+  const [oneFoodPrice, setoneFoodPrice] = useState<any>({});
   const [lastPrice, setLastPrice] = useState<number>(0);
   const toggleBag = () => {
     setIsVisible(!isVisible);
@@ -68,25 +68,23 @@ export const Bag = () => {
     setIsVisible(false);
     setCount(0);
   };
+  console.log(DataBaseInformation);
 
   const totalPrice = DataBaseInformation.map((el) => {
-    const hoolniToo = count[el.foodId];
-    const totalPrice = el.price * hoolniToo;
+    const foodCount = count[el.foodId];
+    const totalPrice = el.price * foodCount;
     return totalPrice;
   });
 
-  const handleCountChange = (newCount: number) => {
-    setLastPrice(lastPrice);
-  };
+  const handleCountChange = () => {};
 
-  useEffect(() => {
-    const totalPrice = DataBaseInformation.reduce((total, item) => {
-      const itemCount = count[item.foodId] || 0;
-      return total + item.price * itemCount;
-    }, 0);
-    setLastPrice(totalPrice);
-  }, [count]);
-  console.log(handleCountChange);
+  // useEffect(() => {
+  //   const totalPrice = DataBaseInformation.reduce((total, item) => {
+  //     const itemCount = count[item.foodId] || 0;
+  //     return total + item.price * itemCount;
+  //   }, 0);
+  //   setLastPrice(totalPrice);
+  // }, [count]);
 
   if (!isVisible) return null;
 
@@ -160,9 +158,9 @@ export const Bag = () => {
                   onCountChange={handleCountChange}
                   incrementCount={() => incrementCount(el.foodId)}
                   decrementCount={() => decrementCount(el.foodId)}
-                  count={1}
+                  count={count}
                   closeCartItem={closeCartItem}
-                  totalFoodPrice={10}
+                  totalPrice={totalPrice}
                 />
               );
             })}
