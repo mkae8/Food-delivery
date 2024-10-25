@@ -21,10 +21,6 @@ const buttonData: ButtonData[] = [
 const Foot: React.FC = () => {
   const { push } = useRouter();
   const pathname = usePathname();
-  // const searchParams = useSearchParams();
-
-;
-  
 
   const handleChange = (item: string) => {
     push(`${pathname}?category=${item}`);
@@ -48,7 +44,6 @@ const Foot: React.FC = () => {
           />
         ))}
       </Stack>
-      <Allfoot />
     </>
   );
 };

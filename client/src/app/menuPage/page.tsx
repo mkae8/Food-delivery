@@ -52,7 +52,6 @@ const MenuPage: React.FC = () => {
 
   return (
     <>
-      <Header />
       <Container maxWidth="lg">
         <AppBar position="static" color="default">
           <Tabs
@@ -91,7 +90,6 @@ const MenuPage: React.FC = () => {
           item={selectedItem}
         />
       )}
-      <Footer />
     </>
   );
 };

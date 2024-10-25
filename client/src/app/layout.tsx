@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 };
 
 import "react-toastify/dist/ReactToastify.css";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -33,23 +34,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ToastContainer />
-        <UserProvider>
-          <MuiProvider>
-            <Header />{" "}
-            <div
-              style={{
-                marginTop: 50,
-                width: "1200px",
-                margin: "auto",
-                minHeight: "100vh",
-              }}
-            >
-              {children}
-            </div>
-            <Footer />
-          </MuiProvider>
-        </UserProvider>
+        <Suspense>
+          <ToastContainer />
+          <UserProvider>
+            <MuiProvider>
+              <Header />{" "}
+              <div
+                style={{
+                  marginTop: 50,
+                  width: "1200px",
+                  margin: "auto",
+                  minHeight: "100vh",
+                }}
+              >
+                {children}
+              </div>
+              <Footer />
+            </MuiProvider>
+          </UserProvider>
+        </Suspense>
       </body>
     </html>
   );

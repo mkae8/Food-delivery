@@ -5,17 +5,38 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import axios from "axios";
 
-export const EditProfile = ({ userName, label = "Таны нэр", onEditClick }) => {
+interface EditProfileProps {
+  userName?: string;
+  onEditClick: (newName: string) => void;
+  label?: string;
+}
+
+export const EditProfile: React.FC<EditProfileProps> = ({
+  userName = "Таны нэр",
+  onEditClick,
+  label = "Таны нэр",
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newName, setNewName] = useState(userName || "");
+  const [newName, setNewName] = useState<string>(userName);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handleSave = () => {
+    if (!newName) {
+      setError("Нэр оруулна уу.");
+      return;
+    }
+    setLoading(true);
+    onEditClick(newName);
+    setLoading(false);
+    setIsModalOpen(false);
+  };
 
   const handleEditClick = () => {
     setIsModalOpen(true);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewName(e.target.value);
   };
 
