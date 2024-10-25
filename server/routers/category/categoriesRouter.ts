@@ -1,7 +1,7 @@
-import { categoryController } from "./../../controllers/foodController/categoryController";
-import { fetchCategory } from "./../../controllers/foodController/fetchCategory";
-import { editCategory } from "../../controllers/foodController/editCategory";
-import { deleteCategoryCon } from "../../controllers/foodController/deleteCategory";
+import { categoryController } from "../../controllers/categoryController/categoryController";
+import { fetchCategory } from "../../controllers/categoryController/fetchCategory";
+import { editCategory } from "../../controllers/categoryController/editCategory";
+import { deleteCategoryCon } from "../../controllers/categoryController/deleteCategory";
 import { Router } from "express";
 
 const categoryRouter = Router();

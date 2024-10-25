@@ -1,4 +1,4 @@
-import { CategoryModel } from "./../../src/database/models/categoryModel";
+import { CategoryModel } from "../../src/database/models/categoryModel";
 import env from "dotenv";
 env.config();
 

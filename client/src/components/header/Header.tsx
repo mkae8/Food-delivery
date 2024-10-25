@@ -15,7 +15,6 @@ import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { Bag } from "../bagCart/Bag";
-
 interface RouterItem {
   title: string;
   href: string;

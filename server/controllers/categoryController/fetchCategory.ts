@@ -1,4 +1,4 @@
-import { CategoryModel } from "./../../src/database/models/admin";
+import { CategoryModel } from "../../src/database/models/admin";
 
 export const fetchCategory = async (req: any, res: any): Promise<void> => {
   try {

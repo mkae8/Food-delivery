@@ -30,7 +30,6 @@ const UserProfile = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        console.log(response.data);
         setUserInfo(response.data);
         setEmail(response.data.email);
       } catch (error) {
