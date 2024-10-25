@@ -139,6 +139,7 @@ export const AdminAdd: React.FC = () => {
       }
     }
   };
+  console.log(category, "category");
 
   return (
     <>

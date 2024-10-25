@@ -52,6 +52,15 @@ export const Header: React.FC = () => {
     }
   };
 
+  const handleSagsClick = () => {
+    if (isLoggedIn) {
+      push("/sags");
+      setClickedButton("Sags");
+    } else {
+      loginHandler();
+    }
+  };
+
   const handleButtonClick = (title: string) => {
     setClickedButton(title);
   };
@@ -106,7 +115,16 @@ export const Header: React.FC = () => {
           <SearchInput />
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
-            <Button onClick={toggleBag} sx={buttonStyles} aria-label="Cart">
+
+            <Button
+              onClick={handleSagsClick}
+              sx={buttonStyles}
+              aria-label="Cart"
+              style={{
+                color: clickedButton !== "sags" ? "black" : "#18ba51",
+              }}
+            >
+
               Сагс
             </Button>
             <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
