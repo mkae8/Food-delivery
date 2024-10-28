@@ -4,13 +4,11 @@ import { InputPassword } from "../InputPassword";
 import { ButtonGlobal } from "../ButtonGlobal";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useUser } from "@/provider/UserProvider";
 import Loading from "../password/Loading";
 
 export const Login = () => {
-  const { push } = useRouter();
-  const { isLoggedIn, loginHandler } = useUser();
+  const { isLoggedIn, loginHandler, globalError } = useUser();
   const [error, setError] = useState("");
   const [userDetail, setUserDetail] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -21,24 +19,8 @@ export const Login = () => {
   };
 
   const handleClick = async () => {
-    setError("");
-    setLoading(true);
-    if (!userDetail.email || !userDetail.password) {
-      setError("Бөглөөрэй хө");
-      setLoading(false);
-      return;
-    }
-
     try {
       await loginHandler(userDetail.email, userDetail.password);
-
-      if (isLoggedIn) {
-        push("/");
-      } else {
-        setError("Нууц үг эсвэл имэйл таарахгүй байна");
-
-        setLoading(false);
-      }
     } catch (error) {
       setError(`Backendee asaasiimuu daa ?${error}`);
       setLoading(false);
@@ -114,7 +96,7 @@ export const Login = () => {
           </Link>
         </Box>
 
-        <Typography sx={{ color: "red" }}>{error}</Typography>
+        <Typography sx={{ color: "red" }}>{globalError}</Typography>
 
         <Box
           sx={{

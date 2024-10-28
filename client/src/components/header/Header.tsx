@@ -13,8 +13,8 @@ import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import { Bag } from "../bagCart/Bag";
+
 interface RouterItem {
   title: string;
   href: string;
@@ -37,14 +37,7 @@ export const Header: React.FC = () => {
       push("/userprofile");
       setClickedButton("Хэрэглэгч");
     } else {
-      const email = prompt("Please enter your email:");
-      const password = prompt("Please enter your password:");
-
-      if (email && password) {
-        await loginHandler(email, password);
-      } else {
-        toast.error("Email and password are required.");
-      }
+      push("/login");
     }
   };
 
