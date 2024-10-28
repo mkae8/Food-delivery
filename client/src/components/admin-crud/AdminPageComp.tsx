@@ -123,7 +123,9 @@ const AdminPageComp = () => {
   const handleDelete = async () => {
     try {
       // Устгах ангиллын id-г ашиглан устгана
-      await axios.delete(`http://localhost:8000/category/${idStore}`);
+      await axios.delete(
+        `https://food-delivery-lrqy.onrender.com/category/${idStore}`
+      );
 
       // Устгасан ангиллыг жагсаалтаас хасна
       setCategories((prevCategories) =>
@@ -141,7 +143,7 @@ const AdminPageComp = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get<Category[]>(
-        "http://localhost:8000/fetchCategory"
+        "https://food-delivery-lrqy.onrender.com/fetchCategory"
       );
       setCategories(response.data);
     } catch (error) {
