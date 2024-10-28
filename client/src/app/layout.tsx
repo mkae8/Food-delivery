@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import localFont from "next/font/local";
 import { MuiProvider } from "@/provider/MuiProvider";
 import Footer from "@/components/footer/Footer";
 import { Header } from "@/components/header/Header";
