@@ -46,14 +46,17 @@ export const SignUp = () => {
       return;
     }
     try {
-      const result = await axios.post("http://localhost:8000/user/signup", {
-        username,
-        email,
-        address,
-        password,
-      });
+      const result = await axios.post(
+        "https://food-delivery-lrqy.onrender.com/user/signup",
+        {
+          username,
+          email,
+          address,
+          password,
+        }
+      );
       console.log(result);
-      
+
       toast.success(" Бүртгэл амжилттай үүслээ! ");
       push("/login");
     } catch (error) {
@@ -154,5 +157,3 @@ export const SignUp = () => {
     </Container>
   );
 };
-
-
