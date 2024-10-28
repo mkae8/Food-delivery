@@ -19,6 +19,7 @@ type UserContextType = {
   ) => Promise<string | undefined>;
   isLoggedIn: boolean;
   token: string;
+  globalError: string;
   userDetail: { name: string; email: string } | {};
   logOut: () => Promise<void>;
 };
@@ -39,6 +40,7 @@ const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
   const [token, setToken] = useState("");
+  const [globalError, setGlobalError] = useState("");
   const [userDetail, setUserDetail] = useState<UserDetail | null>(null);
   ({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,6 +49,11 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
 
   const loginHandler = async (email: string, password: string) => {
     try {
+      if (!email || !password) {
+        setGlobalError("И-мэйл хаяг эсвэл нууц үгээ хийнэ үү");
+        return;
+      }
+
       const result = await axios.post<LoginResponse>(
         "http://localhost:8000/user/login",
         {
@@ -67,8 +74,8 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
       if (axiosError.isAxiosError && axiosError.response) {
         setToken("");
         setIsLoggedIn(false);
+        setGlobalError(axiosError.response.data.message);
         toast.error("Амжилгүй боллоо. Дахин оролдоно уу!");
-        console.log(axiosError.response.data);
         return axiosError.response.data.message;
       } else {
         console.log("An unexpected error occurred:", error);
@@ -80,6 +87,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
   const logOut = async () => {
     window.localStorage.removeItem("token");
     setIsLoggedIn(false);
+    setGlobalError("");
     push("/login");
   };
 
@@ -100,8 +108,9 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
       value={{
         loginHandler,
         isLoggedIn,
+        globalError,
         token,
-        userDetail: userDetail ? userDetail : {}, 
+        userDetail: userDetail ? userDetail : {},
         logOut,
       }}
     >

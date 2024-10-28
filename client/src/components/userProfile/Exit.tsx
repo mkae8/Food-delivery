@@ -1,17 +1,8 @@
 "use client";
-
-import { Button} from "@mui/material";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
-import { useRouter } from "next/navigation";
+import DraggableDialog from "./ExitModal";
 
 export const Exit = () => {
-  const router = useRouter();
-
-  const handleExitClick = async () => {
-    window.localStorage.removeItem("token");
-    router.push("/login");
-  };
-
   return (
     <div>
       <div
@@ -60,12 +51,7 @@ export const Exit = () => {
               paddingInline: "5px",
             }}
           >
-            <Button
-              onClick={handleExitClick}
-              style={{ fontSize: "16px", color: "#0D1118", cursor: "pointer" }}
-            >
-              Гарах
-            </Button>
+            <DraggableDialog />
           </div>
         </div>
       </div>
