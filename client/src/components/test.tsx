@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface FoodCategory {
   id: string;
@@ -15,21 +15,23 @@ interface FoodCategory {
 export const Test = () => {
   const [foodCategories, setFoodCategories] = useState<FoodCategory[]>([]);
 
+  useEffect(() => {
+    foodHandler();
+  }, []);
+
   const foodHandler = async () => {
     try {
       const response = await axios.get<FoodCategory[]>(
         `${process.env.BACKEND_URL}/foods-get`
       );
-      console.log(response);
       setFoodCategories(response.data);
     } catch (error) {
-      console.log("Error fetching data:", error);
+      console.error("Error fetching data:", error);
     }
   };
+
   return (
     <div>
-      <button onClick={foodHandler}>Hoolnuudaa avah</button>
-
       <ul>
         {foodCategories.length > 0 ? (
           foodCategories.map((category) => (
@@ -41,7 +43,6 @@ export const Test = () => {
                 style={{ width: "200px", height: "auto" }}
               />
               <p>{category.foodIngredients}</p>
-              {/* <p>{category.foodCategory}</p> */}
               <p>{category.price}</p>
             </li>
           ))
