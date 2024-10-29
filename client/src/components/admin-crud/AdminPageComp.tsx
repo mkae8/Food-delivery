@@ -42,7 +42,7 @@ const AdminPageComp = () => {
   const addCategory = async (newCategory: string) => {
     try {
       const response = await axios.post<AddCategoryResponse>(
-        "http://localhost:8000/category",
+        "https://food-delivery-lrqy.onrender.com/category",
         {
           categoryName: newCategory,
         }
@@ -83,7 +83,7 @@ const AdminPageComp = () => {
       };
 
       const response = await axios.put(
-        `http://localhost:8000/editCategory/${categoryToEdit}`,
+        `https://food-delivery-lrqy.onrender.com/editCategory/${categoryToEdit}`,
         updatedCategory
       );
 

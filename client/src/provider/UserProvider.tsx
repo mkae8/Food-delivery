@@ -55,7 +55,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
       }
 
       const result = await axios.post<LoginResponse>(
-        "http://localhost:8000/user/login",
+        "https://food-delivery-lrqy.onrender.com/user/login",
         {
           email,
           password,

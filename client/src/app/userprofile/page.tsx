@@ -25,7 +25,7 @@ const UserProfile = () => {
 
       try {
         const response = await axios.get<UserInformation>(
-          `http://localhost:8000/user/profile`,
+          `https://food-delivery-lrqy.onrender.com/user/profile`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
