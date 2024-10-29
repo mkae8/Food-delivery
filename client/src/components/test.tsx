@@ -18,7 +18,7 @@ export const Test = () => {
   const foodHandler = async () => {
     try {
       const response = await axios.get<FoodCategory[]>(
-        `http://localhost:8000/foods-get`
+        `https://food-delivery-lrqy.onrender.com/foods-get`
       );
       console.log(response);
       setFoodCategories(response.data);
