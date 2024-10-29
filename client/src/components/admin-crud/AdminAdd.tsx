@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { toast } from "react-toastify";
+import { useCategory } from "@/provider/CategoryProvider";
 
 interface UploadResponse {
   secure_url: string;
@@ -29,6 +30,8 @@ interface FoodItem {
 }
 
 export const AdminAdd: React.FC = () => {
+  const { categoryNames } = useCategory();
+
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -139,7 +142,6 @@ export const AdminAdd: React.FC = () => {
       }
     }
   };
-  console.log(category, "category");
 
   return (
     <>
@@ -203,10 +205,13 @@ export const AdminAdd: React.FC = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 sx={{ backgroundColor: "#F4F4F4" }}
               >
-                <MenuItem value="Breakfast">Breakfast</MenuItem>
-                <MenuItem value="Soup">Soup</MenuItem>
-                <MenuItem value="Main course">Main course</MenuItem>
-                <MenuItem value="Desserts">Desserts</MenuItem>
+                {categoryNames.map((el) => {
+                  return (
+                    <MenuItem key={el._id} value={el._id}>
+                      {el.categoryName}
+                    </MenuItem>
+                  );
+                })}
               </TextField>
 
               <TextField

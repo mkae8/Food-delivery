@@ -6,6 +6,7 @@ import { AddCategory } from "./AddCategory";
 import { AdminAdd } from "./AdminAdd";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useCategory } from "@/provider/CategoryProvider";
 
 const style = {
   position: "absolute",
@@ -33,6 +34,8 @@ interface AddCategoryResponse {
 }
 
 const AdminPageComp = () => {
+  const { setRefetch } = useCategory();
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -50,6 +53,8 @@ const AdminPageComp = () => {
 
       const newCategoryObj: NewCategoryResponse = response.data.newCategory;
       setCategories((prevCategories) => [...prevCategories, newCategoryObj]);
+      setRefetch((prev) => !prev);
+
       toast.success(`${newCategory} added successfully!`);
     } catch (error) {
       console.error("Error adding category:", error);
@@ -123,7 +128,9 @@ const AdminPageComp = () => {
   const handleDelete = async () => {
     try {
       // Устгах ангиллын id-г ашиглан устгана
-      await axios.delete(`${process.env.BACKEND_URL}/category/${idStore}`);
+      await axios.delete(
+        `${process.env.BACKEND_URL}/deleteCategory/${idStore}`
+      );
 
       // Устгасан ангиллыг жагсаалтаас хасна
       setCategories((prevCategories) =>
@@ -134,23 +141,24 @@ const AdminPageComp = () => {
       handleCloseModal();
     } catch (error) {
       console.error("Error deleting category:", error);
-      toast.error("Fail. hha arai duussangue");
-    }
-  };
-
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get<Category[]>(
-        `${process.env.BACKEND_URL}/fetchCategory`
-      );
-      setCategories(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      toast.error("Failed to fetch categories.");
+      toast.error("Fail delete");
     }
   };
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get<Category[]>(
+          `${process.env.BACKEND_URL}/fetchCategory`
+        );
+
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error("Failed to fetch categories.");
+      }
+    };
+
     fetchCategories();
   }, []);
 
