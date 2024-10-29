@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useState } from "react";
+import { StyleHTMLAttributes, useState } from "react";
 
 type DataBaseInformationProps = {
   foodPic: string;
@@ -15,44 +15,36 @@ type DataBaseInformationProps = {
   onCountChange: (newCount: number) => void;
   incrementCount: () => void;
   decrementCount: () => void;
-  count: number;
-  closeCartItem: () => void;
+  count: any;
+  closeBagCart: () => void;
   totalPrice: number[];
+  sx: any;
 };
 
 export default function BagCart({
   foodName,
   foodPic,
-  price,
   foodIngredients,
-  onCountChange,
   incrementCount,
   decrementCount,
   totalPrice,
-}: DataBaseInformationProps) {
-  const [count, setCount] = useState(0);
-  const OneFoodPrice = 14500;
-
-  const AllFoodPrice = count * OneFoodPrice;
-  console.log(totalPrice);
-
+  closeBagCart,
+  sx,
+}: // count,
+DataBaseInformationProps) {
   return (
-    <Card
-      sx={{
-        padding: "16px",
-        display: "flex",
-        gap: "16px",
-        backgroundColor: "white",
-      }}
-    >
-      <img
-        style={{
-          width: "245px",
-          height: "150px",
-        }}
-        src={foodPic}
-        alt=""
-      />
+    <Card sx={sx}>
+      <div>
+        <img
+          style={{
+            width: "245px",
+            height: "150px",
+            objectFit: "cover",
+          }}
+          src={foodPic}
+          alt=""
+        />
+      </div>
       <div style={{ width: "245px" }}>
         <div
           style={{
@@ -64,7 +56,8 @@ export default function BagCart({
             <p>{foodName}</p>
             <p>{totalPrice}</p>
           </div>
-          <Button /* onclick={} */
+          <Button
+            onClick={closeBagCart}
             sx={{ color: "black", width: "48px", height: "48px" }}
           >
             <ClearIcon />
@@ -86,7 +79,7 @@ export default function BagCart({
           >
             <AddIcon />
           </Button>
-          <Typography>{count}</Typography>
+          <Typography>{"count"}</Typography>
           <Button
             onClick={decrementCount}
             sx={{ width: "45px", height: "40px" }}
