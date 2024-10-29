@@ -13,7 +13,7 @@ export const loginController = async (req: any, res: any) => {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);

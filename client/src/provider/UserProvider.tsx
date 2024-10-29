@@ -55,7 +55,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
       }
 
       const result = await axios.post<LoginResponse>(
-        "https://food-delivery-lrqy.onrender.com/user/login",
+        `${process.env.BACKEND_URL}/user/login`,
         {
           email,
           password,

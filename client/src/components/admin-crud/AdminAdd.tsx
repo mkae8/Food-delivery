@@ -72,7 +72,7 @@ export const AdminAdd: React.FC = () => {
     }
 
     try {
-      await axios.post("https://food-delivery-lrqy.onrender.com/food-create", {
+      await axios.post(`${process.env.BACKEND_URL}/food-create`, {
         foodName: newFoodItem.foodName,
         foodCategory: newFoodItem.category,
         foodIngredients: newFoodItem.ingredients,

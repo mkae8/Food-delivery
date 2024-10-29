@@ -42,7 +42,7 @@ const AdminPageComp = () => {
   const addCategory = async (newCategory: string) => {
     try {
       const response = await axios.post<AddCategoryResponse>(
-        "https://food-delivery-lrqy.onrender.com/category",
+        `${process.env.BACKEND_URL}/category`,
         {
           categoryName: newCategory,
         }
@@ -83,7 +83,7 @@ const AdminPageComp = () => {
       };
 
       const response = await axios.put(
-        `https://food-delivery-lrqy.onrender.com/editCategory/${categoryToEdit}`,
+        `${process.env.BACKEND_URL}/editCategory/${categoryToEdit}`,
         updatedCategory
       );
 
@@ -123,9 +123,7 @@ const AdminPageComp = () => {
   const handleDelete = async () => {
     try {
       // Устгах ангиллын id-г ашиглан устгана
-      await axios.delete(
-        `https://food-delivery-lrqy.onrender.com/category/${idStore}`
-      );
+      await axios.delete(`${process.env.BACKEND_URL}/category/${idStore}`);
 
       // Устгасан ангиллыг жагсаалтаас хасна
       setCategories((prevCategories) =>
@@ -143,7 +141,7 @@ const AdminPageComp = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get<Category[]>(
-        "https://food-delivery-lrqy.onrender.com/fetchCategory"
+        `${process.env.BACKEND_URL}/fetchCategory`
       );
       setCategories(response.data);
     } catch (error) {
