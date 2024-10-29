@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 
 import "react-toastify/dist/ReactToastify.css";
 import { Suspense } from "react";
+import { CategoryProvider } from "@/provider/CategoryProvider";
 
 export default function RootLayout({
   children,
@@ -37,20 +38,22 @@ export default function RootLayout({
         <Suspense>
           <ToastContainer />
           <UserProvider>
-            <MuiProvider>
-              <Header />
-              <div
-                style={{
-                  marginTop: 50,
-                  width: "1200px",
-                  margin: "auto",
-                  minHeight: "100vh",
-                }}
-              >
-                {children}
-              </div>
-              <Footer />
-            </MuiProvider>
+            <CategoryProvider>
+              <MuiProvider>
+                <Header />
+                <div
+                  style={{
+                    marginTop: 50,
+                    width: "1200px",
+                    margin: "auto",
+                    minHeight: "100vh",
+                  }}
+                >
+                  {children}
+                </div>
+                <Footer />
+              </MuiProvider>
+            </CategoryProvider>
           </UserProvider>
         </Suspense>
       </body>

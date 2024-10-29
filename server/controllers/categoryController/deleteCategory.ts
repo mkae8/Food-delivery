@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CategoryModel } from "../../src/database/models/admin";
 
-export const deleteCategoryCon = async (
+export const deleteCategory = async (
   req: Request,
   res: Response
 ): Promise<void> => {
