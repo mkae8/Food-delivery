@@ -4,8 +4,10 @@ import { Box, Button, Typography, Modal, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AddCategory } from "./AddCategory";
 import { AdminAdd } from "./AdminAdd";
+
 import { toast } from "react-toastify";
 import axios from "axios";
+import FoodList from "./FetchFoods";
 
 const style = {
   position: "absolute",
@@ -105,21 +107,6 @@ const AdminPageComp = () => {
     }
   };
 
-  // const handleDelete = async () => {
-  //   try {
-  //     await axios.delete(`http://localhost:8000/category/${selectedCategory}`);
-  //     setCategories((prevCategories) =>
-  //       prevCategories.filter(
-  //         (category) => category.categoryName !== selectedCategory
-  //       )
-  //     );
-  //     toast.success(`Deleted ${selectedCategory}`);
-  //     handleCloseModal();
-  //   } catch (error) {
-  //     console.error("Error deleting category:", error);
-  //     toast.error("Failed to delete category.");
-  //   }
-  // };
   const handleDelete = async () => {
     try {
       // Устгах ангиллын id-г ашиглан устгана
@@ -160,17 +147,24 @@ const AdminPageComp = () => {
     <div
       style={{
         display: "flex",
-        width: "full",
+        width: "100%",
         margin: "auto",
         paddingTop: "20px",
+        gap: "55px",
       }}
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+        }}
+      >
         <Typography fontWeight={700} fontSize={22} color="#272727">
           Food Menu
         </Typography>
 
-        <Box display="flex" flexDirection="column" marginTop="20px" gap="20px">
+        <Box display="flex" flexDirection="column" marginTop="20px" gap="20px ">
           {categories.map((category) => (
             <Button
               key={category._id}
@@ -200,8 +194,25 @@ const AdminPageComp = () => {
 
         <AddCategory addCategory={addCategory} />
       </div>
-      <div>
-        <AdminAdd />
+
+      <div
+        style={{
+          width: "70%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <div>Category name irne</div>
+          <AdminAdd />
+        </div>
+        <FoodList />
       </div>
 
       <Modal open={openModal} onClose={handleCloseModal}>
