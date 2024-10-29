@@ -5,7 +5,7 @@ export const getUserController = async (req, res) => {
   try {
     const user = await UserModel.findById(userId).select("username email");
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
     }
     res.status(200).send(user);
   } catch (error) {

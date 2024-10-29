@@ -47,7 +47,7 @@ export const SignUp = () => {
     }
     try {
       const result = await axios.post(
-        "https://food-delivery-lrqy.onrender.com/user/signup",
+        `${process.env.BACKEND_URL}/user/signup`,
         {
           username,
           email,

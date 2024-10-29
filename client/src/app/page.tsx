@@ -6,6 +6,8 @@ import HomeInfoCards from "@/components/homepage/InfoCards";
 import { HomePageFoods } from "@/components/homepage/HomePageFoods";
 
 export default function Home() {
+  // console.log(process.env.BACKEND_URL);
+
   return (
     <div>
       <HomePageHeader />

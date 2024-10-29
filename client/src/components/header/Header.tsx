@@ -106,7 +106,7 @@ export const Header: React.FC = () => {
             <Sags />
 
             <Button
-              onClick={handleSagsClick}
+              onClick={toggleBag}
               sx={buttonStyles}
               aria-label="Cart"
               style={{
