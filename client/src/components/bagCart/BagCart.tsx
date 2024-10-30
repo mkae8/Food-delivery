@@ -5,33 +5,32 @@ import Card from "@mui/material/Card";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { StyleHTMLAttributes, useState } from "react";
 
 type DataBaseInformationProps = {
-  foodPic: string;
+  images: string[];
   foodName: string;
-  price: number;
+  price: string;
   foodIngredients: string;
-  onCountChange: (newCount: number) => void;
   incrementCount: () => void;
   decrementCount: () => void;
-  count: any;
+  quantity: number;
   closeBagCart: () => void;
-  totalPrice: number[];
   sx: any;
 };
 
 export default function BagCart({
   foodName,
-  foodPic,
+  images,
   foodIngredients,
   incrementCount,
   decrementCount,
-  totalPrice,
   closeBagCart,
+  quantity,
   sx,
-}: // count,
-DataBaseInformationProps) {
+  price,
+}: DataBaseInformationProps) {
+  const totalPrice = Number(price) * Number(quantity);
+
   return (
     <Card sx={sx}>
       <div>
@@ -41,7 +40,7 @@ DataBaseInformationProps) {
             height: "150px",
             objectFit: "cover",
           }}
-          src={foodPic}
+          src={images[0]}
           alt=""
         />
       </div>
@@ -54,7 +53,7 @@ DataBaseInformationProps) {
         >
           <div>
             <p>{foodName}</p>
-            <p>{totalPrice}</p>
+            <p>{price}</p>
           </div>
           <Button
             onClick={closeBagCart}
@@ -73,19 +72,21 @@ DataBaseInformationProps) {
           }}
         >
           <Button
-            onClick={incrementCount}
-            sx={{ width: "45px", height: "40px" }}
-            variant="contained"
-          >
-            <AddIcon />
-          </Button>
-          <Typography>{"count"}</Typography>
-          <Button
             onClick={decrementCount}
             sx={{ width: "45px", height: "40px" }}
             variant="contained"
           >
             <RemoveIcon />
+          </Button>
+
+          <Typography>{totalPrice}</Typography>
+
+          <Button
+            onClick={incrementCount}
+            sx={{ width: "45px", height: "40px" }}
+            variant="contained"
+          >
+            <AddIcon />
           </Button>
         </div>
       </div>
