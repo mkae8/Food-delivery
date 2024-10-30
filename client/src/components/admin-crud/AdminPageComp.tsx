@@ -1,6 +1,13 @@
 "use client";
 
-import { Box, Button, Typography, Modal, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Modal,
+  TextField,
+  MenuItem,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { AddCategory } from "./AddCategory";
 import { AdminAdd } from "./AdminAdd";
@@ -9,7 +16,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useCategory } from "@/provider/CategoryProvider";
 import FoodList from "./FetchFoods";
-
 
 const style = {
   position: "absolute",
@@ -38,7 +44,7 @@ interface AddCategoryResponse {
 
 const AdminPageComp = () => {
   const { setRefetch } = useCategory();
-
+  const { categoryNames } = useCategory();
   const [categories, setCategories] = useState<Category[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -216,7 +222,15 @@ const AdminPageComp = () => {
             width: "100%",
           }}
         >
-          <div>Category name irne</div>
+          <div>
+            {categoryNames.map((el) => {
+              return (
+                <MenuItem key={el._id} value={el._id}>
+                  {el.categoryName}
+                </MenuItem>
+              );
+            })}
+          </div>
           <AdminAdd />
         </div>
         <FoodList />
