@@ -259,8 +259,8 @@ export const ItemModal: React.FC<ItemModalProps> = ({
             </Typography>
             <Typography
               sx={{
-                width: "368px",
-                height: "54px",
+                width: "fit-content",
+                height: "fit-content",
                 borderRadius: "8px",
                 padding: "8px",
                 bgcolor: "#F6F6F6",
