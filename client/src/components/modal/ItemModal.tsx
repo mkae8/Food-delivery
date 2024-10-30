@@ -225,7 +225,6 @@ export const ItemModal: React.FC<ItemModalProps> = ({
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            // border: "1px solid",
           }}
         >
           <Box sx={{ gap: "2px" }}>

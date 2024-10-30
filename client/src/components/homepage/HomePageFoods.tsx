@@ -72,21 +72,38 @@ export const HomePageFoods = () => {
     >
       {mainDishes.length > 0 && (
         <Box sx={{ height: "344px", display: "flex", flexDirection: "column" }}>
-          <Typography
+          <Box
             sx={{
-              fontSize: "22px",
-              fontWeight: "700",
               display: "flex",
               alignItems: "center",
+              justifyContent: "space-between",
+              width: "1190px",
+              height: "64px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              marginRight: "5px",
             }}
           >
-            <img
-              src="/Star.png"
-              alt=""
-              style={{ width: "32px", height: "32px", padding: "7px" }}
-            />
-            Main Course
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: "22px",
+                fontWeight: "700",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src="/Star.png"
+                alt=""
+                style={{ width: "32px", height: "32px", padding: "7px" }}
+              />
+              Main Course
+            </Typography>
+            <Typography sx={{ color: "#18BA51", fontSize: "14px" }}>
+              Бүгдийг харах {">"}
+            </Typography>
+          </Box>
+
           <Box
             sx={{
               display: "flex",
@@ -142,21 +159,37 @@ export const HomePageFoods = () => {
       )}
       {soups.length > 0 && (
         <Box sx={{ height: "344px", display: "flex", flexDirection: "column" }}>
-          <Typography
+          <Box
             sx={{
-              fontSize: "22px",
-              fontWeight: "700",
               display: "flex",
               alignItems: "center",
+              justifyContent: "space-between",
+              width: "1190px",
+              height: "64px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              marginRight: "5px",
             }}
           >
-            <img
-              src="/Star.png"
-              alt=""
-              style={{ width: "32px", height: "32px", padding: "7px" }}
-            />
-            Soup
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: "22px",
+                fontWeight: "700",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src="/Star.png"
+                alt=""
+                style={{ width: "32px", height: "32px", padding: "7px" }}
+              />
+              Soup
+            </Typography>
+            <Typography sx={{ color: "#18BA51", fontSize: "14px" }}>
+              Бүгдийг харах {">"}
+            </Typography>
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -213,21 +246,37 @@ export const HomePageFoods = () => {
 
       {breakFast.length > 0 && (
         <Box sx={{ height: "344px", display: "flex", flexDirection: "column" }}>
-          <Typography
+          <Box
             sx={{
-              fontSize: "22px",
-              fontWeight: "700",
               display: "flex",
               alignItems: "center",
+              justifyContent: "space-between",
+              width: "1190px",
+              height: "64px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              marginRight: "5px",
             }}
           >
-            <img
-              src="/Star.png"
-              alt=""
-              style={{ width: "32px", height: "32px", padding: "7px" }}
-            />
-            Breakfast
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: "22px",
+                fontWeight: "700",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src="/Star.png"
+                alt=""
+                style={{ width: "32px", height: "32px", padding: "7px" }}
+              />
+              Breakfast
+            </Typography>
+            <Typography sx={{ color: "#18BA51", fontSize: "14px" }}>
+              Бүгдийг харах {">"}
+            </Typography>
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -284,21 +333,37 @@ export const HomePageFoods = () => {
 
       {desserts.length > 0 && (
         <Box sx={{ height: "344px", display: "flex", flexDirection: "column" }}>
-          <Typography
+          <Box
             sx={{
-              fontSize: "22px",
-              fontWeight: "700",
               display: "flex",
               alignItems: "center",
+              justifyContent: "space-between",
+              width: "1190px",
+              height: "64px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              marginRight: "5px",
             }}
           >
-            <img
-              src="/Star.png"
-              alt=""
-              style={{ width: "32px", height: "32px", padding: "7px" }}
-            />
-            Desserts
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: "22px",
+                fontWeight: "700",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src="/Star.png"
+                alt=""
+                style={{ width: "32px", height: "32px", padding: "7px" }}
+              />
+              Desserts
+            </Typography>
+            <Typography sx={{ color: "#18BA51", fontSize: "14px" }}>
+              Бүгдийг харах {">"}
+            </Typography>
+          </Box>
           <Box
             sx={{
               display: "flex",
