@@ -1,9 +1,15 @@
 "use client";
 
+// password update (OTP)
+// profile edit
+// fix view all
+
+
 import React, { useEffect, useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import { ItemModal } from "../modal/ItemModal";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface FoodItem {
   id: string;
@@ -13,12 +19,11 @@ interface FoodItem {
   foodIngredients: string;
   foodCategory: string;
 }
-
 export const HomePageFoods = () => {
+  const router = useRouter();
   const [selectedFood, setSelectedFood] = useState<FoodItem | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [foods, setFoods] = useState<FoodItem[]>([]);
-
   useEffect(() => {
     foodHandler();
   }, []);
@@ -56,7 +61,6 @@ export const HomePageFoods = () => {
   const desserts = foods.filter(
     (food) => food.foodCategory === "672061645853cd40b5ea2782"
   );
-  console.log(foods);
 
   return (
     <Container

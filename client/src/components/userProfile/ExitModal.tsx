@@ -72,7 +72,7 @@ export default function DraggableDialog() {
         <DialogActions>
           <Button
             style={{
-              color: "black",
+              color: "#FFF",
               width: "50%",
               fontSize: "14px",
               fontWeight: "bolder",
@@ -85,8 +85,9 @@ export default function DraggableDialog() {
           </Button>
           <Button
             style={{
-              color: "black",
+              color: "#FFF",
               width: "50%",
+              height: "100%",
               fontSize: "14px",
               fontWeight: "bolder",
             }}

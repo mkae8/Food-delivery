@@ -10,9 +10,11 @@ interface EditPhoneProps {
   initialPhoneNumber?: string;
   label?: string;
   onEditClick: (phoneNumber: string) => Promise<void>;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const EditPhone: React.FC<EditPhoneProps> = ({
+  onChange,
   initialPhoneNumber = "",
   label = "",
   onEditClick,
@@ -35,21 +37,25 @@ export const EditPhone: React.FC<EditPhoneProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
+    onChange(e);
   };
 
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.put("/api/update-phone", { phoneNumber });
+      const response = await axios.post(
+        `${process.env.BACKEND_URL}/updateProfile`,
+        { phoneNumber }
+      );
 
       if (response.status === 200) {
         setIsModalOpen(false);
-        onEditClick(phoneNumber);
+        await onEditClick(phoneNumber);
       } else {
         setError("Failed to update phone number");
       }
     } catch (err) {
-      setError(`Error: Unable to update${err}`);
+      setError(`Error: Unable to update ${err}`);
     } finally {
       setLoading(false);
     }
@@ -57,7 +63,6 @@ export const EditPhone: React.FC<EditPhoneProps> = ({
 
   return (
     <div>
-      {/* Phone Display */}
       <div
         style={{
           width: "394px",
@@ -158,7 +163,7 @@ export const EditPhone: React.FC<EditPhoneProps> = ({
           />
           {error && (
             <Typography color="error" style={{ marginTop: "10px" }}>
-              {error}
+              {"Bodloggui ee "}
             </Typography>
           )}
           <Button

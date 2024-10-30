@@ -95,7 +95,6 @@ const MenuPage: React.FC = () => {
       }}
     >
       <Foot />
-
       <Allfoot foods={foods} />
     </div>
   );

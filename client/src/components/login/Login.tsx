@@ -19,10 +19,12 @@ export const Login = () => {
   };
 
   const handleClick = async () => {
+    setLoading(true);
+    setError("");
     try {
       await loginHandler(userDetail.email, userDetail.password);
     } catch (error) {
-      setError(`Backendee asaasiimuu daa ?${error}`);
+      setError(`Backendee asaasiimuu daa ? ${error}`);
       setLoading(false);
     }
   };
@@ -34,104 +36,102 @@ export const Login = () => {
   const isFormFilled = userDetail.email !== "" && userDetail.password !== "";
 
   return (
-    <>
-      <Container
-        style={{
+    <Container
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        width: "448px",
+        height: "549px",
+        justifyContent: "space-around",
+        marginTop: "168px",
+      }}
+    >
+      <Typography
+        sx={{
+          fontSize: "28px",
+          fontWeight: "700",
+          width: "384px",
+          height: "48px",
+        }}
+      >
+        Нэвтрэх
+      </Typography>
+
+      <Box
+        sx={{
+          width: "384px",
+          height: "179px",
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <TextField
+          id="outlined-basic"
+          label="Имэйл "
+          variant="outlined"
+          name="email"
+          placeholder="Имэйл хаягаа оруулна уу"
+          sx={{ width: "384px", height: "48px" }}
+          onChange={handleChange}
+        />
+        <InputPassword
+          text="Нууц үг "
+          label="Нууц үг"
+          onChange={handleChange}
+          name="password"
+        />
+        <Link href={"/forgotPassword"}>
+          <div
+            style={{
+              fontSize: "14px",
+              textAlign: "end",
+              width: "384px",
+            }}
+          >
+            Нууц үг сэргээх
+          </div>
+        </Link>
+      </Box>
+
+      <Typography sx={{ color: "red" }}>{globalError}</Typography>
+
+      <Box
+        sx={{
+          width: "384px",
+          height: "177px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          textAlign: "center",
-          width: "448px",
-          height: "549px",
-          justifyContent: "space-around",
-          marginTop: "168px",
+          gap: "12px",
+          justifyContent: "space-between",
         }}
       >
-        <Typography
-          sx={{
-            fontSize: "28px",
-            fontWeight: "700",
-            width: "384px",
-            height: "48px",
-          }}
-        >
-          Нэвтрэх
-        </Typography>
+        <ButtonGlobal
+          text="Нэвтрэх"
+          width="384px"
+          height="56px"
+          variant="outlined"
+          border="none"
+          clickhandler={handleClick}
+          background={isFormFilled ? "#18ba51" : "#EEEFF2"}
+          color={isFormFilled ? "#FFFFFF" : "#000000"}
+        />
 
-        <Box
-          sx={{
-            width: "384px",
-            height: "179px",
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <TextField
-            id="outlined-basic"
-            label="Имэйл "
-            variant="outlined"
-            name="email"
-            placeholder="Имэйл хаягаа оруулна уу"
-            sx={{ width: "384px", height: "48px" }}
-            onChange={handleChange}
-          />
-          <InputPassword
-            text="Нууц үг "
-            label="Нууц үг"
-            onChange={handleChange}
-            name="password"
-          />
-          <Link href={"/forgotPassword"}>
-            <div
-              style={{
-                fontSize: "14px",
-                textAlign: "end",
-                width: "384px",
-              }}
-            >
-              Нууц үг сэргээх
-            </div>
-          </Link>
-        </Box>
-
-        <Typography sx={{ color: "red" }}>{globalError}</Typography>
-
-        <Box
-          sx={{
-            width: "384px",
-            height: "177px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "12px",
-            justifyContent: "space-between",
-          }}
-        >
+        <div style={{ fontSize: "14px" }}>Эсвэл</div>
+        <Link href="/register">
           <ButtonGlobal
-            text="Нэвтрэх"
+            text="Бүртгүүлэх"
             width="384px"
             height="56px"
             variant="outlined"
-            border="none"
-            clickhandler={handleClick}
-            background={isFormFilled ? "#18ba51" : "#EEEFF2"}
-            color={isFormFilled ? "#FFFFFF" : "#000000"}
+            color="black"
           />
-
-          <div style={{ fontSize: "14px" }}>Эсвэл</div>
-          <Link href="/register">
-            <ButtonGlobal
-              text="Бүртгүүлэх"
-              width="384px"
-              height="56px"
-              variant="outlined"
-              color="black"
-            />
-          </Link>
-        </Box>
-      </Container>
-    </>
+        </Link>
+      </Box>
+    </Container>
   );
 };
