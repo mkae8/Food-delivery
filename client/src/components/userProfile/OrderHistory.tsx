@@ -1,6 +1,6 @@
 "use client";
 
-import {  Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import { useRouter } from "next/navigation";
 

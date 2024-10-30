@@ -9,11 +9,13 @@ interface EditProfileProps {
   userName?: string;
   onEditClick: (newName: string) => void;
   label?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const EditProfile: React.FC<EditProfileProps> = ({
   userName = "Таны нэр",
   onEditClick,
+  onChange,
   label = "Таны нэр",
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +29,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({
       return;
     }
     setLoading(true);
-    onEditClick(newName);
+    onEditClick(newName); // Passes newName to parent component
     setLoading(false);
     setIsModalOpen(false);
   };
@@ -38,6 +40,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewName(e.target.value);
+    onChange(e); // Passes input change event to parent component
   };
 
   const handleSubmit = async () => {
@@ -54,7 +57,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({
         setError("Failed to update profile");
       }
     } catch (err) {
-      setError(`Error: Unable to update${err}`);
+      setError(`Error: Unable to update profile ${err}`);
     } finally {
       setLoading(false);
     }

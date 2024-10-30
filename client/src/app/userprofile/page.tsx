@@ -8,6 +8,7 @@ import { OrderHistory } from "@/components/userProfile/OrderHistory";
 import { Typography } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface UserInformation {
   username: string;
@@ -16,8 +17,7 @@ interface UserInformation {
 }
 
 const UserProfile = () => {
-  const [userInfo, setUserInfo] = useState<UserInformation | null>(null);
-  const [email, setEmail] = useState<string>("");
+  const [userDetail, setUserDetail] = useState<UserInformation | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -25,21 +25,40 @@ const UserProfile = () => {
 
       try {
         const response = await axios.get<UserInformation>(
-
-          
           `${process.env.BACKEND_URL}/user/profile`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setUserInfo(response.data);
-        setEmail(response.data.email);
+        setUserDetail(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
+        toast.error("Failed to load user data.");
       }
     };
     fetchUserData();
   }, []);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserDetail((prev) => (prev ? { ...prev, [name]: value } : prev));
+  };
+
+  const handleSubmit = async () => {
+    if (!userDetail) return;
+
+    try {
+      const result = await axios.post(
+        `${process.env.BACKEND_URL}/updateProfile`,
+        userDetail
+      );
+      console.log(result);
+      toast.success("Profile updated successfully.");
+    } catch (error) {
+      toast.error("Update failed. Please try again.");
+    }
+  };
+
   return (
     <div
       style={{
@@ -53,29 +72,33 @@ const UserProfile = () => {
     >
       <AvatarIcon />
       <Typography variant="h4">
-        {userInfo ? userInfo.username : "Loading..."}
+        {userDetail ? userDetail.username : "Loading..."}
       </Typography>
 
       <EditProfile
-        userName={userInfo ? userInfo.username : "Loading..."}
-        onEditClick={() => console.log("Edit Profile Clicked")}
+        userName={userDetail?.username || ""}
+        onEditClick={(newName) =>
+          setUserDetail((prev) =>
+            prev ? { ...prev, username: newName } : prev
+          )
+        }
+        onChange={handleChange}
       />
 
       <EditPhone
-        initialPhoneNumber={userInfo ? userInfo.phoneNumber : "99474747"}
-        label="Утасны дугаар"
-        onEditClick={async () => {
-          console.log("Edit Phone Clicked!");
-          return Promise.resolve();
-        }}
+        initialPhoneNumber={userDetail?.phoneNumber || ""}
+        label="Phone Number"
+        onChange={handleChange}
       />
 
       <EmailIcon
-        disabled={userInfo?.email ? false : true}
-        email={email}
-        setEmail={setEmail}
+        disabled={!userDetail?.email}
+        email={userDetail?.email || ""}
+        setEmail={(email) =>
+          setUserDetail((prev) => (prev ? { ...prev, email } : prev))
+        }
         label="Email"
-        onEditClick={() => console.log("Edit Email Clicked")}
+        onChange={handleChange}
       />
 
       <OrderHistory />
