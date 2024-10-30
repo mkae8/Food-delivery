@@ -13,52 +13,181 @@ const page = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Box>
+          <Box sx={{ marginTop: "50px" }}>
             <Image
-              src={"/image copy 5.png"}
-              width={1200}
+              src={"/mapArea.png"}
+              width={1240}
               height={616}
-              alt="area"
-              priority
-            />
-          </Box>
-          <Box display="flex">
-            <Typography
-              fontWeight={700}
-              fontSize={20}
-              display="flex"
-              gap="10px"
-            >
-              <Image
-                style={{ display: "flex", alignItems: "center" }}
-                src={"/image copy 6.png"}
-                width={31.27}
-                height={26.77}
-                priority
-                alt="Food Delivery"
-              />
-              Хүргэлтийн бүс дэх хаягууд
-            </Typography>
-          </Box>
-          <Box>
-            <Image
-              src={"/image copy 7.png"}
-              width={588}
-              height={338}
-              alt="area"
-              priority
-            />
-
-            <Image
-              src={"/image copy 8.png"}
-              width={588}
-              height={338}
               alt="area"
               priority
             />
           </Box>
         </Box>
       </Stack>
+      <Box display="flex" marginLeft={5}>
+        <Typography
+          fontWeight={700}
+          fontSize={20}
+          display="flex"
+          gap="10px"
+          alignItems={"center"}
+        >
+          <Image
+            style={{ display: "flex" }}
+            src={"/Star.png"}
+            width={20}
+            height={20}
+            priority
+            alt="Food Delivery"
+          />
+          Хүргэлтийн бүс дэх хаягууд
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          width: "1200px",
+
+          display: "flex",
+          gap: "10px",
+          marginTop: "30px",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box
+          sx={{
+            width: "560px",
+            height: "388px",
+            backgroundColor: "white",
+            boxShadow: "0px 0px 20px 0 rgba(0, 0, 0, 0.20)",
+            borderRadius: "16px",
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+          }}
+        >
+          <Box
+            sx={{
+              width: "480px",
+              height: "330px",
+              gap: "16px",
+              display: "flex",
+              flexDirection: "column",
+              padding: "16px",
+            }}
+          >
+            <Typography sx={{ fontWeight: "bold" }}>A Бүс</Typography>
+            <hr style={{ color: "#18BA51" }} />
+            <Box
+              sx={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "space-between",
+                rowGap: "10px",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "200px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <Typography>Нархан хотхон</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>45-р байр</Typography>
+                <Typography>3-р байр</Typography>
+                <Typography>Хоймор хотхон </Typography>
+                <Typography>Хоймор хотхон </Typography>
+              </Box>
+              <Box
+                sx={{
+                  width: "200px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <Typography>Нархан хотхон</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>45-р байр</Typography>
+                <Typography>3-р байр</Typography>
+                <Typography>Хоймор хотхон </Typography>
+                <Typography>Хоймор хотхон </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            width: "560px",
+            height: "388px",
+            backgroundColor: "white",
+            boxShadow: "0px 0px 20px 0 rgba(0, 0, 0, 0.20)",
+            borderRadius: "16px",
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+          }}
+        >
+          <Box
+            sx={{
+              width: "480px",
+              height: "330px",
+              gap: "16px",
+              display: "flex",
+              flexDirection: "column",
+              padding: "16px",
+            }}
+          >
+            <Typography sx={{ fontWeight: "bold" }}>Б Бүс</Typography>
+            <hr style={{ color: "#18BA51" }} />
+            <Box
+              sx={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "space-between",
+                rowGap: "10px",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "200px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <Typography>Нархан хотхон</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>45-р байр</Typography>
+                <Typography>3-р байр</Typography>
+                <Typography>Хоймор хотхон </Typography>
+                <Typography>Хоймор хотхон </Typography>
+              </Box>
+              <Box
+                sx={{
+                  width: "200px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <Typography>Нархан хотхон</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>26-р байр</Typography>
+                <Typography>45-р байр</Typography>
+                <Typography>3-р байр</Typography>
+                <Typography>Хоймор хотхон </Typography>
+                <Typography>Хоймор хотхон </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </div>
   );
 };

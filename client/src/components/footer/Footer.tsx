@@ -16,19 +16,19 @@ const GuestFooter: React.FC = () => {
 
   const routers = [
     {
-      title: "Home",
+      title: "Нүүр",
       href: "/",
     },
     {
-      title: "Contact",
+      title: "Холбоо барих",
       href: "/footer-info/contact",
     },
     {
-      title: "Menu",
+      title: "Хоолны цэс",
       href: "/menu",
     },
     {
-      title: "Terms",
+      title: "Үйлчилгээний нөхцөл",
       href: "/footer-info/terms",
     },
     {
@@ -96,7 +96,7 @@ const GuestFooter: React.FC = () => {
             />
             <Typography
               fontWeight={700}
-              fontSize={20}
+              fontSize={24}
               color="primary.contrastText"
             >
               Food Delivery
@@ -127,20 +127,20 @@ const GuestFooter: React.FC = () => {
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: "10px",
+              gap: "28px",
             }}
           >
             <Image
               src={"/image copy 2.png"}
               width={31.27}
-              height={26.77}
+              height={29.77}
               alt="Social Media 1"
               priority
             />
             <Image
               src={"/image copy 3.png"}
               width={31.27}
-              height={26.77}
+              height={29.77}
               alt="Social Media 2"
               priority
             />
