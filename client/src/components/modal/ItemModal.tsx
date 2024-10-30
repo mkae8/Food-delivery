@@ -135,7 +135,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
 type FoodItem = {
-  id: string;
+  _id: string;
   foodName: string;
   images: string;
   price: string;
@@ -167,19 +167,17 @@ export const ItemModal: React.FC<ItemModalProps> = ({
   };
 
   const handleAddToCart = () => {
-    const { id, foodName } = item;
     const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
     console.log(cartData);
-
-    const itemIndex = cartData.findIndex((cartItem: any) => cartItem.id === id);
+    const itemIndex = cartData.findIndex(
+      (cartItem: any) => cartItem._id === item._id
+    );
     console.log(itemIndex);
-
     if (itemIndex >= 0) {
       cartData[itemIndex].quantity += quantity;
     } else {
-      cartData.push({ id, foodName, quantity });
+      cartData.push({ item, quantity });
     }
-
     localStorage.setItem("cart", JSON.stringify(cartData));
     onClose();
   };
@@ -226,7 +224,8 @@ export const ItemModal: React.FC<ItemModalProps> = ({
             height: "398px",
             display: "flex",
             flexDirection: "column",
-            gap: "10px",
+            justifyContent: "space-between",
+            // border: "1px solid",
           }}
         >
           <Box sx={{ gap: "2px" }}>

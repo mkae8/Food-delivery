@@ -31,7 +31,6 @@ const MenuPage: React.FC = () => {
     setSelectedTab(newValue);
   };
 
-  // Mock data - replace with actual data from your API
   const menuItems = [
     {
       id: 1,
