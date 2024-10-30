@@ -45,11 +45,18 @@ export const HomePageFoods = () => {
   };
 
   const mainDishes = foods.filter(
-    (food) => food.foodCategory === "Main course"
+    (food) => food.foodCategory === "6720ddce56cc1a086ed07970"
   );
-  const soups = foods.filter((food) => food.foodCategory === "Soup");
-  const breakFast = foods.filter((food) => food.foodCategory === "Breakfast");
-  const desserts = foods.filter((food) => food.foodCategory === "Desserts");
+  const soups = foods.filter(
+    (food) => food.foodCategory === "67205fbf8781ea178e2239ac"
+  );
+  const breakFast = foods.filter(
+    (food) => food.foodCategory === "6720ddd656cc1a086ed07973"
+  );
+  const desserts = foods.filter(
+    (food) => food.foodCategory === "672061645853cd40b5ea2782"
+  );
+  console.log(foods);
 
   return (
     <Container
@@ -82,9 +89,11 @@ export const HomePageFoods = () => {
           </Typography>
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              display: "flex",
+              width: "1200px",
+              height: "256",
               gap: "20px",
+              overflow: "scroll",
               mt: 2,
             }}
           >
@@ -150,9 +159,11 @@ export const HomePageFoods = () => {
           </Typography>
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              display: "flex",
+              width: "1200px",
+              height: "256",
               gap: "20px",
+              overflow: "scroll",
               mt: 2,
             }}
           >
@@ -219,9 +230,11 @@ export const HomePageFoods = () => {
           </Typography>
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              display: "flex",
+              width: "1200px",
+              height: "256",
               gap: "20px",
+              overflow: "scroll",
               mt: 2,
             }}
           >
@@ -288,9 +301,11 @@ export const HomePageFoods = () => {
           </Typography>
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              display: "flex",
+              width: "1200px",
+              height: "256",
               gap: "20px",
+              overflow: "scroll",
               mt: 2,
             }}
           >
