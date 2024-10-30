@@ -107,6 +107,7 @@ export const Bag = () => {
           color: "black",
           backgroundColor: "#00000080",
           opacity: "50%",
+          height: "full",
         }}
       ></div>
       <div
