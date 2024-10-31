@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 import "react-toastify/dist/ReactToastify.css";
 import { Suspense } from "react";
 import { CategoryProvider } from "@/provider/CategoryProvider";
+import { FoodProvider } from "@/provider/FoodProvider";
 
 export default function RootLayout({
   children,
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Suspense>
           <ToastContainer />
+          <FoodProvider>
           <UserProvider>
             <CategoryProvider>
               <MuiProvider>
@@ -55,6 +57,7 @@ export default function RootLayout({
               </MuiProvider>
             </CategoryProvider>
           </UserProvider>
+          </FoodProvider>
         </Suspense>
       </body>
     </html>

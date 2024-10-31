@@ -7,13 +7,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import { SearchInput } from "../SearchInput";
 import { Sags } from "../icon/Sags";
 import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
 import { Bag } from "../bagCart/Bag";
+import FreeSolo from "../SearchInput";
 
 interface RouterItem {
   title: string;
@@ -102,7 +102,7 @@ export const Header: React.FC = () => {
               </Link>
             ))}
           </Box>
-          <SearchInput />
+     <FreeSolo/>
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
 
