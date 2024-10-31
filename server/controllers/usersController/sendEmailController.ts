@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
+import { OtpModel } from "../../src/database/models/otp.model";
 
 const app = express();
 app.use(express.json());
@@ -31,15 +32,20 @@ const emailSender: any = async (
   };
   await transport.sendMail(options);
 };
+export const sendEmailController = async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const OTP = Math.floor(1000 + Math.random() * 9000);
 
-export const sendEmailController = async (req: any, res: any) => {
+  await OtpModel.create({ email, otpCode: OTP });
+
   try {
     await emailSender(
-      "ntemka93@gmail.com",
-      "Hello world",
-      `<div style="color:red;  font-size: 50px"> Uush yu hiijin </div>`,
-      "This is a test email"
+      email,
+      "Your Otp To Reset Password",
+      `<div style="color:red;  font-size: 50px"> ${OTP} </div>`,
+      "One Time Password"
     );
+
     res.send("Successfully sent mail");
   } catch (error) {
     res.status(500).send("Failed to send email");

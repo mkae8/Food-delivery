@@ -3,9 +3,42 @@
 import { Typography } from "@mui/material";
 import { InputGlobal } from "../InputGlobal";
 import { ButtonGlobal } from "../ButtonGlobal";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import Loading from "./Loading";
 
-export const Password: React.FC = () => {
+interface PasswordProps {
+  clickHandler: () => void;
+}
+
+export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const nextStep = async () => {
+    if (!email) {
+      toast.error("Fill in your email");
+      return;
+    }
+
+    try {
+      await axios.post(`${process.env.BACKEND_URL}/sendMailer`, { email });
+      clickHandler();
+      setLoading(true);
+    } catch (error) {
+      toast.error("Email not found");
+      setLoading(false);
+    }
+  };
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div
       style={{
@@ -14,10 +47,9 @@ export const Password: React.FC = () => {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        // border: "1px solid black",
-
         width: "448px",
         height: "386px",
+  
       }}
     >
       <Typography
@@ -31,11 +63,16 @@ export const Password: React.FC = () => {
         Нууц үг сэргээх
       </Typography>
       <div style={{ marginTop: "32px" }}>
-        <InputGlobal name="password" />
+        <InputGlobal name="email" onChange={emailHandler} />
       </div>
 
       <div style={{ marginTop: "32px" }}>
-        <ButtonGlobal text="Үргэлжлүүлэх" width="384px" height="56px" />
+        <ButtonGlobal
+          text="Үргэлжлүүлэх"
+          width="384px"
+          height="56px"
+          clickhandler={nextStep}
+        />
       </div>
     </div>
   );
