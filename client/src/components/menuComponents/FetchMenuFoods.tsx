@@ -31,7 +31,7 @@ type FoodListProps = {
   category: string;
 };
 
-const FoodList = ({ category }: FoodListProps) => {
+const MenuFoods = ({ category }: FoodListProps) => {
   const [foods, setFoods] = useState<FoodItem[]>([]);
 
   const fetchFoodItems = async () => {
@@ -70,7 +70,7 @@ const FoodList = ({ category }: FoodListProps) => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: "20px",
           mt: 2,
         }}
@@ -116,11 +116,11 @@ const FoodList = ({ category }: FoodListProps) => {
             </Box>
           ))
         ) : (
-          <Typography>No foods available for this category.</Typography>
+          <Typography></Typography>
         )}
       </Box>
     </Box>
   );
 };
 
-export default FoodList;
+export default MenuFoods;
