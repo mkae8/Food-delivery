@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PineconeLogo } from "../icon/Pinelog";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -61,12 +61,13 @@ export const Header: React.FC = () => {
     fontWeight: 700,
   };
 
-  const [isBagOpen, setIsBagOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
-  const toggleBag = () => {
-    setIsBagOpen((prev) => !prev);
-    console.log(isBagOpen);
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
   };
+
+  useEffect(() => {}, [open]);
 
   return (
     <AppBar
@@ -77,7 +78,7 @@ export const Header: React.FC = () => {
         textSizeAdjust: "inherit",
       }}
     >
-      {isBagOpen && <Bag />}
+      <Bag open={open} toggleDrawer={toggleDrawer} />
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -106,7 +107,7 @@ export const Header: React.FC = () => {
             <Sags />
 
             <Button
-              onClick={toggleBag}
+              onClick={toggleDrawer(true)}
               sx={buttonStyles}
               aria-label="Cart"
               style={{

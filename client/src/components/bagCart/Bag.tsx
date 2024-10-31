@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Dialog, DialogContent, Typography } from "@mui/material";
+import { Box, Button, Drawer, List, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import BagCart from "./BagCart";
 import { useEffect, useState } from "react";
@@ -20,19 +20,23 @@ interface CartItem {
   quantity: number;
 }
 
-export const Bag = () => {
+type BagProps = {
+  open: boolean;
+  toggleDrawer: (
+    boolean: boolean
+  ) =>
+    | ((event: {}, reason: "backdropClick" | "escapeKeyDown") => void)
+    | undefined;
+};
+
+export const Bag = ({ open, toggleDrawer }: BagProps) => {
   const cartData: any = localStorage.getItem("cart");
   const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
   const [foods, setFoods] = useState<CartItem[]>(realData);
 
-  const [isVisible, setIsVisible] = useState<boolean>(true);
   const [card, setCard] = useState<boolean>(true);
   const [totalPrice, setTotalPrice] = useState<number>(0);
-
-  const toggleBag = () => {
-    setIsVisible(!isVisible);
-  };
 
   const incrementCount = (_id: string) => {
     const cartData: any = localStorage.getItem("cart");
@@ -46,7 +50,7 @@ export const Bag = () => {
       }
     });
 
-    localStorage.setItem("cart", JSON.stringify(newArray));
+    window.localStorage.setItem("cart", JSON.stringify(newArray));
     setFoods(newArray);
   };
 
@@ -65,12 +69,12 @@ export const Bag = () => {
         return { ...el };
       }
     });
-    localStorage.setItem("cart", JSON.stringify(newArray));
+    window.localStorage.setItem("cart", JSON.stringify(newArray));
     setFoods(newArray);
   };
 
   const closeBagCart = (foodId: string) => {
-    const cartData: any = localStorage.getItem("cart");
+    const cartData: any = window.localStorage.getItem("cart");
     const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
     const newArray = realData.filter((el) => el.item._id != foodId);
@@ -79,7 +83,7 @@ export const Bag = () => {
   };
 
   useEffect(() => {
-    const cartData: any = localStorage.getItem("cart");
+    const cartData: any = window.localStorage.getItem("cart");
     const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
     const niitDun = realData.reduce((acc: any, cur: any) => {
@@ -87,83 +91,54 @@ export const Bag = () => {
     }, 0);
 
     setTotalPrice(niitDun);
-  }, []);
-
-  if (!isVisible) return <></>;
+  }, [foods]);
 
   return (
-    <div
-      style={{
-        display: isVisible ? "flex" : "none",
-        position: "absolute",
-        zIndex: "100",
-        width: "100%",
-        height: "full",
-      }}
-    >
-      <div
-        style={{
-          width: "75%",
-          color: "black",
-          backgroundColor: "#00000080",
-          opacity: "50%",
-          height: "full",
-        }}
-      ></div>
-      <div
-        style={{
-          width: "25%",
-          display: "flex",
-          flexDirection: "column",
+    <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+      <Box
+        sx={{
+          backgroundColor: "white",
+          width: "586px",
         }}
       >
-        <div
-          style={{
-            height: "1439px",
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Button sx={{ width: "48px", height: "48px", padding: "0px" }}>
+            <KeyboardArrowLeftIcon />
+          </Button>
+          <Typography sx={{ fontWeight: "bold" }}>Таны сагс</Typography>
+          <Box sx={{ width: "70px" }} />
+        </Box>
+
+        <List
+          sx={{
+            width: "100%",
+            borderBottom: " 1px solid #D6D8DB",
+            borderTop: "1px solid #D6D8DB",
             overflow: "scroll",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Button
-              onClick={toggleBag}
-              style={{ width: "48px", height: "48px", padding: "0px" }}
-            >
-              <KeyboardArrowLeftIcon />
-            </Button>
-            <p
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              Таны сагс
-            </p>
-            <p style={{ width: "50px" }} />
-          </div>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              overflow: "scroll",
-              margin: "16px 0 16px px",
-              borderBottom: " 1px solid #D6D8DB",
-              borderTop: "1px solid #D6D8DB",
-            }}
-          >
-            {foods.map((el, Item) => {
+          {foods.length === 0 ? (
+            <Typography variant="h3"> Sags hooson baina </Typography>
+          ) : (
+            foods.map((el, Item) => {
+              // if (foods.length <= 0) {
+              //   return <Typography> Sags hooson baina </Typography>;
+              // }
               return (
                 <BagCart
                   sx={{
                     display: card ? "flex" : "none",
                     padding: "16px",
                     gap: "16px",
+                    height: "182px",
                     backgroundColor: "white",
+                    justifyContent: "space-between",
                   }}
                   key={Item}
                   images={el.item.images}
@@ -176,22 +151,18 @@ export const Bag = () => {
                   closeBagCart={() => closeBagCart(el.item._id)}
                 />
               );
-            })}
-          </Box>
-        </div>
+            })
+          )}
+        </List>
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
             alignItems: "center",
             height: "172px",
-            gap: "10px",
             paddingX: "32px",
-            paddingTop: "10px",
-            paddingBottom: "30px",
-            width: "full",
-
-            boxShadow: "3",
+            bottom: "0",
+            backgroundColor: "white",
+            width: "100%",
           }}
         >
           <Box
@@ -212,7 +183,7 @@ export const Bag = () => {
             Захиалах
           </Button>
         </Box>
-      </div>
-    </div>
+      </Box>
+    </Drawer>
   );
 };

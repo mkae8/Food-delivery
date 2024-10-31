@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Typography } from "@mui/material";
+import { Box, Button, List, Menu, Tab, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
@@ -32,43 +32,53 @@ export default function BagCart({
   const totalPrice = Number(price) * Number(quantity);
 
   return (
-    <Card sx={sx}>
-      <div>
+    <Box sx={sx}>
+      <Box>
         <img
           style={{
-            width: "245px",
             height: "150px",
             objectFit: "cover",
+            width: "245px",
           }}
           src={images[0]}
           alt=""
         />
-      </div>
-      <div style={{ width: "245px" }}>
-        <div
-          style={{
+      </Box>
+      <Box>
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <div>
-            <p>{foodName}</p>
-            <p>{price}</p>
-          </div>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography>{foodName}</Typography>
+            <Typography>{totalPrice}</Typography>
+          </Box>
           <Button
             onClick={closeBagCart}
-            sx={{ color: "black", width: "48px", height: "48px" }}
+            sx={{ color: "black", width: "45px", height: "40px" }}
           >
             <ClearIcon />
           </Button>
-        </div>
-        <div style={{ fontSize: "16px", color: "#767676", fontWeight: "400" }}>
+        </Box>
+        <Box
+          sx={{
+            fontSize: "16px",
+            color: "#767676",
+            fontWeight: "400",
+            overflow: "visible",
+            wordSpacing: "1px",
+            lineHeight: 1.2,
+          }}
+        >
           {foodIngredients}
-        </div>
-        <div
-          style={{
+        </Box>
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Button
@@ -79,7 +89,7 @@ export default function BagCart({
             <RemoveIcon />
           </Button>
 
-          <Typography>{totalPrice}</Typography>
+          <Typography>{quantity}</Typography>
 
           <Button
             onClick={incrementCount}
@@ -88,8 +98,8 @@ export default function BagCart({
           >
             <AddIcon />
           </Button>
-        </div>
-      </div>
-    </Card>
+        </Box>
+      </Box>
+    </Box>
   );
 }
