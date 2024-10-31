@@ -1,38 +1,23 @@
-"use client";
+"use client"
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Search } from '@mui/icons-material';
+import { useFoods } from '@/provider/FoodProvider';
 
-const Hool = [
-    { title: 'Tsuiwan' },
-    { title: 'Budaatai huurga' },
-    { title: 'Holimog Huurga' },
-    { title: 'Undugtei huurga' },
-];
 
-export const SearchInput = () => {
-    return (
-        <Stack sx={{ width: 360 }}>
-            <Autocomplete
-                freeSolo
-                id="free-solo-2-demo"
-                disableClearable
-                options={Hool.map((option) => option.title)}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                       
-                        InputProps={{
-                            ...params.InputProps,
-                            startAdornment: <Search />,
-                            type: 'search',
-                        }}
-                        placeholder="Хайх..."
-                    />
-                )}
-            />
-        </Stack>
-    );
-};
+export default function FreeSolo() {
+
+  const {foodNames}=useFoods()
+
+  return (
+    <Stack spacing={2} sx={{ width: 300 }}>
+      <Autocomplete
+        id="food-search"
+        freeSolo
+        options={foodNames.map((option) => option.foodName)}
+        renderInput={(params) => <TextField {...params} placeholder='Хоол хайх' style={{color:"grey"}} label="Хоол хайх" />}
+      /> 
+    </Stack>
+  );
+}
