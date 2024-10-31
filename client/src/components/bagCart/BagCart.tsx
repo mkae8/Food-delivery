@@ -1,101 +1,120 @@
 "use client";
 
-import { Button, Typography } from "@mui/material";
+import { Box, Button, List, Menu, Tab, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useState } from "react";
 
 type DataBaseInformationProps = {
-  foodPic: string;
+  images: string[];
+  images: string[];
   foodName: string;
-  price: number;
+  price: string;
+  price: string;
   foodIngredients: string;
-  onCountChange: (newCount: number) => void;
   incrementCount: () => void;
   decrementCount: () => void;
-  count: number;
-  closeCartItem: () => void;
-  totalPrice: number[];
+  quantity: number;
+  closeBagCart: () => void;
+  sx: any;
+  quantity: number;
+  closeBagCart: () => void;
+  sx: any;
 };
 
 export default function BagCart({
   foodName,
-  foodPic,
-  price,
+  images,
+  images,
   foodIngredients,
-  onCountChange,
   incrementCount,
   decrementCount,
-  totalPrice,
+  closeBagCart,
+  quantity,
+  sx,
+  price,
+  closeBagCart,
+  quantity,
+  sx,
+  price,
 }: DataBaseInformationProps) {
-  const [count, setCount] = useState(0);
-  const OneFoodPrice = 14500;
-
-  const AllFoodPrice = count * OneFoodPrice;
-  console.log(totalPrice);
+  const totalPrice = Number(price) * Number(quantity);
+  const totalPrice = Number(price) * Number(quantity);
 
   return (
-    <Card
-      sx={{
-        padding: "16px",
-        display: "flex",
-        gap: "16px",
-        backgroundColor: "white",
-      }}
-    >
-      <img
-        style={{
-          width: "245px",
-          height: "150px",
-        }}
-        src={foodPic}
-        alt=""
-      />
-      <div style={{ width: "245px" }}>
-        <div
+    <Box sx={sx}>
+      <Box>
+        <img
           style={{
+            height: "150px",
+            objectFit: "cover",
+            width: "245px",
+          }}
+          src={images[0]}
+          alt=""
+        />
+      </Box>
+      <Box>
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <div>
-            <p>{foodName}</p>
-            <p>{totalPrice}</p>
-          </div>
-          <Button /* onclick={} */
-            sx={{ color: "black", width: "48px", height: "48px" }}
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography>{foodName}</Typography>
+            <Typography>{totalPrice}</Typography>
+          </Box>
+          <Button
+            onClick={closeBagCart}
+            sx={{ color: "black", width: "45px", height: "40px" }}
           >
             <ClearIcon />
           </Button>
-        </div>
-        <div style={{ fontSize: "16px", color: "#767676", fontWeight: "400" }}>
+        </Box>
+        <Box
+          sx={{
+            fontSize: "16px",
+            color: "#767676",
+            fontWeight: "400",
+            overflow: "visible",
+            wordSpacing: "1px",
+            lineHeight: 1.2,
+          }}
+        >
           {foodIngredients}
-        </div>
-        <div
-          style={{
+        </Box>
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Button
-            onClick={incrementCount}
-            sx={{ width: "45px", height: "40px" }}
-            variant="contained"
-          >
-            <AddIcon />
-          </Button>
-          <Typography>{count}</Typography>
-          <Button
+            onClick={decrementCount}
             onClick={decrementCount}
             sx={{ width: "45px", height: "40px" }}
             variant="contained"
           >
             <RemoveIcon />
+            <RemoveIcon />
           </Button>
-        </div>
-      </div>
-    </Card>
+
+          <Typography>{quantity}</Typography>
+
+          <Button
+            onClick={incrementCount}
+            onClick={incrementCount}
+            sx={{ width: "45px", height: "40px" }}
+            variant="contained"
+          >
+            <AddIcon />
+            <AddIcon />
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 }
