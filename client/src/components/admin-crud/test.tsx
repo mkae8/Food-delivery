@@ -1,17 +1,7 @@
-"use client";
-
-import {
-  Box,
-  Button,
-  Typography,
-  Modal,
-  TextField,
-  MenuItem,
-} from "@mui/material";
+import { Box, Button, Typography, Modal, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AddCategory } from "./AddCategory";
 import { AdminAdd } from "./AdminAdd";
-
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useCategory } from "@/provider/CategoryProvider";
@@ -28,27 +18,15 @@ const style = {
   borderRadius: 2,
 };
 
-interface Category {
-  _id: string;
-  categoryName: string;
-}
-
-interface NewCategoryResponse {
-  _id: string;
-  categoryName: string;
-}
-
-interface AddCategoryResponse {
-  newCategory: NewCategoryResponse;
-}
-
 const AdminPageComp = () => {
   const { setRefetch } = useCategory();
+  const [categories, setCategories] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [newCategoryName, setNewCategoryName] = useState("");
+
   const { categoryNames } = useCategory();
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [newCategoryName, setNewCategoryName] = useState<string>("");
+
   const [idStore, setIdStore] = useState("");
   const [currentCategory, setCurrentCategory] = useState<string>("");
 
@@ -61,7 +39,7 @@ const AdminPageComp = () => {
         }
       );
 
-      const newCategoryObj: NewCategoryResponse = response.data.newCategory;
+      const newCategoryObj: any = response.data.newCategory;
       setCategories((prevCategories) => [...prevCategories, newCategoryObj]);
       setRefetch((prev) => !prev);
 
@@ -163,6 +141,26 @@ const AdminPageComp = () => {
     setClicked(name);
   };
 
+  // const addCategory = async (newCategory) => {
+  //   // ... (your existing add category logic)
+  // };
+
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.BACKEND_URL}/fetchCategory`
+  //       );
+  //       setCategories(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //       toast.error("Failed to fetch categories.");
+  //     }
+  //   };
+
+  //   fetchCategories();
+  // }, []);
+
   return (
     <div
       style={{
@@ -173,110 +171,30 @@ const AdminPageComp = () => {
         gap: "55px",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-        }}
-      >
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         <Typography fontWeight={700} fontSize={22} color="#272727">
           Food Menu
         </Typography>
-
-        <Box display="flex" flexDirection="column" marginTop="20px" gap="20px ">
+        <Box display="flex" flexDirection="column" gap="20px">
           {categories.map((category) => (
             <Button
-              onClick={() => {
-                handleCatClick(category.categoryName);
-              }}
               key={category._id}
-              style={{
-                color: "black",
-                border: "1px solid #D6D8DB",
-                fontStyle: "inherit",
-                display: "flex",
-                justifyContent: "space-between",
-                paddingLeft: "15px",
-                paddingRight: "15px",
-                backgroundColor:
-                  category.categoryName === clicked ? "#18BA51" : "white",
-              }}
+              onClick={() => setSelectedCategory(category.categoryName)}
             >
               {category.categoryName}
-              <div style={{ width: "25px", height: "100%" }}>
-                <svg
-                  width="12"
-                  height="12"
-                  cursor="pointer"
-                  viewBox="0 0 4 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  key={category._id}
-                  onClick={() => {
-                    handleOpenModal(category.categoryName);
-                    setIdStore(category._id);
-                    setCurrentCategory(category.categoryName);
-                  }}
-                >
-                  <path
-                    d="M2 16C1.45 16 0.979167 15.8042 0.5875 15.4125C0.195833 15.0208 0 14.55 0 14C0 13.45 0.195833 12.9792 0.5875 12.5875C0.979167 12.1958 1.45 12 2 12C2.55 12 3.02083 12.1958 3.4125 12.5875C3.80417 12.9792 4 13.45 4 14C4 14.55 3.80417 15.0208 3.4125 15.4125C3.02083 15.8042 2.55 16 2 16ZM2 10C1.45 10 0.979167 9.80417 0.5875 9.4125C0.195833 9.02083 0 8.55 0 8C0 7.45 0.195833 6.97917 0.5875 6.5875C0.979167 6.19583 1.45 6 2 6C2.55 6 3.02083 6.19583 3.4125 6.5875C3.80417 6.97917 4 7.45 4 8C4 8.55 3.80417 9.02083 3.4125 9.4125C3.02083 9.80417 2.55 10 2 10ZM2 4C1.45 4 0.979167 3.80417 0.5875 3.4125C0.195833 3.02083 0 2.55 0 2C0 1.45 0.195833 0.979167 0.5875 0.5875C0.979167 0.195833 1.45 0 2 0C2.55 0 3.02083 0.195833 3.4125 0.5875C3.80417 0.979167 4 1.45 4 2C4 2.55 3.80417 3.02083 3.4125 3.4125C3.02083 3.80417 2.55 4 2 4Z"
-                    fill="#1C1B1F"
-                  />
-                </svg>
-              </div>
             </Button>
           ))}
         </Box>
-
         <AddCategory addCategory={addCategory} />
       </div>
 
-      <div
-        style={{
-          width: "70%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <div>
-            <h2>{clicked}</h2>
-          </div>
-          <AdminAdd />
-        </div>
-        <FoodList category={clicked} />
+      <div style={{ width: "70%", display: "flex", flexDirection: "column" }}>
+        <h2>{selectedCategory}</h2>
+        <FoodList selectedCategory={selectedCategory} />{" "}
+        {/* Шинэчлэгдсэн FoodList компонент */}
       </div>
 
-      <Modal open={openModal} onClose={handleCloseModal}>
-        <Box sx={style}>
-          <Typography variant="h6">Edit or Delete</Typography>
-          <TextField
-            fullWidth
-            label="New Category Name"
-            variant="outlined"
-            margin="normal"
-            value={newCategoryName}
-            onChange={(e) => setNewCategoryName(e.target.value)}
-          />
-          <Button onClick={handleEdit} fullWidth style={{ marginTop: "10px" }}>
-            Edit Name
-          </Button>
-          <Button
-            onClick={handleDelete}
-            fullWidth
-            style={{ marginTop: "10px" }}
-          >
-            Delete Category
-          </Button>
-        </Box>
-      </Modal>
+      {/* Modal and other components */}
     </div>
   );
 };

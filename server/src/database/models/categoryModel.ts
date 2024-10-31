@@ -1,7 +1,7 @@
 import { Model, Schema, models, model, Types } from "mongoose";
 
 export type CategoryModelType = {
-  _id: Types.ObjectId;
+  _id: Schema.Types.ObjectId;
   categoryName?: string;
   foodId: Types.ObjectId[];
   createdAt: Date;
