@@ -90,7 +90,9 @@
 //   );
 // };
 
-import { Typography } from "@mui/material";
+"use client";
+
+import { Box, Typography } from "@mui/material";
 import { InputPassword } from "../InputPassword";
 import { ButtonGlobal } from "../ButtonGlobal";
 import { useState } from "react";
@@ -142,6 +144,7 @@ export const PasswordReset: React.FC<PasswordResetProps> = ({
       style={{
         display: "flex",
         flexDirection: "column",
+        justifyContent: "space-around",
         alignItems: "center",
         textAlign: "center",
         width: "448px",
@@ -159,32 +162,44 @@ export const PasswordReset: React.FC<PasswordResetProps> = ({
       >
         Нууц үг сэргээх
       </Typography>
-      <Typography
+      <Box
         sx={{
-          fontSize: "16px",
-          fontWeight: "500",
           width: "384px",
-          textAlign: "left",
-          marginTop: "48px",
+          height: "145px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
-        Таны <span style={{ color: "green" }}>{email}</span> хаяг руу сэргээх
-        код <br /> илгээх болно.
-      </Typography>
-      <div style={{ marginTop: "32px" }}>
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "500",
+            width: "384px",
+            textAlign: "left",
+
+            gap: "32px",
+            color: "#695C08",
+          }}
+        >
+          Таны{" "}
+          <span style={{ color: "green" }}>{email} pinecone@example.com </span>
+          хаяг руу сэргээх код илгээх болно.
+        </Typography>
         <InputPassword
           text="4 оронтой кодыг оруулна уу"
           label="Нууц үг сэргээх код"
           name="otpCode"
           onChange={otpHandler}
         />
-        <ButtonGlobal
-          text="Үргэлжлүүлэх"
-          width="384px"
-          height="56px"
-          clickhandler={nextStep}
-        />
-      </div>
+      </Box>
+
+      <ButtonGlobal
+        text="Үргэлжлүүлэх"
+        width="384px"
+        height="56px"
+        clickhandler={nextStep}
+      />
     </div>
   );
 };

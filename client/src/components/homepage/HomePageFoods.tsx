@@ -120,7 +120,11 @@ export const HomePageFoods = () => {
                 />
                 {categoryName}
               </Typography>
-              <Button sx={{ color: "#18BA51", fontSize: "14px" }}>
+
+              <Button
+                sx={{ color: "#18BA51", fontSize: "14px" }}
+                onClick={() => router.push("/menu")}
+              >
                 Бүгдийг харах {">"}
               </Button>
             </Box>
