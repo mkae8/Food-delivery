@@ -34,7 +34,6 @@ export const CategoryProvider = ({ children }: PropsWithChildren) => {
         const response = await axios.get<Category[]>(
           `${process.env.BACKEND_URL}/fetchCategory`
         );
-        console.log("hello");
 
         setCategoryNames(response.data);
       } catch (error) {
