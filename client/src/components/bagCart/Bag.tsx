@@ -149,6 +149,14 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
                   incrementCount={() => incrementCount(el.item._id)}
                   decrementCount={() => decrementCount(el.item._id)}
                   closeBagCart={() => closeBagCart(el.item._id)}
+                  images={el.item.images}
+                  foodName={el.item.foodName}
+                  foodIngredients={el.item.foodIngredients}
+                  price={el.item.price}
+                  quantity={el.quantity}
+                  incrementCount={() => incrementCount(el.item._id)}
+                  decrementCount={() => decrementCount(el.item._id)}
+                  closeBagCart={() => closeBagCart(el.item._id)}
                 />
               );
             })
@@ -176,6 +184,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
           >
             <Typography>Таны нийт төлөх дүн</Typography>
             <Typography sx={{ fontWeight: "700", fontSize: "18px" }}>
+              {totalPrice}
               {totalPrice}
             </Typography>
           </Box>
