@@ -15,5 +15,5 @@ const DiscountSchema = new Schema<DiscountModelType>({
   updatedAt: { type: Date, default: Date.now, required: true },
 });
 
-export const UserModel: Model<DiscountModelType> =
+export const DiscountModelType: Model<DiscountModelType> =
   models["Discount"] || model<DiscountModelType>("Discount", DiscountSchema);

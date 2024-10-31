@@ -1,16 +1,20 @@
 import nodemailer from "nodemailer";
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import { OtpModel } from "../../src/database/models/otp.model";
+import { UserModel } from "../../src/database/models/userModel";
+import env from "dotenv";
+
+env.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const emailSender: any = async (
+const emailSender = async (
   sendEmail: string,
   subject: string,
-  html: any,
+  html: string,
   text: string
 ) => {
   const transport = nodemailer.createTransport({
@@ -19,30 +23,39 @@ const emailSender: any = async (
     port: 465,
     secure: true,
     auth: {
-      user: "ntemka93@gmail.com",
-      pass: "ozgdvgnhtnjsbxbo",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
+
   const options = {
-    from: "ntemka93@gmail.com",
+    from: process.env.EMAIL_USER,
     to: sendEmail,
     subject: subject,
     text: text,
     html: html,
   };
+
   await transport.sendMail(options);
 };
-export const sendEmailController = async (req: Request, res: Response) => {
+
+export const sendEmailController = async (req: any, res: any) => {
   const { email } = req.body;
   const OTP = Math.floor(1000 + Math.random() * 9000);
 
-  await OtpModel.create({ email, otpCode: OTP });
-
   try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
+    }
+
+    await OtpModel.create({ email, otpCode: OTP });
+
     await emailSender(
       email,
-      "Your Otp To Reset Password",
-      `<div style="color:red;  font-size: 50px"> ${OTP} </div>`,
+      "Your OTP to Reset Password",
+      `<div style="color:red; font-size: 50px">${OTP}</div>`,
       "One Time Password"
     );
 

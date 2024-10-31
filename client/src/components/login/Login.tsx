@@ -23,6 +23,7 @@ export const Login = () => {
     setError("");
     try {
       await loginHandler(userDetail.email, userDetail.password);
+      setLoading(false);
     } catch (error) {
       setError(`Backendee asaasiimuu daa ? ${error}`);
       setLoading(false);

@@ -13,19 +13,21 @@ export const loginController = async (req: any, res: any) => {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
+      return res
+        .status(404)
+        .send({ message: "Нууц үг эсвэл хэрэглэгчийн нэр буруу байна" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(401).send({ message: "Password or username is wrong" });
+      return res
+        .status(401)
+        .send({ message: "Нууц үг эсвэл хэрэглэгчийн нэр буруу байна" });
     }
-
     const token = jwt.sign({ id: user._id }, process.env.SECRET as string, {
       expiresIn: "1d",
     });
-
     res.status(200).send({ message: "Login successful", token, user });
   } catch (error) {
     console.error(error);
