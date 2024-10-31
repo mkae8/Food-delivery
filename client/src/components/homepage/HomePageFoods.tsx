@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { ItemModal } from "../modal/ItemModal";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -120,9 +120,9 @@ export const HomePageFoods = () => {
                 />
                 {categoryName}
               </Typography>
-              <Typography sx={{ color: "#18BA51", fontSize: "14px" }}>
+              <Button sx={{ color: "#18BA51", fontSize: "14px" }}>
                 Бүгдийг харах {">"}
-              </Typography>
+              </Button>
             </Box>
             <Box
               sx={{

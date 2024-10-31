@@ -15,7 +15,8 @@ export const PasswordReset = () => {
           textAlign: "center",
           width: "448px",
           height: "386px",
-          // border: "1px solid black"
+          marginTop: "200px",
+          // gap:"20px"
         }}
       >
         <Typography
