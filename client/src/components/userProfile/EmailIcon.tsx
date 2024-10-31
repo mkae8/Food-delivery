@@ -5,6 +5,7 @@ import ForwardToInboxOutlinedIcon from "@mui/icons-material/ForwardToInboxOutlin
 import { Stack, Typography, Modal, Button, TextField } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 interface EmailIconProps {
   initialEmail?: string;
@@ -12,7 +13,7 @@ interface EmailIconProps {
   onEditClick: (email: string) => void;
   disabled: boolean;
   email: string;
-  setEmail: Dispatch<SetStateAction<string>>;
+  setEmail: (email: string) => void;
 }
 
 export const EmailIcon: React.FC<EmailIconProps> = ({
@@ -47,12 +48,18 @@ export const EmailIcon: React.FC<EmailIconProps> = ({
 
   const handleSubmit = async () => {
     setLoading(true);
+    const token = localStorage.getItem("token");
     try {
-      const response = await axios.put("/api/update-email", { email });
+      const response = await axios.post(
+        `${process.env.BACKEND_URL}/user/updateProfile`,
+        { email },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
       if (response.status === 200) {
         setIsModalOpen(false);
         onEditClick(email);
+        toast.success("Email successfully updated");
       } else {
         setError("Failed to update email");
       }

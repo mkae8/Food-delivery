@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/components/password/Loading";
 import { AvatarIcon } from "@/components/userProfile/AvatarIcon";
 import { EditPhone } from "@/components/userProfile/EditPhone";
 import { EditProfile } from "@/components/userProfile/EditProfile";
@@ -54,22 +55,22 @@ const UserProfile = () => {
     setUserDetail((prev) => (prev ? { ...prev, [name]: value } : prev));
   };
 
-  const handleSubmit = async () => {
-    if (!userDetail) return;
+  // const handleSubmit = async () => {
+  //   if (!userDetail) return;
 
-    try {
-      const result = await axios.post(
-        `${process.env.BACKEND_URL}/updateProfile`,
-        userDetail
-      );
-      toast.success("Profile updated successfully.");
-    } catch (error) {
-      toast.error("Update failed. Please try again.");
-    }
-  };
+  //   try {
+  //     const result = await axios.post(
+  //       `${process.env.BACKEND_URL}/updateProfile`,
+  //       userDetail
+  //     );
+  //     toast.success("Profile updated successfully.");
+  //   } catch (error) {
+  //     toast.error("Update failed. Please try again.");
+  //   }
+  // };
 
   if (loading) {
-    return <CircularProgress />;
+    return <Loading />;
   }
 
   return (
@@ -103,22 +104,27 @@ const UserProfile = () => {
         initialPhoneNumber={userDetail?.phoneNumber || ""}
         label="Phone Number"
         onChange={handleChange}
+        onEditClick={(initialPhoneNumber) =>
+          setUserDetail((prev) =>
+            prev ? { ...prev, phoneNumber: initialPhoneNumber } : prev
+          )
+        }
       />
-
       <EmailIcon
         disabled={!userDetail?.email}
         email={userDetail?.email || ""}
         setEmail={(email) =>
-          setUserDetail((prev) => (prev ? { ...prev, email } : prev))
+          setUserDetail((prev) => (prev ? { ...prev, email: email } : prev))
         }
         label="Email"
-        onChange={handleChange}
+        onEditClick={(email) =>
+          setUserDetail((prev) => (prev ? { ...prev, email: email } : prev))
+        }
       />
-
       <OrderHistory />
       <Exit />
 
-      <Button
+      {/* <Button
         variant="contained"
         color="primary"
         onClick={handleSubmit}
@@ -130,7 +136,7 @@ const UserProfile = () => {
         }}
       >
         Хадгалах
-      </Button>
+      </Button> */}
     </Container>
   );
 };

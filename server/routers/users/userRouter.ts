@@ -12,7 +12,7 @@ const userRouter = Router();
 userRouter.route("/user/signup").post(signUpController);
 userRouter.route("/user/login").post(loginController);
 userRouter.route("/user/profile").get(authMiddleware, fetchUser);
-userRouter.route("/updateProfile").post(authMiddleware, updateUserData);
+userRouter.route("/user/updateProfile").post(authMiddleware, updateUserData);
 userRouter.route("/sendMailer").get(sendEmailController);
 
 export default userRouter;

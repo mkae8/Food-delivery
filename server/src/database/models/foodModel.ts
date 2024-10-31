@@ -3,7 +3,7 @@ import { Model, Schema, models, model } from "mongoose";
 export type FoodsModelType = {
   _id: Schema.Types.ObjectId;
   foodName: string;
-  foodCategory: string;
+  foodCategory: Schema.Types.ObjectId;
   foodIngredients: string;
   images: string[];
   price: string;
@@ -12,7 +12,7 @@ export type FoodsModelType = {
 
 const FoodSchema = new Schema<FoodsModelType>({
   foodName: { type: String, required: true },
-  foodCategory: { type: String, required: true },
+  foodCategory: { type: Schema.ObjectId, required: true, ref: "Category" },
   foodIngredients: { type: String, required: true },
   price: { type: String, required: true },
   images: { type: [String], required: true, unique: true },
