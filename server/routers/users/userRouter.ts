@@ -5,8 +5,8 @@ import { updateUserData } from "../../controllers/usersController/updateUserData
 import { authMiddleware } from "../../middlewares/auth";
 import { fetchUser } from "../../controllers/usersController/fetchUser";
 
-import { sendEmailController } from "../../controllers/usersController/sendEmailController";
-import { checkOtp } from "../../controllers/usersController/otpCheck";
+import { sendEmailController } from "../../controllers/usersController/userSendEmail";
+import { checkOtp } from "../../controllers/usersController/userOtpCheck";
 
 const userRouter = Router();
 

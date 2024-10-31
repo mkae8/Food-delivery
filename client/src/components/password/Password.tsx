@@ -1,23 +1,27 @@
 "use client";
 
+import React, { useState } from "react";
 import { Typography } from "@mui/material";
 import { InputGlobal } from "../InputGlobal";
 import { ButtonGlobal } from "../ButtonGlobal";
-import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Loading from "./Loading";
 
 interface PasswordProps {
-  clickHandler: () => void;
+  clickHandler: (email: string) => void;
+  setEmail: (email: string) => void;
 }
 
-export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
-  const [email, setEmail] = useState("");
+export const Password: React.FC<PasswordProps> = ({
+  clickHandler,
+  setEmail,
+}) => {
+  const [email, setLocalEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+    setLocalEmail(event.target.value);
   };
 
   const nextStep = async () => {
@@ -26,15 +30,17 @@ export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
       return;
     }
 
+    setLoading(true);
     try {
       await axios.post(`${process.env.BACKEND_URL}/sendMailer`, { email });
-      clickHandler();
-      setLoading(true);
+      clickHandler(email);
+      toast.success("Email sent");
     } catch (error) {
       toast.error("Email not found");
       setLoading(false);
     }
   };
+
   if (loading) {
     return <Loading />;
   }
@@ -49,7 +55,7 @@ export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
         textAlign: "center",
         width: "448px",
         height: "386px",
-  
+        marginTop: "200px",
       }}
     >
       <Typography
