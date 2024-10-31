@@ -4,6 +4,8 @@ import { Stack, Typography, Modal, Button, TextField } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import axios from "axios";
+import Loading from "../password/Loading";
+import { toast } from "react-toastify";
 
 interface EditProfileProps {
   userName?: string;
@@ -29,7 +31,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({
       return;
     }
     setLoading(true);
-    onEditClick(newName); // Passes newName to parent component
+    onEditClick(newName);
     setLoading(false);
     setIsModalOpen(false);
   };
@@ -40,19 +42,26 @@ export const EditProfile: React.FC<EditProfileProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewName(e.target.value);
-    onChange(e); // Passes input change event to parent component
+    onChange(e);
   };
 
   const handleSubmit = async () => {
     setLoading(true);
+    const token = localStorage.getItem("token");
+
     try {
-      const response = await axios.put("/api/update-profile", {
-        name: newName,
-      });
+      const response = await axios.post(
+        `${process.env.BACKEND_URL}/user/updateProfile`,
+        {
+          username: newName,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
       if (response.status === 200) {
         setIsModalOpen(false);
         onEditClick(newName);
+        toast.success("Profile name successfully updated");
       } else {
         setError("Failed to update profile");
       }
@@ -62,10 +71,12 @@ export const EditProfile: React.FC<EditProfileProps> = ({
       setLoading(false);
     }
   };
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
-      {/* Profile Display */}
       <div
         style={{
           width: "394px",
@@ -140,7 +151,6 @@ export const EditProfile: React.FC<EditProfileProps> = ({
         </Stack>
       </div>
 
-      {/* Edit Modal */}
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div
           style={{

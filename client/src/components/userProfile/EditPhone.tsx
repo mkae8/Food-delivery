@@ -5,11 +5,13 @@ import { Stack, Typography, Modal, Button, TextField } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import axios from "axios";
+import Loading from "../password/Loading";
+import { toast } from "react-toastify";
 
 interface EditPhoneProps {
   initialPhoneNumber?: string;
   label?: string;
-  onEditClick: (phoneNumber: string) => Promise<void>;
+  onEditClick: (initialPhoneNumber: string) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -42,21 +44,24 @@ export const EditPhone: React.FC<EditPhoneProps> = ({
 
   const handleSubmit = async () => {
     setLoading(true);
+    const token = localStorage.getItem("token");
+
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_URL}/updateProfile`,
-        { phoneNumber }
+        `${process.env.BACKEND_URL}/user/updateProfile`,
+        { phoneNumber },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (response.status === 200) {
         setIsModalOpen(false);
         await onEditClick(phoneNumber);
+        toast.success("Phone number successfully updated");
       } else {
         setError("Failed to update phone number");
       }
     } catch (err) {
       setError(`Error: Unable to update ${err}`);
-    } finally {
       setLoading(false);
     }
   };

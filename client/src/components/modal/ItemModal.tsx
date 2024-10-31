@@ -133,15 +133,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-
-type FoodItem = {
-  _id: string;
-  foodName: string;
-  images: string;
-  price: string;
-  foodIngredients: string;
-  foodCategory: string;
-};
+import { FoodItem } from "../homepage/HomePageFoods";
 
 interface ItemModalProps {
   item: FoodItem;

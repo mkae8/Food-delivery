@@ -11,7 +11,7 @@ export type CategoryModelType = {
 const CategorySchema = new Schema<CategoryModelType>(
   {
     categoryName: { type: String, unique: true, sparse: true },
-    foodId: { type: [Types.ObjectId], required: true, ref: "Food" },
+    foodId: { type: [Types.ObjectId], required: true },
     createdAt: {
       type: Date,
       default: Date.now,
