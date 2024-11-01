@@ -15,6 +15,15 @@ interface FoodCategory {
   categoryName: string;
 }
 
+export type FoodItem = {
+  _id: string;
+  foodName: string;
+  images: string;
+  price: string;
+  foodIngredients: string;
+  foodCategory: FoodCategory;
+};
+
 interface Category {
   _id: string;
   categoryName: string;

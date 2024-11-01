@@ -12,7 +12,7 @@ import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
-import { Bag } from "../bagCart/Bag";
+// import { Bag } from "../bagCart/Bag";
 import FreeSolo from "../SearchInput";
 
 interface RouterItem {
@@ -78,7 +78,7 @@ export const Header: React.FC = () => {
         textSizeAdjust: "inherit",
       }}
     >
-      <Bag open={open} toggleDrawer={toggleDrawer} />
+      {/* <Bag open={open} toggleDrawer={toggleDrawer} /> */}
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -102,7 +102,7 @@ export const Header: React.FC = () => {
               </Link>
             ))}
           </Box>
-     <FreeSolo/>
+          <FreeSolo />
           <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
             <Sags />
 
