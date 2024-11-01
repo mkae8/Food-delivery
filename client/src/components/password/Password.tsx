@@ -9,34 +9,33 @@ import axios from "axios";
 import Loading from "./Loading";
 
 interface PasswordProps {
-  clickHandler: (email: string) => void;
-  setEmail: (email: string) => void;
+  clickHandler: () => void;
 }
 
-export const Password: React.FC<PasswordProps> = ({
-  clickHandler,
-  setEmail,
-}) => {
-  const [email, setLocalEmail] = useState("");
+export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLocalEmail(event.target.value);
+    setEmail(event.target.value);
   };
 
   const nextStep = async () => {
     if (!email) {
-      toast.error("Fill in your email");
+      toast.error("Имэйлээ оруулна уу");
       return;
     }
-
     setLoading(true);
+
     try {
-      await axios.post(`${process.env.BACKEND_URL}/sendMailer`, { email });
+      localStorage.setItem("email", JSON.stringify(email));
+      const res = await axios.post(`${process.env.BACKEND_URL}/sendMailer`, {
+        email,
+      });
       clickHandler(email);
-      toast.success("Email sent");
+      toast.success("Имэйл илгээсэн");
     } catch (error) {
-      toast.error("Email not found");
+      toast.error("Имэйл олдсонгүй");
       setLoading(false);
     }
   };

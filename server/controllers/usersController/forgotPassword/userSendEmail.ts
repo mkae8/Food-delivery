@@ -1,8 +1,8 @@
 import nodemailer from "nodemailer";
 import express from "express";
 import cors from "cors";
-import { OtpModel } from "../../src/database/models/otp.model";
-import { UserModel } from "../../src/database/models/userModel";
+import { OtpModel } from "../../../src/database/models/otp.model";
+import { UserModel } from "../../../src/database/models/userModel";
 import env from "dotenv";
 
 env.config();
@@ -50,6 +50,13 @@ export const sendEmailController = async (req: any, res: any) => {
       return res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
     }
 
+    const isThereData = await OtpModel.find({ email });
+
+    if (isThereData.length > 0) {
+      res.send("Already sent OTP");
+      return;
+    }
+
     await OtpModel.create({ email, otpCode: OTP });
 
     await emailSender(
@@ -59,7 +66,7 @@ export const sendEmailController = async (req: any, res: any) => {
       "One Time Password"
     );
 
-    res.send("Successfully sent mail");
+    res.send("Имэйл илгээсэн").status(201);
   } catch (error) {
     res.status(500).send("Failed to send email");
   }

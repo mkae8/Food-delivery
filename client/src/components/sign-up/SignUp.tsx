@@ -65,9 +65,7 @@ export const SignUp = () => {
       setLoading(false);
     }
   };
-  if (loading) {
-    return <Loading />;
-  }
+  
   const isFormFilled = Object.values(userDetail).every(
     (value) => value.trim() !== ""
   );

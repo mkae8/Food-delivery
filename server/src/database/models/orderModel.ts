@@ -24,6 +24,7 @@ const OrderSchema = new Schema<OrdersModelType>({
     type: String,
     required: true,
     enum: ["Process", "Delivered", "Waiting", "Active"],
+    default: "Process",
   },
   createdDate: {
     type: Date,
@@ -35,8 +36,8 @@ const OrderSchema = new Schema<OrdersModelType>({
   khoroo: { type: String, required: true },
   apartment: { type: String, required: true },
   moreInformation: { type: String },
-  secondaryNumber: { type: String, required: true },
-  isPaid: { type: Boolean, required: true },
+  secondaryNumber: { type: String, required: false },
+  isPaid: { type: Boolean, required: true, default: false },
 });
 
 export const OrderModel: Model<OrdersModelType> =

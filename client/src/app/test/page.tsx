@@ -1,14 +1,14 @@
-import { PasswordReset } from "@/components/password/PasswordReset";
-import { Test } from "@/components/test";
+// import { PasswordReset } from "@/components/password/PasswordReset";
+// import { Test } from "@/components/test";
 
-const test = () => {
-  return (
-    <>
-      {/* <Test /> */}
+// const test = () => {
+//   return (
+//     <>
+//       <Test />
 
-      <PasswordReset />
-    </>
-  );
-};
 
-export default test;
+//     </>
+//   );
+// };
+
+// export default test;
