@@ -29,9 +29,10 @@ type foodCategoryType = {
 
 type FoodListProps = {
   category: string;
+  openModal: (_food: FoodItem) => void;
 };
 
-const MenuFoods = ({ category }: FoodListProps) => {
+const MenuFoods = ({ category, openModal }: FoodListProps) => {
   const [foods, setFoods] = useState<FoodItem[]>([]);
 
   const fetchFoodItems = async () => {
@@ -79,6 +80,7 @@ const MenuFoods = ({ category }: FoodListProps) => {
           filteredFoods.map((food) => (
             <Box
               key={food._id}
+              onClick={() => openModal(food)}
               sx={{
                 cursor: "pointer",
                 width: "282px",
