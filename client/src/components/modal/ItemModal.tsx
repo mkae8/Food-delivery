@@ -160,11 +160,11 @@ export const ItemModal: React.FC<ItemModalProps> = ({
 
   const handleAddToCart = () => {
     const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-    console.log(cartData);
+    // console.log(cartData);
     const itemIndex = cartData.findIndex(
       (cartItem: any) => cartItem._id === item._id
     );
-    console.log(itemIndex);
+    // console.log(itemIndex);
     if (itemIndex >= 0) {
       cartData[itemIndex].quantity += quantity;
     } else {
