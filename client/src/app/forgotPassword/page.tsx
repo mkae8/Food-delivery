@@ -7,16 +7,11 @@ import PasswordSuccess from "@/components/password/PasswordSuccess";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-type StepComponent = {
+interface StepProps {
   clickHandler: () => void;
-};
+}
 
-const steps: React.FC<StepComponent>[] = [
-  Password,
-  PasswordReset,
-  NewPassword,
-  PasswordSuccess,
-];
+const steps: React.FC<StepProps>[] = [Password, PasswordReset, NewPassword];
 
 const ForgotPassword = () => {
   const router = useRouter();
@@ -24,7 +19,7 @@ const ForgotPassword = () => {
   const StepComponent = steps[step];
 
   const continueHandler = () => {
-    if (step === 3) {
+    if (step === 2) {
       router.push("/");
       return;
     }

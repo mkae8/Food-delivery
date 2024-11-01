@@ -1,8 +1,9 @@
-import { OtpModel } from "../../src/database/models/otp.model";
+import { OtpModel } from "../../../src/database/models/otp.model";
 
 export const checkOtp = async (req: any, res: any) => {
   try {
     const { otpCode, email } = req.body;
+
     const findOtp = await OtpModel.findOne({ email: email });
 
     console.log(findOtp);
