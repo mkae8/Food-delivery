@@ -63,11 +63,9 @@ export const Header: React.FC = () => {
 
   const [open, setOpen] = useState(false);
 
-  const toggleDrawer = (newOpen: boolean) => () => {
+  const toggleDrawer = (newOpen: boolean) => {
     setOpen(newOpen);
   };
-
-  useEffect(() => {}, [open]);
 
   return (
     <AppBar
@@ -107,7 +105,7 @@ export const Header: React.FC = () => {
             <Sags />
 
             <Button
-              onClick={toggleDrawer(true)}
+              onClick={() => toggleDrawer(true)}
               sx={buttonStyles}
               aria-label="Cart"
               style={{
