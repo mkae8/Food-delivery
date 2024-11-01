@@ -1,9 +1,10 @@
 import { Box, Container, Typography } from "@mui/material";
-import React from "react";
-import { Address } from "./Address";
 import { Zahialga } from "./Zahialga";
 
-export const Step2: React.FC = () => {
+interface stepImgprops {
+  stepImg: string;
+}
+export const Step2 = ({ stepImg }: stepImgprops) => {
   return (
     <Container sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box>
@@ -18,7 +19,7 @@ export const Step2: React.FC = () => {
           }}
         >
           <img
-            src="/huleegdej bna.png"
+            src={stepImg}
             style={{ width: "48px", height: "48px", marginBottom: "8px" }}
           />
           <Box

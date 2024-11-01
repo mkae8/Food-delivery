@@ -91,6 +91,7 @@ export const HomePageFoods = () => {
       {Object.entries(groupedFoods).map(([categoryName, foods]) => {
         return (
           <Box
+            key={categoryName}
             sx={{ height: "344px", display: "flex", flexDirection: "column" }}
           >
             <Box

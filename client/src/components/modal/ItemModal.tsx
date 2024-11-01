@@ -159,8 +159,8 @@ export const ItemModal: React.FC<ItemModalProps> = ({
   };
 
   const handleAddToCart = () => {
-    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-    // console.log(cartData);
+    const cartData = JSON.parse(window.localStorage.getItem("cart") || "[]");
+    console.log(cartData);
     const itemIndex = cartData.findIndex(
       (cartItem: any) => cartItem._id === item._id
     );
@@ -170,7 +170,7 @@ export const ItemModal: React.FC<ItemModalProps> = ({
     } else {
       cartData.push({ item, quantity });
     }
-    localStorage.setItem("cart", JSON.stringify(cartData));
+    window.localStorage.setItem("cart", JSON.stringify(cartData));
     onClose();
   };
 
