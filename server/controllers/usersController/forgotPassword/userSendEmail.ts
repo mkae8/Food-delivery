@@ -61,8 +61,16 @@ export const sendEmailController = async (req: any, res: any) => {
 
     await emailSender(
       email,
-      "Your OTP to Reset Password",
-      `<div style="color:red; font-size: 50px">${OTP}</div>`,
+      "Таны OTP нууц үг",
+      `
+        <div style="font-family: Helvetica, Arial, sans-serif; text-align: center; padding: 20px;">
+          <h2 style="color: #00466a; font-size: 24px; margin-bottom: 20px;">Таны нэг удаагийн нууц үг</h2>
+          <div style="color: green; font-size: 48px; font-weight: bold; border: 2px solid green; border-radius: 8px; padding: 20px; display: inline-block;">
+            ${OTP}
+          </div>
+          <p style="font-size: 16px; margin-top: 20px;">Энэхүү OTP нь богино хугацаанд хүчинтэй. </p>
+        </div>
+      `,
       "One Time Password"
     );
 
