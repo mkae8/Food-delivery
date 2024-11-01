@@ -9,7 +9,7 @@ import axios from "axios";
 import Loading from "./Loading";
 
 interface PasswordProps {
-  clickHandler: () => void;
+  clickHandler: (email: string) => void;
 }
 
 export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
