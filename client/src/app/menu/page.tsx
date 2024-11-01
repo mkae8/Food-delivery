@@ -1,5 +1,3 @@
-/** @format */
-
 "use client";
 
 import { Box, Container, Typography, Button } from "@mui/material";
@@ -8,6 +6,9 @@ import axios from "axios"; // Make sure to import axios
 import { toast } from "react-toastify"; // Ensure you have toast for notifications
 import FoodList from "@/components/admin-crud/FetchFoods";
 import MenuFoods from "@/components/menuComponents/FetchMenuFoods";
+import Modal from "@mui/material/Modal";
+import { ItemModal } from "@/components/modal/ItemModal";
+import { FoodItem } from "@/components/homepage/HomePageFoods";
 
 interface FoodCategory {
   _id: string;
@@ -36,12 +37,16 @@ type FoodListProps = {
 };
 
 const MenuPage = ({ category }: FoodListProps) => {
+  const [selectedFood, setSelectedFood] = useState<FoodItem | null>(null);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [foods, setFoods] = useState<FoodItem[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [clicked, setClicked] = useState<string>("");
+  const [loading, setLoading] = useState(true);
 
   const fetchFoodItems = async () => {
     try {
+      setLoading(true);
       const response = await axios.get<FoodItem[]>(
         `${process.env.BACKEND_URL}/foods-get`
       );
@@ -49,6 +54,8 @@ const MenuPage = ({ category }: FoodListProps) => {
     } catch (error) {
       console.error("Error fetching food items", error);
       toast.error("Failed to fetch food items.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,12 +70,6 @@ const MenuPage = ({ category }: FoodListProps) => {
       toast.error("Failed to fetch categories.");
     }
   };
-  console.log(category, "dasda");
-
-  useEffect(() => {
-    fetchFoodItems();
-    fetchCategories();
-  }, []);
 
   const getFoodsByCategory = (
     foods: FoodItem[],
@@ -78,12 +79,24 @@ const MenuPage = ({ category }: FoodListProps) => {
       (food) => food.foodCategory.categoryName === filterCategory
     );
   };
-
-  const filteredFoods = getFoodsByCategory(foods, category);
-
   const handleCatClick = (name: string) => {
     setClicked(name);
   };
+
+  const handleOpenModal = (food: FoodItem) => {
+    setSelectedFood(food);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedFood(null);
+  };
+
+  useEffect(() => {
+    fetchFoodItems();
+    fetchCategories();
+  }, []);
 
   return (
     <Container>
@@ -93,7 +106,6 @@ const MenuPage = ({ category }: FoodListProps) => {
             onClick={() => handleCatClick(category.categoryName)}
             key={category._id}
             style={{
-              color: "black",
               border: "1px solid #D6D8DB",
               fontStyle: "inherit",
               fontWeight: "bold",
@@ -105,6 +117,7 @@ const MenuPage = ({ category }: FoodListProps) => {
               height: "40px",
               backgroundColor:
                 category.categoryName === clicked ? "#18BA51" : "white",
+              color: category.categoryName === clicked ? "white" : "black",
             }}
           >
             {category.categoryName}
@@ -114,61 +127,17 @@ const MenuPage = ({ category }: FoodListProps) => {
 
       <Box sx={{ height: "344px", display: "flex", flexDirection: "column" }}>
         <Typography sx={{ fontSize: "22px", fontWeight: "700", mb: 2 }}>
-          <MenuFoods category={clicked} />
+          <MenuFoods category={clicked} openModal={handleOpenModal} />
         </Typography>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "20px",
-            mt: 2,
-          }}
-        >
-          {filteredFoods.length > 0 ? (
-            filteredFoods.map((food) => (
-              <Box
-                key={food._id}
-                sx={{
-                  cursor: "pointer",
-                  width: "282px",
-                  height: "256px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <img
-                  src={food.images}
-                  alt={food.foodName}
-                  style={{
-                    height: "186px",
-                    width: "282px",
-                    borderRadius: "12px",
-                    objectFit: "cover",
-                  }}
-                />
-                <Box
-                  sx={{
-                    height: "56px",
-                    width: "282px",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Typography sx={{ textAlign: "start", fontWeight: "bold" }}>
-                    {food.foodName}
-                  </Typography>
-                  <Typography sx={{ fontWeight: "bold", color: "#18BA51" }}>
-                    {food.price}₮
-                  </Typography>
-                </Box>
-              </Box>
-            ))
-          ) : (
-            <Typography></Typography>
-          )}
-        </Box>
       </Box>
+
+      {selectedFood && (
+        <ItemModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          item={selectedFood}
+        />
+      )}
     </Container>
   );
 };
