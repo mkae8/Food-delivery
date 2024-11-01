@@ -11,30 +11,26 @@ import {
   useState,
 } from "react";
 import { PropsWithChildren } from "react";
-
-interface Foods {
-  _id: string;
-  foodName: string;
-}
+import { FoodItem } from "@/app/menu/page";
 
 type FoodContextType = {
-foodNames: Foods[];
+  foodNames: FoodItem[];
+
   setRefetch: Dispatch<SetStateAction<Boolean>>;
 };
 
 const FoodContext = createContext<FoodContextType | null>(null);
 
 export const FoodProvider = ({ children }: PropsWithChildren) => {
-  const [foodNames, setFoodNames] = useState<Foods[]>([]);
+  const [foodNames, setFoodNames] = useState<FoodItem[]>([]);
   const [refetch, setRefetch] = useState<Boolean>(false);
 
   useEffect(() => {
     const fetchFoods = async () => {
       try {
-        const response = await axios.get<Foods[]>(
+        const response = await axios.get<FoodItem[]>(
           `${process.env.BACKEND_URL}/foods-get`
         );
-        console.log("hello");
 
         setFoodNames(response.data);
       } catch (error) {
