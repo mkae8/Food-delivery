@@ -5,12 +5,13 @@ const TermPage: React.FC = () => {
     <div>
       <div>
         <div
-          style={{ display: "flex", alignItems: "center", marginTop: "60px" }}
-        >
-          <img src="/Star.png" alt="Star" />
+          style={{ display: "flex", alignItems: "center", marginTop: "60px" }}>
+          <img
+            src="https://res.cloudinary.com/djxo5odaa/image/upload/v1730559884/qv7dx0vczgves5hmyaz8.png"
+            alt="Star"
+          />
           <Typography
-            sx={{ fontSize: "22px", fontWeight: "bold", marginLeft: "16px" }}
-          >
+            sx={{ fontSize: "22px", fontWeight: "bold", marginLeft: "16px" }}>
             Үйлчилгээний нөхцөл
           </Typography>
         </div>

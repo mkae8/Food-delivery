@@ -86,14 +86,12 @@ export const HomePageFoods = () => {
         flexDirection: "column",
         gap: "50px",
         marginTop: "122px",
-      }}
-    >
+      }}>
       {Object.entries(groupedFoods).map(([categoryName, foods]) => {
         return (
           <Box
             key={categoryName}
-            sx={{ height: "344px", display: "flex", flexDirection: "column" }}
-          >
+            sx={{ height: "344px", display: "flex", flexDirection: "column" }}>
             <Box
               sx={{
                 display: "flex",
@@ -104,18 +102,16 @@ export const HomePageFoods = () => {
                 paddingTop: "16px",
                 paddingBottom: "16px",
                 marginRight: "5px",
-              }}
-            >
+              }}>
               <Typography
                 sx={{
                   fontSize: "22px",
                   fontWeight: "700",
                   display: "flex",
                   alignItems: "center",
-                }}
-              >
+                }}>
                 <img
-                  src="/Star.png"
+                  src="https://res.cloudinary.com/djxo5odaa/image/upload/v1730559884/qv7dx0vczgves5hmyaz8.png"
                   alt=""
                   style={{ width: "32px", height: "32px", padding: "7px" }}
                 />
@@ -124,8 +120,7 @@ export const HomePageFoods = () => {
 
               <Button
                 sx={{ color: "#18BA51", fontSize: "14px" }}
-                onClick={() => router.push("/menu")}
-              >
+                onClick={() => router.push("/menu")}>
                 Бүгдийг харах {">"}
               </Button>
             </Box>
@@ -133,12 +128,12 @@ export const HomePageFoods = () => {
               sx={{
                 display: "flex",
                 width: "1200px",
-                height: "256",
+                height: "256px",
                 gap: "20px",
-                overflow: "scroll",
+                overflowX: "auto",
+                overflowY: "hidden",
                 mt: 2,
-              }}
-            >
+              }}>
               {foods.map((food) => (
                 <Box
                   key={food._id}
@@ -146,12 +141,11 @@ export const HomePageFoods = () => {
                   sx={{
                     cursor: "pointer",
                     width: "282px",
-                    height: "256px",
+                    height: "auto",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                  }}
-                >
+                  }}>
                   <img
                     src={food.images}
                     alt={food.foodName}
@@ -168,8 +162,7 @@ export const HomePageFoods = () => {
                       width: "282px",
                       display: "flex",
                       flexDirection: "column",
-                    }}
-                  >
+                    }}>
                     <Typography sx={{ textAlign: "start", fontWeight: "bold" }}>
                       {food.foodName}
                     </Typography>

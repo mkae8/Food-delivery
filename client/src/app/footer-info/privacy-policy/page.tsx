@@ -7,18 +7,18 @@ const page = () => {
     <div>
       <Stack height="100%">
         <div
-          style={{ display: "flex", alignItems: "center", marginTop: "60px" }}
-        >
-          <img src="/Star.png" alt="Star" />
+          style={{ display: "flex", alignItems: "center", marginTop: "60px" }}>
+          <img
+            src="https://res.cloudinary.com/djxo5odaa/image/upload/v1730559884/qv7dx0vczgves5hmyaz8.png"
+            alt="Star"
+          />
           <Typography
-            sx={{ fontSize: "22px", fontWeight: "bold", marginLeft: "16px" }}
-          >
+            sx={{ fontSize: "22px", fontWeight: "bold", marginLeft: "16px" }}>
             Нууцлалын бодлого
           </Typography>
         </div>
         <Typography
-          sx={{ fontSize: "18px", fontWeight: "normal", marginTop: "30px" }}
-        >
+          sx={{ fontSize: "18px", fontWeight: "normal", marginTop: "30px" }}>
           Mstars Food delivery нь Mstars Lab компанийн интернэт худалдааны албан
           ёсны вэбсайт бөгөөд энэхүү нөхцөл, журам нь уг вэбсайтаар үйлчлүүлэх,
           худалдан авалт хийхтэй холбоотой үүсэх харилцааг зохицуулахад оршино.

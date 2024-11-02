@@ -50,10 +50,9 @@ const GuestFooter: React.FC = () => {
             position: "relative",
             width: "100vw",
             height: "545px",
-          }}
-        >
+          }}>
           <Image
-            src="/image copy.png"
+            src="https://res.cloudinary.com/djxo5odaa/image/upload/v1730557051/slkzz3x7vkqhajg6bem0.png"
             fill
             priority
             alt="Background image"
@@ -68,8 +67,7 @@ const GuestFooter: React.FC = () => {
           position: "absolute",
           width: "100vw",
           height: "545px",
-        }}
-      >
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -79,17 +77,17 @@ const GuestFooter: React.FC = () => {
             gap: "45px",
             width: "full",
             height: "544px",
-          }}
-        >
+          }}>
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               gap: "10px",
-            }}
-          >
+            }}>
             <Image
-              src={"/image.png"}
+              src={
+                "https://res.cloudinary.com/djxo5odaa/image/upload/v1730556256/aigfqgqtugjtukedrznw.png"
+              }
               width={31.27}
               height={26.77}
               alt="Food Delivery"
@@ -97,8 +95,7 @@ const GuestFooter: React.FC = () => {
             <Typography
               fontWeight={700}
               fontSize={24}
-              color="primary.contrastText"
-            >
+              color="primary.contrastText">
               Food Delivery
             </Typography>
           </Box>
@@ -109,14 +106,12 @@ const GuestFooter: React.FC = () => {
               alignItems: "center",
               justifyContent: "space-between",
               width: "1200px",
-            }}
-          >
+            }}>
             {routers.map(({ href, title }) => (
               <Link href={href} key={title} style={{ textDecoration: "none" }}>
                 <Typography
                   color="primary.contrastText"
-                  sx={{ cursor: "pointer" }}
-                >
+                  sx={{ cursor: "pointer" }}>
                   {title}
                 </Typography>
               </Link>
@@ -128,24 +123,29 @@ const GuestFooter: React.FC = () => {
               display: "flex",
               alignItems: "center",
               gap: "28px",
-            }}
-          >
+            }}>
             <Image
-              src={"/image copy 2.png"}
+              src={
+                "https://res.cloudinary.com/djxo5odaa/image/upload/v1730556781/fhymyjhqxlv56qdbnrei.png"
+              }
               width={31.27}
               height={29.77}
               alt="Social Media 1"
               priority
             />
             <Image
-              src={"/image copy 3.png"}
+              src={
+                "https://res.cloudinary.com/djxo5odaa/image/upload/v1730556882/msxduyubqxyc1ghwreia.png"
+              }
               width={31.27}
               height={29.77}
               alt="Social Media 2"
               priority
             />
             <Image
-              src={"/image copy 4.png"}
+              src={
+                "https://res.cloudinary.com/djxo5odaa/image/upload/v1730556905/qjnvngjkqadbpwz3sts2.png"
+              }
               width={31.27}
               height={26.77}
               alt="Social Media 3"
@@ -160,8 +160,7 @@ const GuestFooter: React.FC = () => {
               width: "1200px",
               borderTop: "solid 1px white",
               pt: 1,
-            }}
-          >
+            }}>
             <Box
               sx={{
                 display: "flex",
@@ -170,8 +169,7 @@ const GuestFooter: React.FC = () => {
                 alignItems: "center",
                 paddingTop: "25px",
                 paddingBottom: "25px",
-              }}
-            >
+              }}>
               <Typography variant="caption" color="primary.contrastText">
                 © 2024 Pinecone Foods LLC
               </Typography>

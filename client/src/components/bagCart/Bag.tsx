@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import { Box, Button, Drawer, List, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -29,16 +29,10 @@ type BagProps = {
 };
 
 export const Bag = ({ open, toggleDrawer }: BagProps) => {
-  const { isLoggedIn, loginHandler } = useUser();
+  const { isLoggedIn } = useUser();
   const { push } = useRouter();
 
-  const cartData: any = localStorage.getItem("cart");
-  const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
-
-  const [foods, setFoods] = useState<CartItem[]>(realData);
-
-  const [card, setCard] = useState<boolean>(true);
-
+  const [foods, setFoods] = useState<CartItem[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const setToLocalStorage = (newArray: any) => {
@@ -47,19 +41,37 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
     }
   };
 
-  const incrementCount = (_id: string, isIncrement: boolean) => {
+  const loadCartData = () => {
     const cartData: any = localStorage.getItem("cart");
     const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
+    setFoods(realData);
 
-    const newArray = realData.map((el) => {
+    const foodPrice = realData.reduce((acc: number, cur: CartItem) => {
+      return acc + parseFloat(cur.item.price) * cur.quantity; // Ensure price is a number
+    }, 0);
+
+    setTotalPrice(foodPrice);
+  };
+
+  useEffect(() => {
+    loadCartData(); // Load data when component mounts
+
+    const intervalId = setInterval(loadCartData, 1000); // Poll every second
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
+
+  const incrementCount = (_id: string, isIncrement: boolean) => {
+    const newArray = foods.map((el) => {
       if (el.item._id === _id) {
         return {
           ...el,
-          quantity: isIncrement ? el.quantity + 1 : el.quantity - 1,
+          quantity: isIncrement
+            ? el.quantity + 1
+            : Math.max(el.quantity - 1, 0),
         };
-      } else {
-        return { ...el };
       }
+      return el;
     });
 
     setToLocalStorage(newArray);
@@ -67,24 +79,10 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   };
 
   const closeBagCart = (foodId: string) => {
-    const cartData: any = localStorage.getItem("cart");
-    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
-
-    const newArray = realData.filter((el) => el.item._id != foodId);
+    const newArray = foods.filter((el) => el.item._id !== foodId);
     setFoods(newArray);
     setToLocalStorage(newArray);
   };
-
-  useEffect(() => {
-    const cartData: any = localStorage.getItem("cart");
-    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
-
-    const niitDun = realData.reduce((acc: any, cur: any) => {
-      return acc + cur.item.price * cur.quantity;
-    }, 0);
-
-    setTotalPrice(niitDun);
-  }, [foods][cartData]);
 
   const handleSagsClick = () => {
     if (isLoggedIn) {
@@ -100,21 +98,21 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
     <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)}>
       <Box
         sx={{
+          display: "flex",
+          flexDirection: "column",
+          heigh: "100%",
           backgroundColor: "white",
           width: "586px",
-        }}
-      >
+        }}>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Button
             sx={{ width: "48px", height: "48px", padding: "0px" }}
-            onClick={() => toggleDrawer(false)}
-          >
+            onClick={() => toggleDrawer(false)}>
             <KeyboardArrowLeftIcon />
           </Button>
           <Typography sx={{ fontWeight: "bold" }}>Таны сагс</Typography>
@@ -126,9 +124,8 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
             width: "100%",
             borderBottom: " 1px solid #D6D8DB",
             borderTop: "1px solid #D6D8DB",
-            overflow: "scroll",
-          }}
-        >
+            overflowY: "auto",
+          }}>
           {foods.length === 0 ? (
             <Typography variant="h3"> Sags hooson baina </Typography>
           ) : (
@@ -136,7 +133,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
               return (
                 <BagCart
                   sx={{
-                    display: card ? "flex" : "none",
+                    display: foods ? "flex" : "none",
                     padding: "16px",
                     gap: "16px",
                     height: "182px",
@@ -157,17 +154,17 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
             })
           )}
         </List>
-        <Box
+        <Box //this box
           sx={{
             display: "flex",
             alignItems: "center",
             height: "172px",
             paddingX: "32px",
-            bottom: "0",
             backgroundColor: "white",
             width: "100%",
-          }}
-        >
+            position: "sticky",
+            bottom: "0",
+          }}>
           <Box
             sx={{
               display: "flex",
@@ -175,8 +172,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
               justifyContent: "center",
               alignItems: "start",
               width: "50%",
-            }}
-          >
+            }}>
             <Typography>Таны нийт төлөх дүн</Typography>
             <Typography sx={{ fontWeight: "700", fontSize: "18px" }}>
               {totalPrice}
@@ -185,8 +181,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
           <Button
             onClick={handleSagsClick}
             sx={{ width: "50%", height: "48px" }}
-            variant="contained"
-          >
+            variant="contained">
             Захиалах
           </Button>
         </Box>

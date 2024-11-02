@@ -39,9 +39,9 @@ export const Zahialga = () => {
           flexDirection: "column",
           justifyContent: "space-between",
           paddingX: "18px",
-          overflow: "scroll",
-        }}
-      >
+          overflowY: "scroll",
+          overflowX: "hidden",
+        }}>
         {foods.map((el, item) => {
           return (
             <Box
@@ -54,8 +54,7 @@ export const Zahialga = () => {
                 justifyContent: "center",
                 alignContent: "center",
                 padding: "5px",
-              }}
-            >
+              }}>
               <img
                 style={{ width: "184px", height: "121px" }}
                 src={el.item.images}
@@ -76,8 +75,7 @@ export const Zahialga = () => {
           justifyContent: "space-between",
           paddingX: "19px",
           paddingBottom: "16px",
-        }}
-      >
+        }}>
         <Box>
           <p>Нийт төлөх дүн</p>
           <p>

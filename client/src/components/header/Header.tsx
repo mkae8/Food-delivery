@@ -12,7 +12,7 @@ import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
-// import { Bag } from "../bagCart/Bag";
+import { Bag } from "../bagCart/Bag";
 import FreeSolo from "../SearchInput";
 
 interface RouterItem {
@@ -21,10 +21,13 @@ interface RouterItem {
 }
 
 export const Header: React.FC = () => {
-  const { isLoggedIn, loginHandler } = useUser();
+  const { isLoggedIn } = useUser();
   const { push } = useRouter();
 
   const [clickedButton, setClickedButton] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const routers: RouterItem[] = [
     { title: "НҮҮР", href: "/" },
@@ -54,6 +57,10 @@ export const Header: React.FC = () => {
     setClickedButton(title);
   };
 
+  const toggleDrawer = (newOpen: boolean) => {
+    setOpen(newOpen);
+  };
+
   const buttonStyles = {
     my: 2,
     color: "black",
@@ -61,22 +68,38 @@ export const Header: React.FC = () => {
     fontWeight: 700,
   };
 
-  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
-  const toggleDrawer = (newOpen: boolean) => {
-    setOpen(newOpen);
-  };
+      // Show or hide header based on scroll direction
+      if (currentScrollY > lastScrollY) {
+        setShowHeader(false); // Hide when scrolling down
+      } else {
+        setShowHeader(true); // Show when scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
         bgcolor: "white",
         boxShadow: "none",
         textSizeAdjust: "inherit",
-      }}
-    >
-      {/* <Bag open={open} toggleDrawer={toggleDrawer} /> */}
+        transition: "transform 0.3s ease",
+        transform: showHeader ? "translateY(0)" : "translateY(-100%)",
+      }}>
+      <Bag open={open} toggleDrawer={toggleDrawer} />
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -85,16 +108,14 @@ export const Header: React.FC = () => {
               <Link
                 href={item.href}
                 key={item.title}
-                style={{ textDecoration: "none" }}
-              >
+                style={{ textDecoration: "none" }}>
                 <Button
                   sx={buttonStyles}
                   style={{
                     color: clickedButton === item.title ? "#18ba51" : "black",
                   }}
                   onClick={() => handleButtonClick(item.title)}
-                  aria-label={item.title}
-                >
+                  aria-label={item.title}>
                   {item.title}
                 </Button>
               </Link>
@@ -110,8 +131,7 @@ export const Header: React.FC = () => {
               aria-label="Cart"
               style={{
                 color: clickedButton !== "sags" ? "black" : "#18ba51",
-              }}
-            >
+              }}>
               Сагс
             </Button>
             <Box sx={{ display: "flex", ml: "24px", alignItems: "center" }}>
@@ -122,8 +142,7 @@ export const Header: React.FC = () => {
                 aria-label={isLoggedIn ? "User Profile" : "Login"}
                 style={{
                   color: clickedButton !== "Хэрэглэгч" ? "black" : "#18ba51",
-                }}
-              >
+                }}>
                 {isLoggedIn ? "Хэрэглэгч" : "Нэвтрэх"}
               </Button>
             </Box>

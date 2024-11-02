@@ -11,11 +11,12 @@ const page = () => {
           display="flex"
           flexDirection="column"
           justifyContent="center"
-          alignItems="center"
-        >
+          alignItems="center">
           <Box sx={{ marginTop: "50px" }}>
             <Image
-              src={"/mapArea.png"}
+              src={
+                "https://res.cloudinary.com/djxo5odaa/image/upload/v1730560014/ncnlzolczzvgtfgladjr.png"
+              }
               width={1240}
               height={616}
               alt="area"
@@ -30,11 +31,12 @@ const page = () => {
           fontSize={20}
           display="flex"
           gap="10px"
-          alignItems={"center"}
-        >
+          alignItems={"center"}>
           <Image
             style={{ display: "flex" }}
-            src={"/Star.png"}
+            src={
+              "https://res.cloudinary.com/djxo5odaa/image/upload/v1730559884/qv7dx0vczgves5hmyaz8.png"
+            }
             width={20}
             height={20}
             priority
@@ -51,8 +53,7 @@ const page = () => {
           gap: "10px",
           marginTop: "30px",
           justifyContent: "space-between",
-        }}
-      >
+        }}>
         <Box
           sx={{
             width: "560px",
@@ -63,8 +64,7 @@ const page = () => {
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
-          }}
-        >
+          }}>
           <Box
             sx={{
               width: "480px",
@@ -73,8 +73,7 @@ const page = () => {
               display: "flex",
               flexDirection: "column",
               padding: "16px",
-            }}
-          >
+            }}>
             <Typography sx={{ fontWeight: "bold" }}>A Бүс</Typography>
             <hr style={{ color: "#18BA51" }} />
             <Box
@@ -83,16 +82,14 @@ const page = () => {
                 gap: "10px",
                 justifyContent: "space-between",
                 rowGap: "10px",
-              }}
-            >
+              }}>
               <Box
                 sx={{
                   width: "200px",
                   display: "flex",
                   flexDirection: "column",
                   gap: "10px",
-                }}
-              >
+                }}>
                 <Typography>Нархан хотхон</Typography>
                 <Typography>26-р байр</Typography>
                 <Typography>26-р байр</Typography>
@@ -107,8 +104,7 @@ const page = () => {
                   display: "flex",
                   flexDirection: "column",
                   gap: "10px",
-                }}
-              >
+                }}>
                 <Typography>Нархан хотхон</Typography>
                 <Typography>26-р байр</Typography>
                 <Typography>26-р байр</Typography>
@@ -130,8 +126,7 @@ const page = () => {
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
-          }}
-        >
+          }}>
           <Box
             sx={{
               width: "480px",
@@ -140,8 +135,7 @@ const page = () => {
               display: "flex",
               flexDirection: "column",
               padding: "16px",
-            }}
-          >
+            }}>
             <Typography sx={{ fontWeight: "bold" }}>Б Бүс</Typography>
             <hr style={{ color: "#18BA51" }} />
             <Box
@@ -150,16 +144,14 @@ const page = () => {
                 gap: "10px",
                 justifyContent: "space-between",
                 rowGap: "10px",
-              }}
-            >
+              }}>
               <Box
                 sx={{
                   width: "200px",
                   display: "flex",
                   flexDirection: "column",
                   gap: "10px",
-                }}
-              >
+                }}>
                 <Typography>Нархан хотхон</Typography>
                 <Typography>26-р байр</Typography>
                 <Typography>26-р байр</Typography>
@@ -174,8 +166,7 @@ const page = () => {
                   display: "flex",
                   flexDirection: "column",
                   gap: "10px",
-                }}
-              >
+                }}>
                 <Typography>Нархан хотхон</Typography>
                 <Typography>26-р байр</Typography>
                 <Typography>26-р байр</Typography>

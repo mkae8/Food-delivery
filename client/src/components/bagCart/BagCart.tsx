@@ -48,16 +48,14 @@ export default function BagCart({
           sx={{
             display: "flex",
             justifyContent: "space-between",
-          }}
-        >
+          }}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Typography>{foodName}</Typography>
             <Typography>{totalPrice}</Typography>
           </Box>
           <Button
             onClick={closeBagCart}
-            sx={{ color: "black", width: "45px", height: "40px" }}
-          >
+            sx={{ color: "black", width: "45px", height: "40px" }}>
             <ClearIcon />
           </Button>
         </Box>
@@ -69,8 +67,7 @@ export default function BagCart({
             overflow: "visible",
             wordSpacing: "1px",
             lineHeight: 1.2,
-          }}
-        >
+          }}>
           {foodIngredients}
         </Box>
         <Box
@@ -78,13 +75,11 @@ export default function BagCart({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Button
             onClick={decrementCount}
             sx={{ width: "45px", height: "40px" }}
-            variant="contained"
-          >
+            variant="contained">
             <RemoveIcon />
           </Button>
 
@@ -93,8 +88,7 @@ export default function BagCart({
           <Button
             onClick={incrementCount}
             sx={{ width: "45px", height: "40px" }}
-            variant="contained"
-          >
+            variant="contained">
             <AddIcon />
           </Button>
         </Box>

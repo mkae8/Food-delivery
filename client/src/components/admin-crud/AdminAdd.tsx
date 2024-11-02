@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { useCategory } from "@/provider/CategoryProvider";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface UploadResponse {
   secure_url: string;
@@ -153,8 +154,7 @@ export const AdminAdd: React.FC = () => {
               color: "white",
               fontStyle: "inherit",
             }}
-            onClick={handleOpen}
-          >
+            onClick={handleOpen}>
             Add new food
           </Button>
         </div>
@@ -163,20 +163,20 @@ export const AdminAdd: React.FC = () => {
             open={open}
             onClose={handleClose}
             aria-labelledby="create-food-modal"
-            aria-describedby="modal-to-add-food"
-          >
+            aria-describedby="modal-to-add-food">
             <Box sx={style}>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                }}
-              >
-                <img
-                  style={{ height: "12px", width: "12px", cursor: "pointer" }}
-                  src="/image copy 10.png"
-                  alt="Close"
+                }}>
+                <CloseIcon
+                  sx={{
+                    height: "32px",
+                    width: "32px",
+                    cursor: "pointer",
+                  }}
                   onClick={handleClose}
                 />
                 <h2 id="create-food-modal" style={{ textAlign: "center" }}>
@@ -203,8 +203,7 @@ export const AdminAdd: React.FC = () => {
                 select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                sx={{ backgroundColor: "#F4F4F4" }}
-              >
+                sx={{ backgroundColor: "#F4F4F4" }}>
                 {categoryNames.map((el) => {
                   return (
                     <MenuItem key={el._id} value={el._id}>
@@ -260,16 +259,14 @@ export const AdminAdd: React.FC = () => {
                   width: "284px",
                   height: "122px",
                   position: "relative",
-                }}
-              >
+                }}>
                 <Typography
                   variant="h6"
                   style={{
                     marginBottom: "10px",
                     color: "#525252",
                     fontSize: "16px",
-                  }}
-                >
+                  }}>
                   Хоолны зургийг нэмнэ үү
                 </Typography>
                 <Button
@@ -279,8 +276,7 @@ export const AdminAdd: React.FC = () => {
                     backgroundColor: "#333",
                     color: "white",
                     marginBottom: "10px",
-                  }}
-                >
+                  }}>
                   Зураг нэмэх
                   <input
                     type="file"
@@ -311,27 +307,23 @@ export const AdminAdd: React.FC = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   marginTop: "15px",
-                }}
-              >
+                }}>
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "15px",
-                  }}
-                >
+                  }}>
                   <Button
                     variant="text"
                     color="secondary"
-                    onClick={handleClear}
-                  >
+                    onClick={handleClear}>
                     Clear
                   </Button>
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleSubmit}
-                  >
+                    onClick={handleSubmit}>
                     Continue
                   </Button>
                 </div>
