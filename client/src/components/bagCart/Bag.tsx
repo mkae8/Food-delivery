@@ -1,11 +1,11 @@
-"use client";
+// "use client";
 
 import { Box, Button, Drawer, List, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import { useEffect, useState } from "react";
 import BagCart from "./BagCart";
+import { useEffect, useState } from "react";
 import { useUser } from "@/provider/UserProvider";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 interface Item {
@@ -32,15 +32,10 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   const { isLoggedIn, loginHandler } = useUser();
   const { push } = useRouter();
 
-  const getFromLocalStrage = () => {
-    if (typeof window !== "undefined") {
-      const cartData: any = window.localStorage.getItem("cart");
-      const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
-      return realData;
-    }
-  };
+  const cartData: any = window.localStorage.getItem("cart");
+  const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
-  const [foods, setFoods] = useState<CartItem[]>([]);
+  const [foods, setFoods] = useState<CartItem[]>(realData);
 
   const [card, setCard] = useState<boolean>(true);
 
@@ -53,7 +48,8 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   };
 
   const incrementCount = (_id: string, isIncrement: boolean) => {
-    const realData = getFromLocalStrage() || [];
+    const cartData: any = window.localStorage.getItem("cart");
+    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
     const newArray = realData.map((el) => {
       if (el.item._id === _id) {
@@ -76,7 +72,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
 
     const newArray = realData.filter((el) => el.item._id != foodId);
     setFoods(newArray);
-    window.localStorage.setItem("cart", JSON.stringify(newArray));
+    setToLocalStorage(newArray);
   };
 
   useEffect(() => {
@@ -88,7 +84,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
     }, 0);
 
     setTotalPrice(niitDun);
-  }, [foods]);
+  }, [foods][cartData]);
 
   const handleSagsClick = () => {
     if (isLoggedIn) {
@@ -153,6 +149,8 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
                   foodIngredients={el.item.foodIngredients}
                   price={el.item.price}
                   quantity={el.quantity}
+                  incrementCount={() => incrementCount(el.item._id, true)}
+                  decrementCount={() => incrementCount(el.item._id, false)}
                   incrementCount={() => incrementCount(el.item._id, true)}
                   decrementCount={() => incrementCount(el.item._id, false)}
                   closeBagCart={() => closeBagCart(el.item._id)}
