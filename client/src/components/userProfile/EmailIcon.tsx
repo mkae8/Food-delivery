@@ -48,25 +48,28 @@ export const EmailIcon: React.FC<EmailIconProps> = ({
 
   const handleSubmit = async () => {
     setLoading(true);
-    const token = window.localStorage.getItem("token");
-    try {
-      const response = await axios.post(
-        `${process.env.BACKEND_URL}/user/updateProfile`,
-        { email },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
 
-      if (response.status === 200) {
-        setIsModalOpen(false);
-        onEditClick(email);
-        toast.success("Email successfully updated");
-      } else {
-        setError("Failed to update email");
+    if (typeof window !== "undefined") {
+      const token = window.localStorage.getItem("token");
+      try {
+        const response = await axios.post(
+          `${process.env.BACKEND_URL}/user/updateProfile`,
+          { email },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (response.status === 200) {
+          setIsModalOpen(false);
+          onEditClick(email);
+          toast.success("Email successfully updated");
+        } else {
+          setError("Failed to update email");
+        }
+      } catch (err) {
+        setError(`Error: Unable to update${err}`);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(`Error: Unable to update${err}`);
-    } finally {
-      setLoading(false);
     }
   };
 

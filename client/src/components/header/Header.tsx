@@ -155,8 +155,8 @@ import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
-import { Bag } from "../bagCart/Bag";
 import FreeSolo from "../SearchInput";
+import { Bag } from "../bagCart/Bag";
 
 interface RouterItem {
   title: string;
@@ -218,6 +218,7 @@ export const Header: React.FC = () => {
       position="static"
       sx={{ bgcolor: "white", boxShadow: "none", textSizeAdjust: "inherit" }}
     >
+      <Bag open={open} toggleDrawer={toggleDrawer} />
       <Bag open={open} toggleDrawer={toggleDrawer} />
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>

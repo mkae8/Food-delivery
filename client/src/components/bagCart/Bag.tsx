@@ -32,10 +32,15 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   const { isLoggedIn, loginHandler } = useUser();
   const { push } = useRouter();
 
-  const cartData: any = window.localStorage.getItem("cart");
-  const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
+  const getFromLocalStrage = () => {
+    if (typeof window !== "undefined") {
+      const cartData: any = window.localStorage.getItem("cart");
+      const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
+      return realData;
+    }
+  };
 
-  const [foods, setFoods] = useState<CartItem[]>(realData);
+  const [foods, setFoods] = useState<CartItem[]>([]);
 
   const [card, setCard] = useState<boolean>(true);
 
@@ -43,13 +48,12 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
 
   const setToLocalStorage = (newArray: any) => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("cart", JSON.stringify(newArray));
+      window.localStorage.setItem("cart", JSON.stringify(newArray));
     }
   };
 
   const incrementCount = (_id: string, isIncrement: boolean) => {
-    const cartData: any = window.localStorage.getItem("cart");
-    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
+    const realData = getFromLocalStrage() || [];
 
     const newArray = realData.map((el) => {
       if (el.item._id === _id) {
@@ -67,8 +71,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   };
 
   const closeBagCart = (foodId: string) => {
-    const cartData: any = window.localStorage.getItem("cart");
-    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
+    const realData = getFromLocalStrage() || [];
 
     const newArray = realData.filter((el) => el.item._id != foodId);
     setFoods(newArray);
@@ -76,15 +79,14 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   };
 
   useEffect(() => {
-    const cartData: any = window.localStorage.getItem("cart");
-    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
+    const realData = getFromLocalStrage() || [];
 
     const niitDun = realData.reduce((acc: any, cur: any) => {
       return acc + cur.item.price * cur.quantity;
     }, 0);
 
     setTotalPrice(niitDun);
-  }, [foods][cartData]);
+  }, [foods]);
 
   const handleSagsClick = () => {
     if (isLoggedIn) {

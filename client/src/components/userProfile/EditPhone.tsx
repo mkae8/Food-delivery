@@ -44,25 +44,26 @@ export const EditPhone: React.FC<EditPhoneProps> = ({
 
   const handleSubmit = async () => {
     setLoading(true);
-    const token = window.localStorage.getItem("token");
+    if (typeof window !== "undefined") {
+      const token = window.localStorage.getItem("token");
+      try {
+        const response = await axios.post(
+          `${process.env.BACKEND_URL}/user/updateProfile`,
+          { phoneNumber },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
-    try {
-      const response = await axios.post(
-        `${process.env.BACKEND_URL}/user/updateProfile`,
-        { phoneNumber },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (response.status === 200) {
-        setIsModalOpen(false);
-        await onEditClick(phoneNumber);
-        toast.success("Phone number successfully updated");
-      } else {
-        setError("Failed to update phone number");
+        if (response.status === 200) {
+          setIsModalOpen(false);
+          await onEditClick(phoneNumber);
+          toast.success("Phone number successfully updated");
+        } else {
+          setError("Failed to update phone number");
+        }
+      } catch (err) {
+        setError(`Error: Unable to update ${err}`);
+        setLoading(false);
       }
-    } catch (err) {
-      setError(`Error: Unable to update ${err}`);
-      setLoading(false);
     }
   };
 

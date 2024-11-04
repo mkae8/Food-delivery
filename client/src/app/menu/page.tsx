@@ -15,7 +15,7 @@ interface FoodCategory {
   categoryName: string;
 }
 
-export type FoodItem = {
+export type FoodItems = {
   _id: string;
   foodName: string;
   images: string;
@@ -32,11 +32,7 @@ interface Category {
   updatedAt: Date;
 }
 
-type FoodListProps = {
-  category: string;
-};
-
-const MenuPage = ({ category }: FoodListProps) => {
+const MenuPage = () => {
   const [selectedFood, setSelectedFood] = useState<FoodItem | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [foods, setFoods] = useState<FoodItem[]>([]);

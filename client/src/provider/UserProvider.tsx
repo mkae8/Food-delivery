@@ -45,47 +45,53 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
     email: string,
     password: string
   ): Promise<string | undefined> => {
-    try {
-      if (!email || !password) {
-        setError("И-мэйл хаяг эсвэл нууц үгээ хийнэ үү");
-        return;
-      }
-      const result = await axios.post<LoginResponse>(
-        `${process.env.BACKEND_URL}/user/login`,
-        { email, password }
-      );
+    if (typeof window !== "undefined") {
+      try {
+        if (!email || !password) {
+          setError("И-мэйл хаяг эсвэл нууц үгээ хийнэ үү");
+          return;
+        }
+        const result = await axios.post<LoginResponse>(
+          `${process.env.BACKEND_URL}/user/login`,
+          { email, password }
+        );
 
-      window.localStorage.setItem("token", result.data.token);
-      setToken(result.data.token);
-      setIsLoggedIn(true);
-      setUserDetail(result.data.user);
-      push("/");
-      toast.success("Амжилттай нэвтэрлээ!");
-    } catch (error: any) {
-      setError(error.response?.data?.message);
-      toast.error("Нэвтрэх явцад алдаа гарлаа.");
+        window.localStorage.setItem("token", result.data.token);
+        setToken(result.data.token);
+        setIsLoggedIn(true);
+        setUserDetail(result.data.user);
+        push("/");
+        toast.success("Амжилттай нэвтэрлээ!");
+      } catch (error: any) {
+        setError(error.response?.data?.message);
+        toast.error("Нэвтрэх явцад алдаа гарлаа.");
+      }
     }
   };
 
   const logOut = async () => {
-    try {
-      window.localStorage.removeItem("token");
-      setToken("");
-      setIsLoggedIn(false);
-      setUserDetail({});
-      push("/login");
-    } catch (error) {
-      console.log("Logout failed:", error);
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.removeItem("token");
+        setToken("");
+        setIsLoggedIn(false);
+        setUserDetail({});
+        push("/login");
+      } catch (error) {
+        console.log("Logout failed:", error);
+      }
     }
   };
 
   useEffect(() => {
-    const storedToken = window.localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-      setIsLoggedIn(true);
-    } else {
-      push("/login");
+    if (typeof window !== "undefined") {
+      const storedToken = window.localStorage.getItem("token");
+      if (storedToken) {
+        setToken(storedToken);
+        setIsLoggedIn(true);
+      } else {
+        push("/login");
+      }
     }
   }, [push]);
 
