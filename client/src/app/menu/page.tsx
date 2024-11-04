@@ -1,14 +1,16 @@
 "use client";
 
-import { Box, Container, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import { useEffect, useState } from "react";
-import axios from "axios"; // Make sure to import axios
-import { toast } from "react-toastify"; // Ensure you have toast for notifications
-import FoodList from "@/components/admin-crud/FetchFoods";
-import MenuFoods from "@/components/menuComponents/FetchMenuFoods";
-import Modal from "@mui/material/Modal";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { ItemModal } from "@/components/modal/ItemModal";
-import { FoodItem } from "@/components/homepage/HomePageFoods";
 
 interface FoodCategory {
   _id: string;
@@ -41,8 +43,8 @@ const MenuPage = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchFoodItems = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const response = await axios.get<FoodItem[]>(
         `${process.env.BACKEND_URL}/foods-get`
       );
@@ -67,14 +69,6 @@ const MenuPage = () => {
     }
   };
 
-  const getFoodsByCategory = (
-    foods: FoodItem[],
-    filterCategory: string
-  ): FoodItem[] => {
-    return foods.filter(
-      (food) => food.foodCategory.categoryName === filterCategory
-    );
-  };
   const handleCatClick = (name: string) => {
     setClicked(name);
   };
@@ -94,21 +88,21 @@ const MenuPage = () => {
     fetchCategories();
   }, []);
 
+  const filteredFoods = clicked
+    ? foods.filter((food) => food.foodCategory.categoryName === clicked)
+    : foods;
+
   return (
     <Container>
       <Box display="flex" justifyContent="center" marginTop="20px" gap="20px">
         {categories.map((category) => (
           <Button
-            onClick={() => handleCatClick(category.categoryName)}
             key={category._id}
-            style={{
+            onClick={() => handleCatClick(category.categoryName)}
+            sx={{
               border: "1px solid #D6D8DB",
               fontStyle: "inherit",
               fontWeight: "bold",
-              display: "flex",
-              justifyContent: "center",
-              paddingLeft: "15px",
-              paddingRight: "15px",
               width: "280px",
               height: "40px",
               backgroundColor:
@@ -121,11 +115,64 @@ const MenuPage = () => {
         ))}
       </Box>
 
-      <Box sx={{ height: "344px", display: "flex", flexDirection: "column" }}>
-        <Typography sx={{ fontSize: "22px", fontWeight: "700", mb: 2 }}>
-          <MenuFoods category={clicked} openModal={handleOpenModal} />
-        </Typography>
-      </Box>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "20px",
+            mt: 2,
+            marginBottom: "100px",
+            marginTop: "50px",
+          }}
+        >
+          {filteredFoods.length > 0 ? (
+            filteredFoods.map((food) => (
+              <Box
+                key={food._id}
+                sx={{
+                  cursor: "pointer",
+                  width: "282px",
+                  height: "256px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+                onClick={() => handleOpenModal(food)}
+              >
+                <img
+                  src={food.images}
+                  alt={food.foodName}
+                  style={{
+                    height: "186px",
+                    width: "282px",
+                    borderRadius: "12px",
+                    objectFit: "cover",
+                  }}
+                />
+                <Box
+                  sx={{
+                    height: "56px",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold" }}>
+                    {food.foodName}
+                  </Typography>
+                  <Typography sx={{ fontWeight: "bold", color: "#18BA51" }}>
+                    {food.price}₮
+                  </Typography>
+                </Box>
+              </Box>
+            ))
+          ) : (
+            <Typography>No foods available in this category.</Typography>
+          )}
+        </Box>
+      )}
 
       {selectedFood && (
         <ItemModal
