@@ -23,7 +23,10 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const token = localStorage.getItem("token");
+      let token;
+      if (typeof window !== "undefined") {
+        token = window.localStorage.getItem("token");
+      }
 
       if (!token) {
         toast.error("You need to be logged in to access profile information.");

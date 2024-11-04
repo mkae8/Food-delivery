@@ -44,7 +44,7 @@ export const EditPhone: React.FC<EditPhoneProps> = ({
 
   const handleSubmit = async () => {
     setLoading(true);
-    const token = localStorage.getItem("token");
+    const token = window.localStorage.getItem("token");
 
     try {
       const response = await axios.post(

@@ -48,7 +48,7 @@ export const EmailIcon: React.FC<EmailIconProps> = ({
 
   const handleSubmit = async () => {
     setLoading(true);
-    const token = localStorage.getItem("token");
+    const token = window.localStorage.getItem("token");
     try {
       const response = await axios.post(
         `${process.env.BACKEND_URL}/user/updateProfile`,

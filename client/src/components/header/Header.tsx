@@ -63,6 +63,7 @@ export const Header: React.FC = () => {
 
   const [open, setOpen] = useState(false);
 
+
   const toggleDrawer =
     (newOpen: boolean) =>
     (event: {}, reason: "backdropClick" | "escapeKeyDown") => {
@@ -73,6 +74,7 @@ export const Header: React.FC = () => {
       }
       setOpen(newOpen);
     };
+
 
   return (
     <AppBar
@@ -112,7 +114,9 @@ export const Header: React.FC = () => {
             <Sags />
 
             <Button
+
               onClick={() => handleSagsClick()}
+
               sx={buttonStyles}
               aria-label="Cart"
               style={{
