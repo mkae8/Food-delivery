@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PineconeLogo } from "../icon/Pinelog";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,7 +12,7 @@ import { Newtreh } from "../icon/Newtreh";
 import Link from "next/link";
 import { useUser } from "@/provider/UserProvider";
 import { useRouter } from "next/navigation";
-// import { Bag } from "../bagCart/Bag";
+import { Bag } from "../bagCart/Bag";
 import FreeSolo from "../SearchInput";
 
 interface RouterItem {
@@ -63,9 +63,18 @@ export const Header: React.FC = () => {
 
   const [open, setOpen] = useState(false);
 
-  const toggleDrawer = (newOpen: boolean) => {
-    setOpen(newOpen);
-  };
+
+  const toggleDrawer =
+    (newOpen: boolean) =>
+    (event: {}, reason: "backdropClick" | "escapeKeyDown") => {
+      if (
+        reason &&
+        (reason === "backdropClick" || reason === "escapeKeyDown")
+      ) {
+      }
+      setOpen(newOpen);
+    };
+
 
   return (
     <AppBar
@@ -76,7 +85,7 @@ export const Header: React.FC = () => {
         textSizeAdjust: "inherit",
       }}
     >
-      {/* <Bag open={open} toggleDrawer={toggleDrawer} /> */}
+      <Bag open={open} toggleDrawer={toggleDrawer} />
       <Container sx={{ width: "1248px" }}>
         <Toolbar disableGutters>
           <PineconeLogo />
@@ -105,7 +114,9 @@ export const Header: React.FC = () => {
             <Sags />
 
             <Button
-              onClick={() => toggleDrawer(true)}
+
+              onClick={() => handleSagsClick()}
+
               sx={buttonStyles}
               aria-label="Cart"
               style={{

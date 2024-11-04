@@ -1,12 +1,12 @@
-// "use client";
+
+"use client";
 
 import { Box, Button, Drawer, List, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import BagCart from "./BagCart";
 import { useEffect, useState } from "react";
-import { useUser } from "@/provider/UserProvider";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import BagCart from "./BagCart";
+
+
 
 interface Item {
   _id: string;
@@ -25,6 +25,16 @@ interface CartItem {
 
 type BagProps = {
   open: boolean;
+
+  toggleDrawer: (
+    boolean: boolean
+  ) =>
+    | ((event: {}, reason: "backdropClick" | "escapeKeyDown") => void)
+    | undefined;
+};
+
+export const Bag = ({ open, toggleDrawer }: BagProps) => {
+
   toggleDrawer: (boolean: boolean) => void;
 };
 
@@ -32,12 +42,27 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   const { isLoggedIn, loginHandler } = useUser();
   const { push } = useRouter();
 
-  const cartData: any = localStorage.getItem("cart");
-  const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
-  const [foods, setFoods] = useState<CartItem[]>(realData);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  const [card, setCard] = useState<boolean>(true);
+  const incrementCount = (_id: string) => {
+    const cartData: any = localStorage.getItem("cart");
+    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
+
+    const newArray = realData.map((el) => {
+      if (el.item._id === _id) {
+        return { ...el, quantity: el.quantity + 1 };
+      } else {
+        return { ...el };
+      }
+    });
+
+    window.localStorage.setItem("cart", JSON.stringify(newArray));
+    setFoods(newArray);
+  };
+
+  const decrementCount = (_id: string) => {
+
 
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -48,35 +73,43 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   };
 
   const incrementCount = (_id: string, isIncrement: boolean) => {
-    const cartData: any = localStorage.getItem("cart");
-    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
-    const newArray = realData.map((el) => {
-      if (el.item._id === _id) {
-        return {
-          ...el,
-          quantity: isIncrement ? el.quantity + 1 : el.quantity - 1,
-        };
       } else {
         return { ...el };
       }
     });
 
+    window.localStorage.setItem("cart", JSON.stringify(newArray));
+
+
     setToLocalStorage(newArray);
+
     setFoods(newArray);
   };
 
   const closeBagCart = (foodId: string) => {
+
+    const cartData: any = window.localStorage.getItem("cart");
+
     const cartData: any = localStorage.getItem("cart");
+
     const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
     const newArray = realData.filter((el) => el.item._id != foodId);
     setFoods(newArray);
+
+    window.localStorage.setItem("cart", JSON.stringify(newArray));
+  };
+
+  useEffect(() => {
+    const cartData: any = window.localStorage.getItem("cart");
+
     setToLocalStorage(newArray);
   };
 
   useEffect(() => {
     const cartData: any = localStorage.getItem("cart");
+
     const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
     const niitDun = realData.reduce((acc: any, cur: any) => {
@@ -84,6 +117,12 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
     }, 0);
 
     setTotalPrice(niitDun);
+
+  }, [foods]);
+
+  return (
+    <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+
   }, [foods][cartData]);
 
   const handleSagsClick = () => {
@@ -98,6 +137,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
 
   return (
     <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)}>
+
       <Box
         sx={{
           backgroundColor: "white",
@@ -111,10 +151,14 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
             alignItems: "center",
           }}
         >
+
+          <Button sx={{ width: "48px", height: "48px", padding: "0px" }}>
+
           <Button
             sx={{ width: "48px", height: "48px", padding: "0px" }}
             onClick={() => toggleDrawer(false)}
           >
+
             <KeyboardArrowLeftIcon />
           </Button>
           <Typography sx={{ fontWeight: "bold" }}>Таны сагс</Typography>
@@ -133,6 +177,11 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
             <Typography variant="h3"> Sags hooson baina </Typography>
           ) : (
             foods.map((el, Item) => {
+
+              // if (foods.length <= 0) {
+              //   return <Typography> Sags hooson baina </Typography>;
+              // }
+
               return (
                 <BagCart
                   sx={{
@@ -149,8 +198,11 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
                   foodIngredients={el.item.foodIngredients}
                   price={el.item.price}
                   quantity={el.quantity}
-                  incrementCount={() => incrementCount(el.item._id, true)}
-                  decrementCount={() => incrementCount(el.item._id, false)}
+
+                  incrementCount={() => incrementCount(el.item._id)}
+                  decrementCount={() => decrementCount(el.item._id)}
+
+
                   closeBagCart={() => closeBagCart(el.item._id)}
                 />
               );
@@ -180,6 +232,12 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
             <Typography>Таны нийт төлөх дүн</Typography>
             <Typography sx={{ fontWeight: "700", fontSize: "18px" }}>
               {totalPrice}
+
+              {totalPrice}
+            </Typography>
+          </Box>
+          <Button sx={{ width: "50%", height: "48px" }} variant="contained">
+
             </Typography>
           </Box>
           <Button
@@ -187,6 +245,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
             sx={{ width: "50%", height: "48px" }}
             variant="contained"
           >
+
             Захиалах
           </Button>
         </Box>
