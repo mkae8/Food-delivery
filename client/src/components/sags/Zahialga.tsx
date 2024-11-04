@@ -20,10 +20,7 @@ interface CartItem {
 }
 
 export const Zahialga = () => {
-  const cartData: any = localStorage.getItem("cart");
-  const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
-
-  const [foods, setFoods] = useState<CartItem[]>(realData);
+  const [foods, setFoods] = useState<CartItem[]>([]);
 
   return (
     <>

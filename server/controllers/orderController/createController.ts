@@ -1,6 +1,5 @@
 import { OrderModel } from "../../src/database/models/orderModel";
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
 import env from "dotenv";
 
 env.config();

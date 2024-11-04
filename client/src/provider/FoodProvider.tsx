@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 import { PropsWithChildren } from "react";
-import { FoodItem } from "@/app/menu/page";
+import { FoodItem } from "../components/homepage/HomePageFoods";
 
 type FoodContextType = {
   foodNames: FoodItem[];

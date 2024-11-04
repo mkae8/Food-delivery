@@ -47,28 +47,29 @@ export const EditProfile: React.FC<EditProfileProps> = ({
 
   const handleSubmit = async () => {
     setLoading(true);
-    const token = window.localStorage.getItem("token");
+    if (typeof window !== "undefined") {
+      const token = window.localStorage.getItem("token");
+      try {
+        const response = await axios.post(
+          `${process.env.BACKEND_URL}/user/updateProfile`,
+          {
+            username: newName,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
-    try {
-      const response = await axios.post(
-        `${process.env.BACKEND_URL}/user/updateProfile`,
-        {
-          username: newName,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (response.status === 200) {
-        setIsModalOpen(false);
-        onEditClick(newName);
-        toast.success("Profile name successfully updated");
-      } else {
-        setError("Failed to update profile");
+        if (response.status === 200) {
+          setIsModalOpen(false);
+          onEditClick(newName);
+          toast.success("Profile name successfully updated");
+        } else {
+          setError("Failed to update profile");
+        }
+      } catch (err) {
+        setError(`Error: Unable to update profile ${err}`);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(`Error: Unable to update profile ${err}`);
-    } finally {
-      setLoading(false);
     }
   };
   if (loading) {

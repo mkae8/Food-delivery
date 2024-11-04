@@ -8,7 +8,6 @@ export const fetchFoods = async (req: any, res: any): Promise<void> => {
     res.status(200).send(foods);
   } catch (error) {
     console.log(error);
-
     res.status(500).send({ message: "Failed to fetch foods" });
   }
 };

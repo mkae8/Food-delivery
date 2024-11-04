@@ -9,7 +9,7 @@ import axios from "axios";
 import Loading from "./Loading";
 
 interface PasswordProps {
-  clickHandler: (email: string) => void;
+  clickHandler: any;
 }
 
 export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
@@ -33,7 +33,7 @@ export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
         email,
       });
       clickHandler(email);
-      toast.success("Имэйл илгээсэн");
+      toast.success("Имэйл илгээсэн. Cпам хайрцагаа шалгана уу");
     } catch (error) {
       toast.error("Имэйл олдсонгүй");
       setLoading(false);

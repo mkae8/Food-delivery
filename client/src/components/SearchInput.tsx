@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useFoods } from "@/provider/FoodProvider";
 import { useRouter } from "next/navigation";
-import { FoodItem } from "@/app/menu/page";
+import { FoodItem } from "../components/homepage/HomePageFoods";
 
 export default function FreeSolo() {
   const { foodNames } = useFoods();

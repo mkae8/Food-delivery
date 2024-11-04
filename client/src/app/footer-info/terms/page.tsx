@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const TermPage: React.FC = () => {
+const TermPage = () => {
   return (
     <div>
       <div>
