@@ -7,8 +7,10 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 type DataBaseInformationProps = {
   images: string[];
+
   foodName: string;
   price: string;
+
   foodIngredients: string;
   incrementCount: () => void;
   decrementCount: () => void;
@@ -20,9 +22,11 @@ type DataBaseInformationProps = {
 export default function BagCart({
   foodName,
   images,
+
   foodIngredients,
   incrementCount,
   decrementCount,
+
   closeBagCart,
   quantity,
   sx,
@@ -85,6 +89,7 @@ export default function BagCart({
             sx={{ width: "45px", height: "40px" }}
             variant="contained"
           >
+            <RemoveIcon />
             <RemoveIcon />
           </Button>
 

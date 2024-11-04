@@ -1,11 +1,11 @@
-// "use client";
+"use client";
 
 import { Box, Button, Drawer, List, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import BagCart from "./BagCart";
 import { useEffect, useState } from "react";
+import BagCart from "./BagCart";
 import { useUser } from "@/provider/UserProvider";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
 interface Item {
@@ -71,15 +71,17 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
   };
 
   const closeBagCart = (foodId: string) => {
-    const realData = getFromLocalStrage() || [];
+    const cartData: any = window.localStorage.getItem("cart");
+    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
     const newArray = realData.filter((el) => el.item._id != foodId);
     setFoods(newArray);
-    setToLocalStorage(newArray);
+    window.localStorage.setItem("cart", JSON.stringify(newArray));
   };
 
   useEffect(() => {
-    const realData = getFromLocalStrage() || [];
+    const cartData: any = window.localStorage.getItem("cart");
+    const realData: CartItem[] = cartData ? JSON.parse(cartData) : [];
 
     const niitDun = realData.reduce((acc: any, cur: any) => {
       return acc + cur.item.price * cur.quantity;
