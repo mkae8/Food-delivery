@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import { Box, Button, Drawer, List, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -25,10 +25,11 @@ interface CartItem {
 
 type BagProps = {
   open: boolean;
+  setOpen: (boolean: boolean) => void;
   toggleDrawer: (boolean: boolean) => void;
 };
 
-export const Bag = ({ open, toggleDrawer }: BagProps) => {
+export const Bag = ({ open, toggleDrawer, setOpen }: BagProps) => {
   const { isLoggedIn, loginHandler } = useUser();
   const { push } = useRouter();
 
@@ -51,6 +52,11 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
       window.localStorage.setItem("cart", JSON.stringify(newArray));
     }
   };
+
+  useEffect(() => {
+    const data = getFromLocalStrage() || [];
+    setFoods(data);
+  }, []);
 
   const incrementCount = (_id: string, isIncrement: boolean) => {
     const realData = getFromLocalStrage() || [];
@@ -90,7 +96,6 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
 
   const handleSagsClick = () => {
     if (isLoggedIn) {
-      push("/sags");
       toggleDrawer(false);
     } else {
       push("/login");
@@ -115,7 +120,7 @@ export const Bag = ({ open, toggleDrawer }: BagProps) => {
         >
           <Button
             sx={{ width: "48px", height: "48px", padding: "0px" }}
-            onClick={() => toggleDrawer(false)}
+            onClick={() => setOpen(false)}
           >
             <KeyboardArrowLeftIcon />
           </Button>

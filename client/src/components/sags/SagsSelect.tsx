@@ -70,6 +70,12 @@ export const SagsSelect = () => {
               width: "384px",
             }}
           >
+            <MenuItem value="Main">1-р хороо</MenuItem>
+            <MenuItem value="Main">2-р хороо</MenuItem>
+            <MenuItem value="Main">3-р хороо</MenuItem>
+            <MenuItem value="Main">4-р хороо</MenuItem>
+            <MenuItem value="Main">5-р хороо</MenuItem>
+            <MenuItem value="Main">6-р хороо</MenuItem>
             <MenuItem value="Main">7-р хороо</MenuItem>
             <MenuItem value="Side">8-р хороо</MenuItem>
             <MenuItem value="DMain course">9-р хороо</MenuItem>
@@ -93,6 +99,7 @@ export const SagsSelect = () => {
             <MenuItem value="DMain course">Хоймор хотхон</MenuItem>
             <MenuItem value="Dessert">45-р байр</MenuItem>
             <MenuItem value="Dessert">Зайсан хотхон </MenuItem>
+            <MenuItem value="Dessert">Other </MenuItem>
           </TextField>
           <br />
           <NemeltMedeelel />
