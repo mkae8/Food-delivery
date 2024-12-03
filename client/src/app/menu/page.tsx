@@ -92,7 +92,7 @@ const MenuPage = () => {
   }, []);
 
   const filteredFoods = clicked
-    ? foods.filter((food) => food.foodCategory.categoryName === clicked)
+    ? foods.filter((food) => food.foodCategory?.categoryName === clicked)
     : foods;
 
   return (
