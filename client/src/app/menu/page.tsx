@@ -12,12 +12,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ItemModal } from "@/components/modal/ItemModal";
 
-interface FoodCategory {
+export interface FoodCategory {
   _id: string;
   categoryName: string;
+  foodId?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-export type FoodItems = {
+export type FoodItem = {
   _id: string;
   foodName: string;
   images: string;
@@ -176,9 +179,9 @@ const MenuPage = () => {
 
       {selectedFood && (
         <ItemModal
+          item={selectedFood as any}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          item={selectedFood}
         />
       )}
     </Container>
