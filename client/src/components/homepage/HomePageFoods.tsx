@@ -59,7 +59,7 @@ export const HomePageFoods = () => {
   };
 
   const groupedFoods = foods.reduce((acc: GroupedFoods, food) => {
-    const categoryName = food.foodCategory.categoryName;
+    const categoryName = food.foodCategory?.categoryName;
     const foodDetails: FoodItem = {
       foodName: food.foodName,
       foodIngredients: food.foodIngredients,
