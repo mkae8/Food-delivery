@@ -54,7 +54,7 @@ const AdminPageComp = () => {
   const addCategory = async (newCategory: string) => {
     try {
       const response = await axios.post<AddCategoryResponse>(
-        `${process.env.BACKEND_URL}/category`,
+        `https://food-delivery-ily2.onrender.com/category`,
         {
           categoryName: newCategory,
         }
@@ -97,7 +97,7 @@ const AdminPageComp = () => {
       };
 
       const response = await axios.put(
-        `${process.env.BACKEND_URL}/editCategory/${categoryToEdit}`,
+        `https://food-delivery-ily2.onrender.com/editCategory/${categoryToEdit}`,
         updatedCategory
       );
 
@@ -120,12 +120,12 @@ const AdminPageComp = () => {
 
   const handleDelete = async () => {
     try {
-      // Устгах ангиллын id-г ашиглан устгана
+
       await axios.delete(
-        `${process.env.BACKEND_URL}/deleteCategory/${idStore}`
+        `https://food-delivery-ily2.onrender.com/deleteCategory/${idStore}`
       );
 
-      // Устгасан ангиллыг жагсаалтаас хасна
+
       setCategories((prevCategories) =>
         prevCategories.filter((category) => category._id !== idStore)
       );
@@ -142,7 +142,7 @@ const AdminPageComp = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          `${process.env.BACKEND_URL}/fetchCategory`
+          `https://food-delivery-ily2.onrender.com/fetchCategory`
         );
 
         setCategories(response.data);

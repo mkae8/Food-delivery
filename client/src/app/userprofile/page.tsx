@@ -36,7 +36,7 @@ const UserProfile = () => {
 
       try {
         const response = await axios.get<UserInformation>(
-          `${process.env.BACKEND_URL}/user/profile`,
+          `https://food-delivery-ily2.onrender.com/user/profile`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -58,19 +58,7 @@ const UserProfile = () => {
     setUserDetail((prev) => (prev ? { ...prev, [name]: value } : prev));
   };
 
-  // const handleSubmit = async () => {
-  //   if (!userDetail) return;
 
-  //   try {
-  //     const result = await axios.post(
-  //       `${process.env.BACKEND_URL}/updateProfile`,
-  //       userDetail
-  //     );
-  //     toast.success("Profile updated successfully.");
-  //   } catch (error) {
-  //     toast.error("Update failed. Please try again.");
-  //   }
-  // };
 
   if (loading) {
     return <Loading />;

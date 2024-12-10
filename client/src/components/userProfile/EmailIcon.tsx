@@ -53,7 +53,7 @@ export const EmailIcon: React.FC<EmailIconProps> = ({
       const token = window.localStorage.getItem("token");
       try {
         const response = await axios.post(
-          `${process.env.BACKEND_URL}/user/updateProfile`,
+          `https://food-delivery-ily2.onrender.com/user/updateProfile`,
           { email },
           { headers: { Authorization: `Bearer ${token}` } }
         );

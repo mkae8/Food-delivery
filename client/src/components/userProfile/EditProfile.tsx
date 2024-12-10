@@ -51,7 +51,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({
       const token = window.localStorage.getItem("token");
       try {
         const response = await axios.post(
-          `${process.env.BACKEND_URL}/user/updateProfile`,
+          `https://food-delivery-ily2.onrender.com/user/updateProfile`,
           {
             username: newName,
           },
