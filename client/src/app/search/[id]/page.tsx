@@ -7,7 +7,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
   const response = await axios.get<FoodItem>(
-    `${process.env.BACKEND_URL}/food-get/${id}`
+    `https://food-delivery-ily2.onrender.com/food-get/${id}`
   );
 
   return (

@@ -22,7 +22,7 @@ export const Test = () => {
   const foodHandler = async () => {
     try {
       const response = await axios.get<FoodCategory[]>(
-        `${process.env.BACKEND_URL}/foods-get`
+        `https://food-delivery-ily2.onrender.com/foods-get`
       );
       setFoodCategories(response.data);
     } catch (error) {
