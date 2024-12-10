@@ -33,6 +33,7 @@ export const Header: React.FC = () => {
     { title: "НҮҮР", href: "/" },
     { title: "ХООЛНЫ ЦЭС", href: "/menu" },
     { title: "ХҮРГЭЛТИЙН БҮС", href: "/footer-info/delivery-area" },
+    { title: "Админ", href: "/admin-crud" },
   ];
 
   const handleUserClick = () => {

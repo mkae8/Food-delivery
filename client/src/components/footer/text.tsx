@@ -31,30 +31,29 @@ export default function GuestFooter() {
               gap: "25px",
               width: "full",
               height: "544px",
-              position: "relative", // Necessary for the image
+              position: "relative", 
             }}
           >
             <Box
               sx={{
                 position: "relative",
-                width: "100%", // Full width
-                height: "100%", // Full height
+                width: "100%", 
+                height: "100%",
               }}
             >
-              <Image
+              {/* <Image
                 priority
-                src="/image copy.png" // Update to your image path
-                fill // Use 'fill' to fill the parent container
-                alt="description" // Descriptive alt text
-                style={{ objectFit: "cover" }} // Set the style directly
-              />
+                src="/image copy.png" 
+                fill 
+                alt="description" 
+                style={{ objectFit: "cover" }} 
+              /> */}
             </Box>
 
             <Typography fontWeight={700} fontSize={20} color="text.secondary">
               Food Delivery
             </Typography>
 
-            {/* Other content here... */}
           </Box>
         </Box>
       </Container>

@@ -52,13 +52,13 @@ const GuestFooter: React.FC = () => {
             height: "545px",
           }}
         >
-          <Image
+          {/* <Image
             src="/image copy.png"
             fill
             priority
             alt="Background image"
             style={{ objectFit: "cover" }}
-          />
+          /> */}
         </Box>
       </Stack>
       <Box
