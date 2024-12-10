@@ -122,7 +122,7 @@ const GuestFooter: React.FC = () => {
               </Link>
             ))}
           </Box>
-
+{/* 
           <Box
             sx={{
               display: "flex",
@@ -151,7 +151,7 @@ const GuestFooter: React.FC = () => {
               alt="Social Media 3"
               priority
             />
-          </Box>
+          </Box> */}
 
           <Box
             sx={{

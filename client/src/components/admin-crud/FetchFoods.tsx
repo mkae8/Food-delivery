@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 interface FoodCategory {
   _id: string;
-  categoryName: string; // Updated to match your model
+  categoryName: string;
 }
 
 interface FoodItem {
@@ -49,17 +49,14 @@ const FoodList = ({ category }: FoodListProps) => {
     fetchFoodItems();
   }, []);
 
-  // Function to filter foods by category
   const getFoodsByCategory = (
     foods: FoodItem[],
     filterCategory: string
   ): FoodItem[] => {
     return foods.filter(
-      (food) => food.foodCategory.categoryName === filterCategory
+      (food) => food.foodCategory?.categoryName === filterCategory
     );
   };
-
-  // Get the filtered foods
   const filteredFoods = getFoodsByCategory(foods, category);
 
   return (
