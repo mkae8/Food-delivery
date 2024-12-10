@@ -49,7 +49,7 @@ const MenuPage = () => {
     setLoading(true);
     try {
       const response = await axios.get<FoodItem[]>(
-        `${process.env.BACKEND_URL}/foods-get`
+        `https://food-delivery-ily2.onrender.com/foods-get`
       );
       setFoods(response.data);
     } catch (error) {
@@ -63,7 +63,7 @@ const MenuPage = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get<Category[]>(
-        `${process.env.BACKEND_URL}/fetchCategory`
+        `https://food-delivery-ily2.onrender.com/fetchCategory`
       );
       setCategories(response.data);
     } catch (error) {

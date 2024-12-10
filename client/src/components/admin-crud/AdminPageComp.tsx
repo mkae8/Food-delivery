@@ -6,7 +6,6 @@ import {
   Typography,
   Modal,
   TextField,
-  MenuItem,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AddCategory } from "./AddCategory";
@@ -102,7 +101,6 @@ const AdminPageComp = () => {
         updatedCategory
       );
 
-      // Ангиллыг шинэчлэх
       setCategories((prevCategories) =>
         prevCategories.map((cat) =>
           cat._id === categoryToEdit
