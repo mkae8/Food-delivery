@@ -54,7 +54,7 @@ const AdminPageComp = () => {
   const addCategory = async (newCategory: string) => {
     try {
       const response = await axios.post<AddCategoryResponse>(
-        `https://food-delivery-ily2.onrender.com/category`,
+        `food-delivery-ily2.onrender.com/category`,
         {
           categoryName: newCategory,
         }
@@ -97,7 +97,7 @@ const AdminPageComp = () => {
       };
 
       const response = await axios.put(
-        `https://food-delivery-ily2.onrender.com/editCategory/${categoryToEdit}`,
+        `food-delivery-ily2.onrender.com/editCategory/${categoryToEdit}`,
         updatedCategory
       );
 
@@ -122,7 +122,7 @@ const AdminPageComp = () => {
     try {
 
       await axios.delete(
-        `https://food-delivery-ily2.onrender.com/deleteCategory/${idStore}`
+        `food-delivery-ily2.onrender.com/deleteCategory/${idStore}`
       );
 
 
@@ -142,7 +142,7 @@ const AdminPageComp = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          `https://food-delivery-ily2.onrender.com/fetchCategory`
+          `food-delivery-ily2.onrender.com/fetchCategory`
         );
 
         setCategories(response.data);

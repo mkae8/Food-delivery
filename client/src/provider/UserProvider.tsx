@@ -52,7 +52,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
           return;
         }
         const result = await axios.post<LoginResponse>(
-          `https://food-delivery-ily2.onrender.com/user/login`,
+          `food-delivery-ily2.onrender.com/user/login`,
           { email, password }
         );
 

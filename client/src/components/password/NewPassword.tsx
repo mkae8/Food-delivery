@@ -47,7 +47,7 @@ export const NewPassword: React.FC<NewPasswordProps> = ({ clickHandler }) => {
     }
     try {
       const result = await axios.put(
-        `https://food-delivery-ily2.onrender.com/passwordUpdate`,
+        `food-delivery-ily2.onrender.com/passwordUpdate`,
         { email, password }
       );
       console.log(result);
