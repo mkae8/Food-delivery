@@ -29,7 +29,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     const fetchFoods = async () => {
       try {
         const response = await axios.get<FoodItem[]>(
-          `https:/food-delivery-ily2.onrender.com/foods-get`
+          `https://food-delivery-ily2.onrender.com/foods-get`
         );
 
         setFoodNames(response.data);

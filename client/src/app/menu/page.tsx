@@ -49,7 +49,7 @@ const MenuPage = () => {
     setLoading(true);
     try {
       const response = await axios.get<FoodItem[]>(
-        `https:/food-delivery-ily2.onrender.com/foods-get`
+        `https://food-delivery-ily2.onrender.com/foods-get`
       );
       setFoods(response.data);
     } catch (error) {
@@ -63,11 +63,11 @@ const MenuPage = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get<Category[]>(
-        `https:/food-delivery-ily2.onrender.com/fetchCategory`
+        `https://food-delivery-ily2.onrender.com/fetchCategory`
       );
       setCategories(response.data);
     } catch (error) {
-      console.error("Error fetching categories", error);
+      console.log("Error fetching categories", error);
       toast.error("Failed to fetch categories.");
     }
   };
