@@ -26,7 +26,7 @@ export const PasswordReset: React.FC<PasswordResetProps> = ({
     setLoading(true);
 
     try {
-      const response = await axios.post(`food-delivery-ily2.onrender.com/check`, {
+      const response = await axios.post(`https://food-delivery-ily2.onrender.com/check`, {
         otpCode: Number(otpCode),
         email,
       });

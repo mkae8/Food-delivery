@@ -47,7 +47,7 @@ export const SignUp = () => {
     }
     try {
       const result = await axios.post(
-        `food-delivery-ily2.onrender.com/user/signup`,
+        `https://food-delivery-ily2.onrender.com/user/signup`,
         {
           username,
           email,

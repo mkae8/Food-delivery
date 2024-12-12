@@ -32,7 +32,7 @@ export const CategoryProvider = ({ children }: PropsWithChildren) => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          `food-delivery-ily2.onrender.com/fetchCategory`
+          `https://food-delivery-ily2.onrender.com/fetchCategory`
         );
 
         setCategoryNames(response.data);

@@ -29,7 +29,7 @@ export const Password: React.FC<PasswordProps> = ({ clickHandler }) => {
 
     try {
       localStorage.setItem("email", JSON.stringify(email));
-      const res = await axios.post(`food-delivery-ily2.onrender.com/sendMailer`, {
+      const res = await axios.post(`https://food-delivery-ily2.onrender.com/sendMailer`, {
         email,
       });
       clickHandler(email);

@@ -40,7 +40,7 @@ export const HomePageFoods = () => {
   const foodHandler = async () => {
     try {
       const response = await axios.get<FoodItem[]>(
-        `food-delivery-ily2.onrender.com/foods-get`
+        `https://food-delivery-ily2.onrender.com/foods-get`
       );
       setFoods(response.data);
     } catch (error) {
