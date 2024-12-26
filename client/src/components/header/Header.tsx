@@ -74,7 +74,12 @@ export const Header: React.FC = () => {
   return (
     <AppBar
       position="sticky"
-      sx={{ bgcolor: "white", boxShadow: "none", textSizeAdjust: "inherit" }}
+      sx={{
+        bgcolor: "white",
+        boxShadow: "none",
+        textSizeAdjust: "inherit",
+        marginTop: "10px",
+      }}
     >
       <Bag open={open} toggleDrawer={toggleDrawer} />
       <Bag open={open} toggleDrawer={toggleDrawer} />
