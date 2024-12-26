@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import React, { useState } from "react";
@@ -75,7 +73,7 @@ export const Header: React.FC = () => {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{ bgcolor: "white", boxShadow: "none", textSizeAdjust: "inherit" }}
     >
       <Bag open={open} toggleDrawer={toggleDrawer} />

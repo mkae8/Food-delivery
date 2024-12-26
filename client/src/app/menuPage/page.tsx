@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { Container, Grid, AppBar, Tabs, Tab, Box } from "@mui/material";
 import { styled } from "@mui/system";
-import { Header } from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
 import MenuItemCard from "@/components/order/MenuItemCard";
 import OrderDetailModal from "@/components/order/OrderDetailModal";
 
