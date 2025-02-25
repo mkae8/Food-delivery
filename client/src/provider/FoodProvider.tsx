@@ -16,14 +16,14 @@ import { FoodItem } from "../components/homepage/HomePageFoods";
 type FoodContextType = {
   foodNames: FoodItem[];
 
-  setRefetch: Dispatch<SetStateAction<Boolean>>;
+  setRefetch: Dispatch<SetStateAction<boolean>>;
 };
 
 const FoodContext = createContext<FoodContextType | null>(null);
 
 export const FoodProvider = ({ children }: PropsWithChildren) => {
   const [foodNames, setFoodNames] = useState<FoodItem[]>([]);
-  const [refetch, setRefetch] = useState<Boolean>(false);
+  const [refetch, setRefetch] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchFoods = async () => {

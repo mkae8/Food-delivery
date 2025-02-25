@@ -11,6 +11,6 @@ export const updateUserData = async (req: any, res: any) => {
     });
     res.send({ message: "Update successfully" }).status(201);
   } catch (error) {
-    res.send("boldoggui ee bro").status("400");
+    res.send("boldoggui ee bro").status(400);
   }
 };

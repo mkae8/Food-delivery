@@ -3,7 +3,6 @@
 import { NewPassword } from "@/components/password/NewPassword";
 import { Password } from "@/components/password/Password";
 import { PasswordReset } from "@/components/password/PasswordReset";
-import PasswordSuccess from "@/components/password/PasswordSuccess";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
